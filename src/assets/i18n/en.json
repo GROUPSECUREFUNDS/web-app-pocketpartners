@@ -49,7 +49,9 @@
     "members": "Members",
     "eachMemberMustPay": "Each member must pay",
     "paymentDistribution": "Payment distribution",
-    "invitationToken": "Invitation Token"
+    "invitationToken": "Invitation Token",
+    "ExpensesDetailsGroup": "Expenses Details",
+    "viewDetailedDistribution" : "Detailed Expense Distribution View"
   },
   "expense": {
     "title": "Expense",

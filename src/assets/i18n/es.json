@@ -48,7 +48,9 @@
       "currency": "Moneda",
       "members": "Miembros",
       "eachMemberMustPay": "Cada miembro debe pagar",
-      "paymentDistribution": "Distribución de pagos"
+      "paymentDistribution": "Distribución de pagos",
+      "ExpensesDetailsGroup": "Detalle de Gastos del Grupo",
+      "viewDetailedDistribution" : "Vista detallada de la distribución de gastos"
     },
     "expense": {
       "title": "Gasto",
@@ -135,4 +137,3 @@
       "cancel": "Cancelar"
     }
   }
-  
