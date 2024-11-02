@@ -82,7 +82,6 @@ export class PageGroupComponent implements OnInit {
     });
   }
 
-
   ngOnInit() {
     this.authenticationService.currentUserId.subscribe((userId: any) => {
       this.currentUserId = userId;

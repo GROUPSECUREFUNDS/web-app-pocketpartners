@@ -58,6 +58,7 @@ import {MatSlideToggle} from "@angular/material/slide-toggle";
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { GroupJoinDialogComponent } from './group/components/group-join-dialog/group-join-dialog.component';
+import { PageGroupExpensesDetailsComponent } from './group/pages/page-group-expenses-details/page-group-expenses-details.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -89,7 +90,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AuthenticationSectionComponent,
     SignInComponent,
     SignUpComponent,
-    GroupJoinDialogComponent,],
+    GroupJoinDialogComponent,
+    PageGroupExpensesDetailsComponent,],
   imports: [
     BrowserModule,
     AppRoutingModule,

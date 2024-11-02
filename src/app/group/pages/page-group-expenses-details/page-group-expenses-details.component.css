@@ -84,14 +84,9 @@ mat-card-content button:hover {
   background-color: #303f9f; /* Color al pasar el cursor */
 }
 
-
-
-
 /* Responsividad para pantallas pequeñas */
 @media only screen and (max-width: 500px) {
   mat-card {
     width: 100%;
   }
 }
-
-

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { GroupService } from '../../services/group.service';
 import { GroupEntity } from '../../model/group.entity';
 import { Chart } from 'chart.js/auto';
@@ -34,7 +34,8 @@ export class PageGroupDetailsComponent implements OnInit {
     private expensesService: ExpensesService,
     private paymentService: PaymentService,
     private authenticationService: AuthenticationService,
-    private partnerService: PartnerService
+    private partnerService: PartnerService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -140,4 +141,9 @@ export class PageGroupDetailsComponent implements OnInit {
       options: {}
     });
   }
+
+  goToDetailedDistribution(groupId: string) {
+    this.router.navigate(['/page-group-expenses-details', groupId]);
+  }
+
 }

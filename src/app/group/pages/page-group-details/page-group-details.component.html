@@ -52,6 +52,9 @@
         <div style="display: flex; justify-content: center;">
           <canvas id="pieChart"></canvas>
         </div>
+        <button mat-button color="primary" (click)="goToDetailedDistribution(group.id.toString())">
+          {{ 'group.viewDetailedDistribution' | translate }}
+        </button>
       </mat-card-content>
     </mat-card>
   </div>

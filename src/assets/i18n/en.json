@@ -21,6 +21,7 @@
     "groupInfo": "Group Information",
     "groupName": "Group Name",
     "groupImage": "Group Image (link)",
+    "dueDate": "Due Date",
     "next": "Next",
     "groupCurrency": "Group Currency",
     "currency": "Currency",
@@ -47,7 +48,10 @@
     "currency": "Currency",
     "members": "Members",
     "eachMemberMustPay": "Each member must pay",
-    "paymentDistribution": "Payment distribution"
+    "paymentDistribution": "Payment distribution",
+    "invitationToken": "Invitation Token",
+    "ExpensesDetailsGroup": "Expenses Details",
+    "viewDetailedDistribution" : "Detailed Expense Distribution View"
   },
   "expense": {
     "title": "Expense",
@@ -59,15 +63,18 @@
     "new": "New Expense",
     "name": "Give it a name",
     "amount": "How much?",
-    "setAmount": "Set the amount",
+    "set_amount": "Set the amount",
     "group": "Which group?",
-    "pickGroup": "Pick a group",
+    "pick_group": "Pick a group",
     "summary": "Summary",
     "search": "Search expenses...",
     "addNew": "Add New Expense",
     "which": "Which Expense?",
     "pick": "Pick an expense",
-    "uploadedByYou": "Expenses Uploaded by YOU"
+    "uploadedByYou": "Expenses Uploaded by YOU",
+    "dueDate": "Due Date",
+    "add_new": "Add New Expense"
+
   },
   "common": {
     "next": "Next",
@@ -82,7 +89,8 @@
     "expense": "Expense"
   },
   "payment": {
-    "addNew": "Add New Payment"
+    "addNew": "Add New Payment",
+    "dueDate": "Payment Due Date"
   },
   "payments": {
     "incoming": "Incoming Payments",
@@ -96,6 +104,9 @@
     "makePayment": "Make Payment",
     "groups": "Groups",
     "noPayments": "No payments yet. Make one!"
+  },
+  "expenses": {
+    "uploadedByYou": "Expenses Uploaded by YOU"
   },
   "transaction": {
     "timeline": "Transaction Timeline",
