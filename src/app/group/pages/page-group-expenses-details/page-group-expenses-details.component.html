@@ -19,8 +19,6 @@
       <mat-card-content>
         <p>{{ 'group.creationDate' | translate }}: {{ group.createdAt | date: 'dd/MM/yyyy' }}</p>
         <p *ngFor="let currency of group.currency">{{ 'group.currency' | translate }}: {{ currency.code }}</p>
-        <p>{{ 'group.members' | translate }}: {{ totalOfMembers }}</p>
-        <p>{{ 'group.invitationToken' | translate }}: {{ group.invitationToken }}</p>
       </mat-card-content>
     </mat-card>
 
