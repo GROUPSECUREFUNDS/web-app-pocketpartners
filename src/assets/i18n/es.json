@@ -48,6 +48,7 @@
       "currency": "Moneda",
       "members": "Miembros",
       "eachMemberMustPay": "Cada miembro debe pagar",
+      "thisAreTheTotalExpenses": "Estos son los gastos totales",
       "paymentDistribution": "Distribución de pagos",
       "ExpensesDetailsGroup": "Detalle de Gastos del Grupo",
       "viewDetailedDistribution" : "Vista detallada de la distribución de gastos"

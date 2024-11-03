@@ -25,7 +25,7 @@ export class PageGroupDetailsComponent implements OnInit {
   amountEachMemberShouldPay: number = 0;
   paidMembers: Set<number> = new Set<number>();
   pieChart!: Chart<"pie", number[], string>;
-  invitationToken: string = '';  
+  invitationToken: string = '';
   currentUserId!: number;
 
   constructor(
@@ -63,7 +63,7 @@ export class PageGroupDetailsComponent implements OnInit {
   }
 
 
-  
+
   getAllGroupMembers() {
     this.groupService.getAllMembersByIdGroup(this.group.id).subscribe((members: any) => {
       this.groupMembers = members;
@@ -145,12 +145,10 @@ export class PageGroupDetailsComponent implements OnInit {
     });
   }
 
-<<<<<<< HEAD
+
   goToDetailedDistribution(groupId: string) {
     this.router.navigate(['/page-group-expenses-details', groupId]);
   }
-=======
 
->>>>>>> 3a5a5b618a9ae2e6b2b3b3371de3a3f713cef1a4
 
 }

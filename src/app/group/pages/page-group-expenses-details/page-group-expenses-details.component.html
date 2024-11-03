@@ -23,7 +23,7 @@
     </mat-card>
 
     <mat-card>
-      <mat-card-title>{{ 'group.eachMemberMustPay' | translate }}</mat-card-title>
+      <mat-card-title>{{ 'group.thisAreTheTotalExpenses' | translate }}</mat-card-title>
       <p *ngFor="let expense of expenses">
         <mat-checkbox [(ngModel)]="expense.checked" (change)="onExpenseCheckChange()">
           {{ expense.name || 'Gasto sin nombre' }}: {{ expense.amount | currency: currentCurrency }}

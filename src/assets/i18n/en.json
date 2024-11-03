@@ -48,6 +48,7 @@
     "currency": "Currency",
     "members": "Members",
     "eachMemberMustPay": "Each member must pay",
+    "thisAreTheTotalExpenses": "These are the total expenses",
     "paymentDistribution": "Payment distribution",
     "invitationToken": "Invitation Token",
     "ExpensesDetailsGroup": "Expenses Details",
