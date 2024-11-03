@@ -9,6 +9,7 @@
     <div class="group-item" *ngFor="let group of filteredGroups()">
       <h2>{{ group.name }}</h2>
       <p>{{ group.createdAt | date: 'dd/MM/yyyy' }}</p>
+      
 
       @if (group.isMember) {
         <p>{{ 'groups.youAreInGroup' | translate }}</p>
