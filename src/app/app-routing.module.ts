@@ -16,6 +16,9 @@ import { AddPaymentComponent } from "./payments/incoming/pages/add-payment/add-p
 import { authenticationGuard } from "./iam/services/authentication.guard";
 import { SignInComponent } from "./iam/pages/sign-in/sign-in.component";
 import { SignUpComponent } from "./iam/pages/sign-up/sign-up.component";
+import {
+  PageGroupExpensesDetailsComponent
+} from "./group/pages/page-group-expenses-details/page-group-expenses-details.component";
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [authenticationGuard], },
@@ -29,6 +32,7 @@ const routes: Routes = [
   { path: 'expenses', component: PageExpensesComponent, canActivate: [authenticationGuard], },
   { path: 'expenses/add-expense', component: AddExpenseComponent, canActivate: [authenticationGuard], },
   { path: 'outgoing/add-payment', component: AddPaymentComponent, canActivate: [authenticationGuard], },
+  { path: 'page-group-expenses-details/:id', component: PageGroupExpensesDetailsComponent, canActivate: [authenticationGuard],},
   { path: 'sign-in', component: SignInComponent },
   { path: 'sign-up', component: SignUpComponent },
   { path: '*', component: PageNotFoundComponent },

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { GroupService } from '../../services/group.service';
 import { GroupEntity } from '../../model/group.entity';
 import { Chart } from 'chart.js/auto';
@@ -22,10 +22,11 @@ export class PageGroupDetailsComponent implements OnInit {
   totalOfMembers: number = 0;
   amountOfPayToYou: number = 0;
   amountEachMemberShouldPay: number = 0;
-  paidMembers: Set<number> = new Set<number>(); 
+  paidMembers: Set<number> = new Set<number>();
   currentCurrency: string = 'PEN';
   pieChart!: Chart<"pie", number[], string>;
   groupMemberInformation: any[] = [];
+  invitationToken: string = '';  // Agregamos esta línea para el token de invitación
 
   constructor(
     private route: ActivatedRoute,
@@ -33,7 +34,8 @@ export class PageGroupDetailsComponent implements OnInit {
     private expensesService: ExpensesService,
     private paymentService: PaymentService,
     private authenticationService: AuthenticationService,
-    private partnerService: PartnerService
+    private partnerService: PartnerService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -44,15 +46,21 @@ export class PageGroupDetailsComponent implements OnInit {
     this.id = parseInt(this.route.snapshot.url[1].path, 10);
 
     if (this.id) {
-      
       this.groupService.getById(this.id).subscribe((group: any) => {
         this.group = group;
+        this.invitationToken = group.invitationToken;  // Asegúrate de que el token de invitación esté en la respuesta
         this.currentCurrency = group.currency[0].code;
         this.calculateAmountToYou();
       });
     }
   }
 
+  // Método para generar el enlace de invitación
+  generateInvitationLink(): string {
+    return `http://localhost:4200/invite?groupId=${this.group.id}&token=${this.invitationToken}`;
+  }
+
+  // El resto del código permanece igual
   getAllGroupMembers() {
     this.groupService.getAllMembersByIdGroup(this.group.id).subscribe((members: any) => {
       this.groupMembers = members;
@@ -64,9 +72,6 @@ export class PageGroupDetailsComponent implements OnInit {
     });
   }
 
-  /**
-   * Calculates the amount to be paid to the user based on expenses and completed payments.
-   */
   calculateAmountToYou() {
     let totalExpenses = 0;
     let totalCompletedPayments = 0;
@@ -119,7 +124,7 @@ export class PageGroupDetailsComponent implements OnInit {
     const numberOfUnpaidMembers = this.totalOfMembers - numberOfPaidMembers;
 
     if (this.pieChart) {
-      this.pieChart.destroy(); 
+      this.pieChart.destroy();
     }
 
     const canvas = document.getElementById('pieChart') as HTMLCanvasElement;
@@ -136,4 +141,9 @@ export class PageGroupDetailsComponent implements OnInit {
       options: {}
     });
   }
+
+  goToDetailedDistribution(groupId: string) {
+    this.router.navigate(['/page-group-expenses-details', groupId]);
+  }
+
 }

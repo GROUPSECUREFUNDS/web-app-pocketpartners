@@ -14,7 +14,7 @@ export class ExpensesService extends BaseService<ExpensesEntity> {
     this.resourceEndpoint = '/expenses';
   }
 
-  
+
   getJoinedUserGroups(userId: number): Observable<any> {
     return this.http.get<any>(`${this.basePath}/groups/members/${userId}`, this.httpOptions);
   }
@@ -38,7 +38,11 @@ export class ExpensesService extends BaseService<ExpensesEntity> {
   deleteExpenseById(expenseId: number): Observable<any> {
     return this.http.delete<any>(`${this.resourcePath()}/expenseId/${expenseId}`, this.httpOptions);
   }
-  
+
+  createExpense(expense: ExpensesEntity) {
+    return this.http.post<any>(`${this.resourcePath()}`, expense, this.httpOptions)
+  }
+
 
 }
 

@@ -7,7 +7,6 @@ import { MatToolbar } from "@angular/material/toolbar";
 import { MatAnchor } from "@angular/material/button";
 import {
   HttpClient,
-
   provideHttpClient,
   withInterceptors,
   withInterceptorsFromDi
@@ -64,38 +63,41 @@ import {MatSlideToggle} from "@angular/material/slide-toggle";
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { AdvertisementComponent } from './public/components/advertisement/advertisement.component';
+import { GroupJoinDialogComponent } from './group/components/group-join-dialog/group-join-dialog.component';
+import { PageGroupExpensesDetailsComponent } from './group/pages/page-group-expenses-details/page-group-expenses-details.component';
+
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({ declarations: [
-        AppComponent,
-        PageNotFoundComponent,
-        LanguageSwitcherComponent,
-        PageCreateGroupComponent,
-        FormCreateGroupComponent,
-        HomeComponent,
-        PageGroupComponent,
-        IncomingComponent,
-        OutgoingComponent,
-        ContactComponent,
-        FormCreateContactComponent,
-        TransactionsTimelineComponent,
-        ChartComponent,
-        PageExpensesComponent,
-        ExpenseCardComponent,
-        AddExpenseComponent,
-        AddPaymentComponent,
-        FormExpenseComponent,
-        FormPaymentComponent,
-        PageGroupDetailsComponent,
-        AuthenticationSectionComponent,
-        SignInComponent,
-        SignUpComponent,
+    AppComponent,
+    PageNotFoundComponent,
+    LanguageSwitcherComponent,
+    PageCreateGroupComponent,
+    FormCreateGroupComponent,
+    HomeComponent,
+    PageGroupComponent,
+    IncomingComponent,
+    OutgoingComponent,
+    ContactComponent,
+    FormCreateContactComponent,
+    TransactionsTimelineComponent,
+    ChartComponent,
+    PageExpensesComponent,
+    ExpenseCardComponent,
+    AddExpenseComponent,
+    AddPaymentComponent,
+    FormExpenseComponent,
+    FormPaymentComponent,
+    PageGroupDetailsComponent,
+    AuthenticationSectionComponent,
+    SignInComponent,
+    SignUpComponent,
 
-    ],
-    exports: [],
-    bootstrap: [AppComponent],
+  ],
+  exports: [],
+  bootstrap: [AppComponent],
   imports: [BrowserModule,
     AppRoutingModule,
     MatToolbar,
@@ -103,7 +105,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     HeaderComponent,
     MatProgressSpinnerModule,
     MatButtonToggleModule,
-
     TranslateModule.forRoot({
       defaultLanguage: 'en',
       loader: {
@@ -142,9 +143,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatButtonModule,
     MatIconModule,
     MatSlideToggle, AdvertisementComponent], providers: [
-        provideAnimationsAsync(),
-        provideHttpClient(withInterceptors([authenticationInterceptor])),
-        GroupService,
-        provideHttpClient(withInterceptorsFromDi()),
-    ] })
+    provideAnimationsAsync(),
+    provideHttpClient(withInterceptors([authenticationInterceptor])),
+    GroupService,
+    provideHttpClient(withInterceptorsFromDi()),
+  ]
+})
 export class AppModule { }

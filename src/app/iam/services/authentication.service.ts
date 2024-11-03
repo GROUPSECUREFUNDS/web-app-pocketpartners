@@ -78,7 +78,7 @@ export class AuthenticationService {
           if (this.currentUserInformation.value.userId == response.id) {
             this.saveUserInfo(this.currentUserInformation.value).subscribe({
               next: (response: any) => {
-                this.router.navigate(['/']).then();
+                this.router.navigate(['/home']).then();
               },
               error: (error) => {
                 console.error(`Error while saving user information: ${error}`);
@@ -96,7 +96,7 @@ export class AuthenticationService {
                     console.error(`Error while obtaining user information: ${error}`);
                   }
                 });
-              this.router.navigate(['/']).then();
+              this.router.navigate(['/home']).then();
             });
           }
         },

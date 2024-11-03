@@ -25,6 +25,9 @@
         <p>{{ 'group.creationDate' | translate }}: {{ group.createdAt | date: 'dd/MM/yyyy' }}</p>
         <p *ngFor="let currency of group.currency">{{ 'group.currency' | translate }}: {{ currency.code }}</p>
         <p>{{ 'group.members' | translate }}: {{ totalOfMembers }}</p>
+        <p>
+          {{ 'group.invitationToken' | translate }}: {{ group.invitationToken }}
+        </p>
       </mat-card-content>
     </mat-card>
 
@@ -49,6 +52,9 @@
         <div style="display: flex; justify-content: center;">
           <canvas id="pieChart"></canvas>
         </div>
+        <button mat-button color="primary" (click)="goToDetailedDistribution(group.id.toString())">
+          {{ 'group.viewDetailedDistribution' | translate }}
+        </button>
       </mat-card-content>
     </mat-card>
   </div>

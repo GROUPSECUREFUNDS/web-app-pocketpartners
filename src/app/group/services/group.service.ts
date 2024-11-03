@@ -37,4 +37,9 @@ export class GroupService extends BaseService<GroupEntity> {
   getAllGroups(): Observable<GroupEntity[]> {
     return this.http.get<GroupEntity[]>(this.resourceEndpoint, this.httpOptions);
   }
+
+  joinGroupWithToken(groupId: number, userId: number, token: string) {
+    return this.http.post<GroupEntity>(`${this.resourcePath()}/${groupId}/members/${userId}`, { token }, this.httpOptions);
+  }
+
 }

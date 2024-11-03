@@ -37,4 +37,8 @@ export class PaymentService extends BaseService<PaymentEntity> {
   postCompletePaymentById(paymentId: any) {
     return this.http.post<any>(`${this.resourcePath()}/${paymentId}/completed`, this.httpOptions)
   }
+
+  postPayment(payment: PaymentEntity) {
+    return this.http.post<any>(`${this.resourcePath()}`, payment, this.httpOptions)
+  }
 }

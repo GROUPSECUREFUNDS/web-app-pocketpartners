@@ -3,6 +3,8 @@ import { GroupService } from '../../services/group.service';
 import { GroupEntity } from '../../model/group.entity';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../../iam/services/authentication.service';
+import {MatDialog} from "@angular/material/dialog";
+import {GroupJoinDialogComponent} from "../../components/group-join-dialog/group-join-dialog.component";
 
 @Component({
   selector: 'app-page-group',
@@ -17,7 +19,8 @@ export class PageGroupComponent implements OnInit {
   constructor(
     private groupService: GroupService,
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private dialog: MatDialog
   ) { }
 
   getAllGroups() {
@@ -34,7 +37,7 @@ export class PageGroupComponent implements OnInit {
           this.groupService.getAllMembersByIdGroup(group.id).subscribe
           ((members: any) => {
             group.members = members;
-            
+
             if (group.members.some(member => member.userId === this.currentUserId)) {
               group.isMember = true;
             } else {
@@ -57,10 +60,25 @@ export class PageGroupComponent implements OnInit {
   }
 
   joinGroup(groupId: number) {
-    console.log("Te estás uniendo al grupo: ", groupId, " con el ID: ", this.currentUserId);
-    this.groupService.joinGroup(groupId, this.currentUserId).subscribe((response: any) => {
-      console.log("El grupo se unió correctamente");
-      this.openGroup(groupId);
+    const dialogRef = this.dialog.open(GroupJoinDialogComponent, {
+      width: '300px',
+      data: { groupId }
+    });
+
+    dialogRef.afterClosed().subscribe((invitationToken) => {
+      if (invitationToken) {
+        console.log("Joining group with token: ", invitationToken);
+        this.groupService.joinGroupWithToken(groupId, this.currentUserId, invitationToken).subscribe(
+          (response: any) => {
+            console.log("Successfully joined the group");
+            this.openGroup(groupId);
+          },
+          (error: any) => {
+            console.error("Failed to join the group:", error);
+            alert("Invalid invitation token.");
+          }
+        );
+      }
     });
   }
 

@@ -9,8 +9,9 @@ export class BaseService<T> {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-type': 'application/json',
-    })
-  }
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    }),
+  };
 
   constructor(protected http: HttpClient) {
   }

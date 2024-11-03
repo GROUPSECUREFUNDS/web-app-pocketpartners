@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Join Group</h2>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Group Invitation Token</mat-label>
+    <input matInput [(ngModel)]="invitationToken" placeholder="Enter invitation token">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions style="display: flex; justify-content: flex-end; margin-top: 10px;">
+  <button mat-button (click)="onJoin()" [disabled]="!invitationToken"
+          style="font-size: 0.9rem; font-weight: 500; border-radius: 4px;text-transform: uppercase; color: white; background-color: #ff9900;">
+    Join
+  </button>
+  <button mat-button (click)="onCancel()"
+          style="font-size: 0.9rem; font-weight: 500; border-radius: 4px; text-transform: uppercase; color: white; background-color: #8700ff; margin-right: 10px;">
+    Cancel
+  </button>
+</div>
