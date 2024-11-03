@@ -1,37 +1,37 @@
 <mat-card class="transactions-card">
   <mat-card-header class="header">
-    <mat-card-title>{{ 'transaction.timeline' | translate }}</mat-card-title> <!-- Traducción para "Transaction Timeline" -->
+    <mat-card-title>{{ 'transaction.timeline' | translate }}</mat-card-title> 
   </mat-card-header>
   <mat-card-content>
-    <!-- Payments Section -->
+    
     <div class="timeline-section">
-      <h2>{{ 'transaction.payments' | translate }}</h2> <!-- Traducción para "Payments" -->
+      <h2>{{ 'transaction.payments' | translate }}</h2> 
       <div class="no-data" *ngIf="payments.length === 0">
-        {{ 'transaction.noPayments' | translate }} <!-- Traducción para "No payments available." -->
+        {{ 'transaction.noPayments' | translate }} 
       </div>
       <mat-card *ngFor="let payment of payments" class="transaction-card">
         <mat-card-header>
-          <mat-card-title>{{ 'transaction.description' | translate }}: {{ payment.description }}</mat-card-title> <!-- Traducción para "Description:" -->
-          <mat-card-subtitle>{{ 'transaction.status' | translate }}: {{ payment.status }}</mat-card-subtitle> <!-- Traducción para "Status:" -->
+          <mat-card-title>{{ 'transaction.description' | translate }}: {{ payment.description }}</mat-card-title> 
+          <mat-card-subtitle>{{ 'transaction.status' | translate }}: {{ payment.status }}</mat-card-subtitle> 
         </mat-card-header>
         <mat-card-content>
-          <p class="amount">{{ 'transaction.totalAmount' | translate }}: {{ payment.amount | currency:'PEN' }}</p> <!-- Traducción para "Total Amount:" -->
+          <p class="amount">{{ 'transaction.totalAmount' | translate }}: {{ payment.amount | currency:'PEN' }}</p> 
         </mat-card-content>
       </mat-card>
     </div>
 
-    <!-- Expenses Section -->
+    
     <div class="timeline-section">
-      <h2>{{ 'transaction.expenses' | translate }}</h2> <!-- Traducción para "Expenses" -->
+      <h2>{{ 'transaction.expenses' | translate }}</h2> 
       <div class="no-data" *ngIf="expenses.length === 0">
-        {{ 'transaction.noExpenses' | translate }} <!-- Traducción para "No expenses available." -->
+        {{ 'transaction.noExpenses' | translate }} 
       </div>
       <mat-card *ngFor="let expense of expenses" class="transaction-card">
         <mat-card-header>
-          <mat-card-title>{{ 'transaction.description' | translate }}: {{ expense.name }}</mat-card-title> <!-- Traducción para "Description:" -->
+          <mat-card-title>{{ 'transaction.description' | translate }}: {{ expense.name }}</mat-card-title> 
         </mat-card-header>
         <mat-card-content>
-          <p class="amount">{{ 'transaction.totalAmount' | translate }}: {{ expense.amount | currency:'PEN' }}</p> <!-- Traducción para "Total Amount:" -->
+          <p class="amount">{{ 'transaction.totalAmount' | translate }}: {{ expense.amount | currency:'PEN' }}</p> 
         </mat-card-content>
       </mat-card>
     </div>

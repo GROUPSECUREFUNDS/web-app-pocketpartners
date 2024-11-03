@@ -5,23 +5,23 @@
         <div mat-card-avatar class="welcome-image">
           <img [src]="partner.photo" alt="{{ 'userProfile.photoAlt' | translate }}" >
         </div>
-        <mat-card-title class="else">{{ 'welcome.greeting' | translate }} {{ currentUsername }}</mat-card-title> <!-- Traducción para "Welcome" -->
+        <mat-card-title class="else">{{ 'welcome.greeting' | translate }} {{ currentUsername }}</mat-card-title> 
         <mat-card-subtitle style="margin-left: 30px;">{{ partner.email }}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <p style="margin-left: 85px;">{{ 'welcome.hiMessage' | translate }}</p> <!-- Traducción para "¡Hi! We hope you have a nice day." -->
+        <p style="margin-left: 85px;">{{ 'welcome.hiMessage' | translate }}</p> 
       </mat-card-content>
     </mat-card>
 
-    <!-- Transactions Timeline, positioned right below the Welcome Card -->
+    
     <app-transactions-timeline></app-transactions-timeline>
   </div>
 
   <div class="right-container">
-    <!-- Chart Component -->
+    
     <app-chart></app-chart>
     <div class="report-button-container">
-      <button mat-button (click)="generateUserReport()">{{ 'report.generateButton' | translate }}</button> <!-- Traducción para "Generar Reporte de Gastos" -->
+      <button mat-button (click)="generateUserReport()">{{ 'report.generateButton' | translate }}</button> 
     </div>
   </div>
 </div>

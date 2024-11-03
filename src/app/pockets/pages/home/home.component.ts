@@ -5,9 +5,9 @@ import { ExpensesEntity } from "../../../expenses/model/expenses.entity";
 import { ExpensesService } from "../../../expenses/services/expenses.service";
 import { AuthenticationService } from '../../../iam/services/authentication.service';
 import {GroupEntity} from "../../../group/model/group.entity";
-import {GroupService} from "../../../group/services/group.service";
 import {PaymentService} from "../../../payments/services/payment.service";
 import {PaymentEntity} from "../../../payments/model/payment-entity";
+import { GroupService } from '../../../group/services/group.service';
 
 
 @Component({
@@ -66,7 +66,7 @@ export class HomeComponent implements OnInit {
     
     this.expensesService.getExpensesByUserId(this.userId).subscribe(expenses => {
       
-      this.groupService.getById(this.userId).subscribe(groups => {
+      this.groupService.getById(this.userId).subscribe((groups: any) => {
         
         if (expenses.length === 0) {
           alert('No hay gastos disponibles para generar el reporte.');

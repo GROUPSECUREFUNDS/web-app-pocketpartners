@@ -38,7 +38,7 @@ export class FormPaymentComponent {
 
     this.onAddPayment.emit(this.Payment);
 
-    // redirect to payments list
+    
     this.router.navigate(['/outgoing']);
   }
 

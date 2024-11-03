@@ -4,8 +4,8 @@ import { PartnerService } from "../../../../pockets/services/Partner.service";
 import { PartnerEntity } from "../../../../pockets/model/partnerEntity";
 import { PaymentEntity } from "../../../model/payment-entity";
 import { AuthenticationService } from "../../../../iam/services/authentication.service";
-import { GroupService } from "../../../../group/services/group.service";
-import { GroupOperationsService } from "../../../../group/services/group-operations.service";
+import { GroupOperationsService } from '../../../../group/services/group-operations.service';
+import { GroupService } from '../../../../group/services/group.service';
 
 @Component({
   selector: 'app-add-payment',
