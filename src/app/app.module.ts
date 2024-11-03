@@ -25,12 +25,10 @@ import { AppComponent } from './app.component';
 import { LanguageSwitcherComponent } from './public/components/language-switcher/language-switcher.component';
 import { PageCreateGroupComponent } from './group/pages/page-create-group/page-create-group.component';
 import { FormCreateGroupComponent } from './group/components/form-create-group/form-create-group.component';
-import { HomeComponent } from './pockets/pages/home/home.component';
 import { MatIcon } from "@angular/material/icon";
 import { MatSidenav, MatSidenavContainer, MatSidenavContent } from "@angular/material/sidenav";
 import { MatListItem, MatListItemAvatar, MatListItemLine, MatNavList } from "@angular/material/list";
 import { PageGroupComponent } from './group/pages/page-group/page-group.component';
-import { GroupService } from './group/services/group.service';
 import { IncomingComponent } from './payments/incoming/pages/incoming.component';
 import { OutgoingComponent } from './payments/outgoing/pages/outgoing.component';
 import { MatCard, MatCardHeader, MatCardModule, MatCardTitleGroup } from "@angular/material/card";
@@ -58,6 +56,9 @@ import {MatSlideToggle} from "@angular/material/slide-toggle";
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { GroupJoinDialogComponent } from './group/components/group-join-dialog/group-join-dialog.component';
+import { GroupConfigComponent } from './group/pages/group-config/group-config.component';
+import { GroupService } from './group/services/group.service';
+import { HomeComponent } from './pockets/pages/home/home.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -89,7 +90,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AuthenticationSectionComponent,
     SignInComponent,
     SignUpComponent,
-    GroupJoinDialogComponent,],
+    GroupJoinDialogComponent,
+    GroupConfigComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
