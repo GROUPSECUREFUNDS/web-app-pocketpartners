@@ -5,7 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async'
 import { MatToolbar } from "@angular/material/toolbar";
 import { MatAnchor } from "@angular/material/button";
-import { HttpClient, provideHttpClient, withInterceptors } from "@angular/common/http";
+import {
+  HttpClient,
+  provideHttpClient,
+  withInterceptors,
+  withInterceptorsFromDi
+} from "@angular/common/http";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
@@ -57,16 +62,15 @@ import { DarkModeSwitcherComponent } from './public/components/dark-mode-switche
 import {MatSlideToggle} from "@angular/material/slide-toggle";
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { AdvertisementComponent } from './public/components/advertisement/advertisement.component';
 import { GroupJoinDialogComponent } from './group/components/group-join-dialog/group-join-dialog.component';
 import { PageGroupExpensesDetailsComponent } from './group/pages/page-group-expenses-details/page-group-expenses-details.component';
-
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
-@NgModule({
-  declarations: [
+@NgModule({ declarations: [
     AppComponent,
     PageNotFoundComponent,
     LanguageSwitcherComponent,
@@ -90,10 +94,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     AuthenticationSectionComponent,
     SignInComponent,
     SignUpComponent,
-    GroupJoinDialogComponent,
-    PageGroupExpensesDetailsComponent,],
-  imports: [
-    BrowserModule,
+
+  ],
+  exports: [],
+  bootstrap: [AppComponent],
+  imports: [BrowserModule,
     AppRoutingModule,
     MatToolbar,
     MatAnchor,
@@ -137,16 +142,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatAutocompleteModule,
     MatButtonModule,
     MatIconModule,
-    MatSlideToggle,
-  ],
-  providers: [
+    MatSlideToggle, AdvertisementComponent], providers: [
     provideAnimationsAsync(),
     provideHttpClient(withInterceptors([authenticationInterceptor])),
     GroupService,
-  ],
-  exports: [
-
-  ],
-  bootstrap: [AppComponent]
+    provideHttpClient(withInterceptorsFromDi()),
+  ]
 })
 export class AppModule { }
