@@ -17,4 +17,8 @@ export class GroupOperationsService extends BaseService<OperationEntity> {
   getAllGroupOperationsByGroupId(id: number): Observable<OperationEntity[]> {
     return this.http.get<OperationEntity[]>(`${this.resourcePath()}/groupId/${id}`, this.httpOptions);
   }
+
+  postOperation(operation: OperationEntity): Observable<OperationEntity> {
+    return this.http.post<OperationEntity>(`${this.resourcePath()}`, operation, this.httpOptions);
+  }
 }

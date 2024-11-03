@@ -47,56 +47,85 @@ export class FormExpenseComponent {
   ) { }
 
   onSubmit() {
-    // Set up the Expense data
+    // Configurar los datos de Expense
     this.Expense.name = this.firstFormGroup.value.firstCtrl as string;
     this.Expense.amount = parseFloat(<string>this.thirdFormGroup.value.firstCtrl);
     this.Expense.userId = this.user.id;
     this.Expense.groupId = parseInt(<string>this.fourthFormGroup.value.firstCtrl, 10);
     this.Expense.dueDate = new Date(this.fifthFormGroup.value.dueDateCtrl!);
 
-    // Emit the new expense
+    // Emitir el nuevo gasto
     this.onAddExpense.emit(this.Expense);
 
     const groupId = this.Expense.groupId;
 
-    // Fetch members and process expense and payments
     this.groupMembersService.getGroupMembers(groupId).pipe(
       switchMap((members: PartnerEntity[]) => {
+        if (members.length === 0) {
+          throw new Error('No se encontraron miembros en el grupo');
+        }
+
         return this.expenseService.getExpensesByGroupId(groupId).pipe(
           switchMap((expenses: ExpensesEntity[]) => {
-            const paymentAmount = this.Expense.amount / members.length;
-            const expenseId = expenses.length ? expenses[expenses.length - 1].id : null;
-
-            if (expenseId === null) {
-              // Handle case where expenseId is not found
-              throw new Error('Expense ID not found');
+            if (expenses.length === 0) {
+              throw new Error('No se encontraron gastos previos');
             }
 
-            // Continue with group operation logic...
-            const groupOperation = new OperationEntity();
-            // Further processing and API calls...
+            const expenseId = expenses[expenses.length - 1].id;
+            const paymentAmount = this.Expense.amount / members.length;
 
-            return of(true); // Replace with actual return logic
+            // Crear observables para la creación de `PaymentEntity` y `OperationEntity`
+            const paymentObservables = members.map(member => {
+              const payment = new PaymentEntity();
+              payment.description = this.firstFormGroup.value.firstCtrl as string;
+              payment.amount = paymentAmount;
+              payment.userId = member.id;
+              payment.expenseId = expenseId;
+
+              return this.paymentService.postPayment(payment).pipe(
+                retry(2), // Reintentar la creación del pago hasta 2 veces
+                switchMap((createdPayment: PaymentEntity) => {
+                  const operation = new OperationEntity();
+                  operation.groupId = groupId;
+                  operation.expenseId = expenseId;
+                  operation.paymentId = createdPayment.id;
+
+                  return this.groupOperationService.postOperation(operation).pipe(
+                    retry(2), // Reintentar la creación de la operación hasta 2 veces
+                    catchError(error => {
+                      console.error(`Error creando la operación para el pago ${createdPayment.id}:`, error);
+                      return of(null); // Continuar si una operación falla
+                    })
+                  );
+                }),
+                catchError(error => {
+                  console.error('Error creando pago:', error);
+                  return of(null); // Continuar si un pago falla
+                })
+              );
+            });
+
+            // Ejecutar todas las solicitudes de pago y operación en paralelo
+            return forkJoin(paymentObservables);
           }),
           catchError(err => {
-            console.error('Error fetching expenses:', err);
-            return of(null); // Handle error gracefully
+            console.error('Error al obtener los gastos del grupo:', err);
+            return of(null); // Manejar error en la obtención de gastos
           })
         );
       }),
       catchError(err => {
-        console.error('Error fetching group members:', err);
-        return of(null); // Handle error gracefully
+        console.error('Error al obtener los miembros del grupo:', err);
+        return of(null); // Manejar error en la obtención de miembros
       })
-    ).subscribe(result => {
-      if (result) {
-        // Handle successful completion
-        console.log('Operation completed successfully');
+    ).subscribe(results => {
+      if (results && results.every(result => result !== null)) {
+        console.log('Todos los pagos y operaciones se crearon exitosamente:', results);
       } else {
-        // Handle failure
-        console.error('Operation failed');
+        console.error('Una o más operaciones fallaron');
       }
     });
   }
+
 
 }

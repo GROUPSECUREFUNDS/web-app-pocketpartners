@@ -17,14 +17,14 @@ import { GroupService } from '../../../group/services/group.service';
 export class IncomingComponent implements OnInit {
   public groups: GroupEntity[] = [];
   public groupPayments: { [key: number]: PaymentEntity[] } = {};
-  public users: { [key: number]: ContactEntity } = {}; 
+  public users: { [key: number]: ContactEntity } = {};
   dataLoaded: Promise<boolean> = new Promise((resolve) => resolve(false));
 
   constructor(
     private groupService: GroupService,
     private groupOperations: GroupOperationsService,
     private paymentService: PaymentService,
-    private userService: ContactService 
+    private userService: ContactService
   ) { }
 
   getAllGroups() {
@@ -45,7 +45,7 @@ export class IncomingComponent implements OnInit {
       .subscribe((operations: OperationEntity[]) => {
         console.log("Some operations: ", operations);
         operations.forEach(operation => {
-          this.getPaymentById(groupId, operation.paymentsId);
+          this.getPaymentById(groupId, operation.paymentId);
         });
       });
   }
