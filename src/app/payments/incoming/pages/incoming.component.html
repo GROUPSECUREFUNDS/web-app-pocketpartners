@@ -1,6 +1,6 @@
 @if (dataLoaded | async) {
   <div class="title-container">
-    <h1>{{ 'payments.incoming' | translate }}</h1> <!-- Traducción para "Incoming Payments" -->
+    <h1>{{ 'payments.incoming' | translate }}</h1> 
   </div>
 
   <mat-card *ngFor="let group of groups" class="group-card">
@@ -13,19 +13,19 @@
       <mat-card-content>
         <div class="container">
           <div class="box name">
-            <h3><b>{{ 'payments.members' | translate }}</b></h3> <!-- Traducción para "Members" -->
+            <h3><b>{{ 'payments.members' | translate }}</b></h3> 
             <div *ngFor="let payment of groupPayments[group.id]">
               {{ users[payment.userId].fullName || payment.userId }}
             </div>
           </div>
           <div class="box date">
-            <h4><b>{{ 'payments.description' | translate }}</b></h4> <!-- Traducción para "Description" -->
+            <h4><b>{{ 'payments.description' | translate }}</b></h4> 
             <div *ngFor="let payment of groupPayments[group.id]">
               {{ payment.description }}
             </div>
           </div>
           <div class="box amount">
-            <h4><b>{{ 'payments.amount' | translate }}</b></h4> <!-- Traducción para "Amount" -->
+            <h4><b>{{ 'payments.amount' | translate }}</b></h4> 
             <div *ngFor="let payment of groupPayments[group.id]">
               {{ payment.amount | currency }}
             </div>
@@ -34,7 +34,7 @@
       </mat-card-content>
     } @else {
       <mat-card-content>
-        {{ 'payments.noMovements' | translate }} <!-- Traducción para "No movements yet..." -->
+        {{ 'payments.noMovements' | translate }} 
       </mat-card-content>
     }
   </mat-card>

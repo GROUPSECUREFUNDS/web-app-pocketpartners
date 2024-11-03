@@ -14,32 +14,50 @@ export class GroupService extends BaseService<GroupEntity> {
     this.resourceEndpoint = '/groups';
   }
 
-  putANewGroup(groupName: string, groupPhoto: string, currency: any) {
-    return this.http.post<GroupEntity>(`${this.resourcePath()}`, { name: groupName, groupPhoto: groupPhoto, currency: [currency] }, this.httpOptions);
-  }
-
   getById(id: number) {
+
     return this.http.get<GroupEntity>(`${this.resourcePath()}/${id}`, this.httpOptions);
   }
 
-  getExpensesById(id: number) {
-    return this.http.get<GroupEntity>(`${this.resourcePath()}/groupOperations/groupId/${id}`, this.httpOptions);
+
+   updateGroup(id: number, name: string,description: string): Observable<GroupEntity> {
+    return this.http.put<GroupEntity>(`${this.resourcePath()}/${id}`, { name, description }, this.httpOptions);
   }
 
-  getAllMembersByIdGroup(id: number) {
-    return this.http.get<GroupEntity>(`${this.resourcePath()}/${id}/members`, this.httpOptions);
+  updateGroupImage(id: number, image: string): Observable<GroupEntity> {
+    return this.http.put<GroupEntity>(`${this.resourcePath()}/${id}/image`, { image }, this.httpOptions);
   }
 
-  joinGroup(groupId: number, userId: number) {
-    return this.http.post<GroupEntity>(`${this.resourcePath()}/${groupId}/members/${userId}`, null, this.httpOptions);
+  deleteGroup(id: number): Observable<{}> {
+    return this.http.delete(`${this.resourcePath()}/${id}`, this.httpOptions);
   }
+
+
+  
 
   getAllGroups(): Observable<GroupEntity[]> {
     return this.http.get<GroupEntity[]>(this.resourceEndpoint, this.httpOptions);
   }
 
-  joinGroupWithToken(groupId: number, userId: number, token: string) {
-    return this.http.post<GroupEntity>(`${this.resourcePath()}/${groupId}/members/${userId}`, { token }, this.httpOptions);
+ 
+  getAllGroupsByUserId(userId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.resourceEndpoint}/user/${userId}`, this.httpOptions);
+  }
+
+  createGroup(groupName: string,  groupPhoto: string, description: string, adminId: number) {  
+    return this.http.post<GroupEntity>(`${this.resourcePath()}`, { name: groupName, groupPhoto: groupPhoto, description: description, adminId: adminId  }, this.httpOptions);
+  }
+
+  getAllMembersByIdGroup(id: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.resourcePath()}/${id}/members`, this.httpOptions);
+  }
+
+  generateInvitation(groupId: number): Observable<string> {
+    return this.http.post(`${this.resourcePath()}/${groupId}/generate-invitation`, {}, { ...this.httpOptions, responseType: 'text' as 'json' }) as Observable<string>;
+  }
+
+  joinGroup(groupId: number, userId: number, token: string): Observable<any> {
+    return this.http.post<any>(`${this.resourcePath()}/${groupId}/join`, { userId, token }, this.httpOptions);
   }
 
 }

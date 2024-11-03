@@ -13,16 +13,29 @@ import { AuthenticationService } from '../../../iam/services/authentication.serv
 export class PageCreateGroupComponent {
   constructor(private groupService: GroupService, private groupMembersService: GroupMembersService, private router: Router, private authenticationService: AuthenticationService) { }
   userId: number = 0;
-  createNewGroup(group: GroupEntity) {
-    this.authenticationService.currentUserId.subscribe((userIdData: any) => {
-      this.userId = userIdData;
-      this.groupService.putANewGroup(group.name, group.groupPhoto, group.currency).subscribe((response) => {
-        this.groupMembersService.postGroupMember(response.id, this.userId).subscribe((response) => {
-          this.redirectToGroupList();
-        });
-      });
-    }).unsubscribe();
+
+  ngOnInit() {
+    this.authenticationService.currentUserId.subscribe((userId: any) => {
+      this.userId = userId;
+    });
   }
+
+  createNewGroup(group: GroupEntity) {
+    if (this.userId) {
+      this.groupService.createGroup(group.name, group.groupPhoto, group.description, this.userId)
+        .subscribe({
+          next: () => {
+            this.redirectToGroupList();
+          },
+          error: () => {
+            console.error("Error al crear el grupo:");
+          }
+        });
+    } else {
+      console.error("Error: userId no está disponible.");
+    }
+  }
+
 
   redirectToGroupList() {
     this.router.navigate(['/groups']);

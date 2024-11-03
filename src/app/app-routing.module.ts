@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-
 import { PageNotFoundComponent } from './public/pages/page-not-found/page-not-found.component';
 import { PageCreateGroupComponent } from './group/pages/page-create-group/page-create-group.component';
 import { HomeComponent } from "./pockets/pages/home/home.component";
@@ -16,9 +15,9 @@ import { AddPaymentComponent } from "./payments/incoming/pages/add-payment/add-p
 import { authenticationGuard } from "./iam/services/authentication.guard";
 import { SignInComponent } from "./iam/pages/sign-in/sign-in.component";
 import { SignUpComponent } from "./iam/pages/sign-up/sign-up.component";
-import {
-  PageGroupExpensesDetailsComponent
-} from "./group/pages/page-group-expenses-details/page-group-expenses-details.component";
+import { PageGroupExpensesDetailsComponent } from "./group/pages/page-group-expenses-details/page-group-expenses-details.component";
+import { GroupConfigComponent } from './group/pages/group-config/group-config.component';
+
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [authenticationGuard], },
@@ -26,6 +25,7 @@ const routes: Routes = [
   { path: 'groups', component: PageGroupComponent, canActivate: [authenticationGuard], },
   { path: 'group-detail/:id', component: PageGroupDetailsComponent, canActivate: [authenticationGuard], },
   { path: 'profile', component: ContactComponent, canActivate: [authenticationGuard], },
+  {path: 'group-config/:id', component: GroupConfigComponent, canActivate: [authenticationGuard],},
   { path: 'incoming', component: IncomingComponent, canActivate: [authenticationGuard], },
   { path: 'outgoing', component: OutgoingComponent, canActivate: [authenticationGuard], },
   { path: 'create-group', component: PageCreateGroupComponent, canActivate: [authenticationGuard], },

@@ -24,20 +24,20 @@
   margin-left: 20px;
 }
 
-/* Left container for welcome card and timeline */
+
 .left-container {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 5px; /* Space between welcome card and transactions timeline */
+  gap: 5px; 
 }
 
-/* Right container for the chart */
+
 .right-container {
   flex: 1;
 }
 
-/* Welcome card styles */
+
 .welcome-card {
   background-color: #ffffff;
   border-radius: 15px;
@@ -45,22 +45,22 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Responsive adjustments */
+
 @media (max-width: 768px) {
   .container {
-    flex-direction: column; /* Stack items vertically on small screens */
+    flex-direction: column; 
   }
 
   .right-container,
   .left-container {
-    width: 100%; /* Make both containers full-width */
+    width: 100%; 
   }
 }
 
 .report-button-container {
   display: flex;
-  justify-content: center; /* Centrar el botón */
-  margin-top: 20px; /* Espaciado superior */
+  justify-content: center; 
+  margin-top: 20px; 
 }
 
 

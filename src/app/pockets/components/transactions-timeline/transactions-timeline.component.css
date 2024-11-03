@@ -1,76 +1,76 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
-/* Estilos generales para la tarjeta de transacciones */
+
 .transactions-card {
-  margin: 40px auto; /* Centrar la tarjeta y elevarla un poco más */
+  margin: 40px auto; 
   padding: 20px;
-  width: 100%; /* Hacer la tarjeta más ancha */
-  max-width: 1100px; /* Limitar el ancho para pantallas grandes */
-  background-color: #ffffff; /* Fondo lila pastel claro */
+  width: 100%; 
+  max-width: 1100px; 
+  background-color: #ffffff; 
   border-radius: 20px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* Estilo para el encabezado de la tarjeta */
+
 .header {
-  background-color: #b39ddb; /* Lila pastel medio */
+  background-color: #b39ddb; 
   color: white;
   padding: 20px;
   border-radius: 15px 15px 0 0;
   text-align: center;
 }
 
-/* Estilo para las secciones de la línea de tiempo */
+
 .timeline-section {
   margin: 25px 0;
 }
 
 .timeline-section h2 {
-  color: #9575cd; /* Lila pastel más suave */
+  color: #9575cd; 
   font-size: 1.6em;
   margin-bottom: 15px;
 }
 
-/* Estilo para las tarjetas individuales de pagos y gastos */
+
 .transaction-card {
   margin-bottom: 10px;
-  background-color: #f8fcfd; /* Fondo celeste pastel */
-  border-left: 6px solid #ceeaff; /* Borde celeste pastel más oscuro */
+  background-color: #f8fcfd; 
+  border-left: 6px solid #ceeaff; 
   border-radius: 15px;
   width: 100%;
 }
 
 .transaction-card mat-card-title {
   font-size: 1.1em;
-  color: #7986cb; /* Lila suave */
+  color: #7986cb; 
 }
 
 .transaction-card mat-card-subtitle {
   font-size: 1em;
-  color: #9575cd; /* Lila pastel suave */
+  color: #9575cd; 
 }
 
-/* Estilo para los montos */
+
 .amount {
   font-size: 1em;
   font-weight: bold;
-  color: #4db6ac; /* Verde agua pastel */
+  color: #4db6ac; 
 }
 
-/* Estilo para el texto cuando no hay datos */
+
 .no-data {
   text-align: center;
   font-style: italic;
-  color: #bdbdbd; /* Gris claro */
+  color: #bdbdbd; 
 }
 
-/* Ajustes de la tarjeta para pantallas más pequeñas */
+
 @media (max-width: 768px) {
   .transactions-card {
-    width: 95%; /* Adaptar el ancho para pantallas más pequeñas */
+    width: 95%; 
   }
 
   .transaction-card {
-    width: 100%; /* Asegurar que las tarjetas se ajusten en pantallas pequeñas */
+    width: 100%; 
   }
 }

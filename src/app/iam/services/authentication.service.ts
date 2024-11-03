@@ -18,6 +18,7 @@ import { PartnerEntity } from '../../pockets/model/partnerEntity';
  */
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
+
   basePath: string = `${environment.baseURL}`;
   httpOptions = { headers: new HttpHeaders({ 'Content-type': 'application/json' }) };
 

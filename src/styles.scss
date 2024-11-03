@@ -5,3 +5,12 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+:root {
+    --primary-color: #6a1b9a;     // Morado
+    --secondary-color: #f57c00;   // Naranja
+    --background-color: #ffffff;  // Blanco
+    --text-color: #333333;        // Texto oscuro
+    --button-color: #6200ea;      // Botón morado
+    --button-hover: #3700b3;      // Hover del botón
+  }
+  

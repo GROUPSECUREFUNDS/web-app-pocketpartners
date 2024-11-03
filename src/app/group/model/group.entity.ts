@@ -1,12 +1,14 @@
 export class GroupEntity {
   id: number;
   name: string;
-  invitationToken: string;
-  currency: Array<{ id: number; code: string; }>;
   groupPhoto: string;
+  description: string;
+  adminId: number;
   members: {
     userId: number;
-    name: string;
+    fullName: string;
+    joinedAt: Date;
+    role: string;
   }[];
   isMember: boolean;
   createdAt: Date;
@@ -31,11 +33,11 @@ export class GroupEntity {
 
   constructor(
     id: number = 0,
-    groupPhoto: string = '',
-    invitationToken: string = '',
-    currency: { id: number; code: string; }[] = [],
+    adminId: number = 0,
     name: string = '',
-    members: { userId: number; name: string; }[] = [],
+    groupPhoto: string ='',
+    description: string = '',
+    members: { userId: number; fullName: string; joinedAt: Date; role: string; }[] = [],
     createdAt: Date = new Date(),
     paymentHistory: { id: number; date: Date; amount: number; member: { id: number; name: string; } }[] = [],
     expenseHistory: { id: number; date: Date; amount: number; member: { id: number; name: string; } }[] = [],
@@ -43,9 +45,9 @@ export class GroupEntity {
   ) {
     this.id = id;
     this.groupPhoto = groupPhoto;
-    this.invitationToken = invitationToken;
-    this.currency = currency;
+    this.description = description;
     this.name = name;
+    this.adminId = adminId;
     this.members = members;
     this.createdAt = createdAt;
     this.isMember = isMember;

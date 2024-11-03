@@ -22,7 +22,6 @@ export class AddExpenseComponent implements OnInit {
     private expenseService: ExpensesService,
     private authenticationService: AuthenticationService,
     private groupService: GroupService,
-    private groupOperationService: GroupOperationsService,
     private router: Router 
   ) { }
 

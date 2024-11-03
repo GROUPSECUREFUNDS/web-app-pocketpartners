@@ -68,15 +68,14 @@ export class PageGroupComponent implements OnInit {
     dialogRef.afterClosed().subscribe((invitationToken) => {
       if (invitationToken) {
         console.log("Joining group with token: ", invitationToken);
-        this.groupService.joinGroupWithToken(groupId, this.currentUserId, invitationToken).subscribe(
+        this.groupService.joinGroup(groupId, this.currentUserId, invitationToken).subscribe(
           (response: any) => {
             console.log("Successfully joined the group");
             this.openGroup(groupId);
           },
           (error: any) => {
             console.error("Failed to join the group:", error);
-            alert("Invalid invitation token.");
-          }
+           }
         );
       }
     });

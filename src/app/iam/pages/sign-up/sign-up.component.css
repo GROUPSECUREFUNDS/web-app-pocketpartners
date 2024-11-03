@@ -1,39 +1,39 @@
-/* Estilos para el contenedor principal */
+
 .sign-in-content, .sign-up-content {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  padding: 20px; /* Añade padding para evitar desbordamientos */
+  padding: 20px; 
   box-sizing: border-box;
 }
 
-/* Estilos para el contenedor de la imagen */
+
 .image-wrapper {
   width: 36.9%;
   margin-right: 20px;
 }
 
-/* Estilos para la imagen */
+
 .side-image {
   width: 100%;
   height: auto;
 }
 
-/* Estilos para el card (mat-card) */
+
 .mat-card {
   width: 100%;
-  max-width: 500px; /* Ajusta el ancho máximo para evitar que sea demasiado grande */
+  max-width: 500px; 
   max-height: 550px;
   padding: 20px;
   box-sizing: border-box;
   background-color: #ffffff;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
-  overflow-y: auto; /* Añade desplazamiento vertical si el contenido es demasiado grande */
+  overflow-y: auto; 
 }
 
-/* Estilos para el título de card */
+
 .mat-card-title {
   font-size: 24px;
   font-weight: bold;
@@ -41,49 +41,49 @@
   text-align: center;
 }
 
-/* Estilos para los campos de formulario */
+
 .form-group {
   margin-bottom: 10px;
 }
 
-/* Estilos para los campos en una fila */
+
 .form-group.row {
   display: flex;
   justify-content: space-between;
 }
 
 .half-width {
-  width: 48%; /* Ancho de los campos en una fila */
+  width: 48%; 
 }
 
-/* Estilos para los inputs */
+
 mat-form-field {
   width: 100%;
 }
 
-/* Estilos para el texto de la etiqueta (mat-label) */
+
 .mat-form-field-label {
-  color: #9c27b0 !important; /* Color morado para la etiqueta */
-  font-size: 16px; /* Tamaño de fuente para la etiqueta */
-  font-weight: bold; /* Negrita para la etiqueta */
+  color: #9c27b0 !important; 
+  font-size: 16px; 
+  font-weight: bold; 
 }
 
-/* Estilos para el enlace '¿Olvidaste tu contraseña?' */
+
 .form-group a {
   color: #9c27b0;
 }
 
-/* Estilos para el botón 'Iniciar sesión' */
+
 .form-group button {
   background-color: #9c27b0;
   color: #ffffff;
-  border-radius: 8px; /* Bordes redondeados */
+  border-radius: 8px; 
 }
 
-/* Estilos para los iconos sociales */
+
 .social-icons {
   margin-top: 20px;
-  text-align: center; /* Centra los íconos socialmente */
+  text-align: center; 
 }
 
 .social-icon {
@@ -92,7 +92,7 @@ mat-form-field {
 }
 
 .social-icon img {
-  width: 40px; /* Tamaño de los íconos de redes sociales */
+  width: 40px; 
   height: auto;
 }
 

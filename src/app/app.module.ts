@@ -30,12 +30,10 @@ import { AppComponent } from './app.component';
 import { LanguageSwitcherComponent } from './public/components/language-switcher/language-switcher.component';
 import { PageCreateGroupComponent } from './group/pages/page-create-group/page-create-group.component';
 import { FormCreateGroupComponent } from './group/components/form-create-group/form-create-group.component';
-import { HomeComponent } from './pockets/pages/home/home.component';
 import { MatIcon } from "@angular/material/icon";
 import { MatSidenav, MatSidenavContainer, MatSidenavContent } from "@angular/material/sidenav";
 import { MatListItem, MatListItemAvatar, MatListItemLine, MatNavList } from "@angular/material/list";
 import { PageGroupComponent } from './group/pages/page-group/page-group.component';
-import { GroupService } from './group/services/group.service';
 import { IncomingComponent } from './payments/incoming/pages/incoming.component';
 import { OutgoingComponent } from './payments/outgoing/pages/outgoing.component';
 import { MatCard, MatCardHeader, MatCardModule, MatCardTitleGroup } from "@angular/material/card";
@@ -65,6 +63,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { AdvertisementComponent } from './public/components/advertisement/advertisement.component';
 import { GroupJoinDialogComponent } from './group/components/group-join-dialog/group-join-dialog.component';
 import { PageGroupExpensesDetailsComponent } from './group/pages/page-group-expenses-details/page-group-expenses-details.component';
+import { GroupConfigComponent } from './group/pages/group-config/group-config.component';
+import { GroupService } from './group/services/group.service';
+import { HomeComponent } from './pockets/pages/home/home.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -95,11 +96,13 @@ export function HttpLoaderFactory(http: HttpClient) {
     SignInComponent,
     SignUpComponent,
     GroupJoinDialogComponent,
-    PageGroupExpensesDetailsComponent
+    PageGroupExpensesDetailsComponent,
+    GroupConfigComponent
   ],
   exports: [],
   bootstrap: [AppComponent],
-  imports: [BrowserModule,
+  imports: [
+    BrowserModule,
     AppRoutingModule,
     MatToolbar,
     MatAnchor,
@@ -146,7 +149,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatSlideToggle, AdvertisementComponent, DarkModeSwitcherComponent], providers: [
     provideAnimationsAsync(),
     provideHttpClient(withInterceptors([authenticationInterceptor])),
-    GroupService,
     provideHttpClient(withInterceptorsFromDi()),
   ]
 })

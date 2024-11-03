@@ -1,9 +1,7 @@
 <mat-stepper [linear]="!isLinear" #stepper>
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>
-        {{ 'createGroup.groupInfo' | translate }}
-      </ng-template>
+      <ng-template matStepLabel>{{ 'createGroup.groupInfo' | translate }}</ng-template>
       <mat-form-field>
         <mat-label>{{ 'createGroup.groupName' | translate }}</mat-label>
         <input matInput formControlName="firstCtrl" required>
@@ -12,34 +10,24 @@
         <mat-label>{{ 'createGroup.groupImage' | translate }}</mat-label>
         <input matInput formControlName="secondCtrl" required>
       </mat-form-field>
-      <div>
-        <button mat-button matStepperNext>{{ 'createGroup.next' | translate }}</button>
-      </div>
+      <button mat-button matStepperNext>{{ 'createGroup.next' | translate }}</button>
     </form>
   </mat-step>
+
   <mat-step [stepControl]="thirdFormGroup">
     <form [formGroup]="thirdFormGroup">
-      <ng-template matStepLabel>
-        {{ 'createGroup.groupCurrency' | translate }}
-      </ng-template>
+      <ng-template matStepLabel>{{ 'createGroup.groupDescription' | translate }}</ng-template>
       <mat-form-field>
-        <mat-label>{{ 'createGroup.currency' | translate }}</mat-label>
-        <input matInput formControlName="firstCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
+        <mat-label>{{ 'createGroup.description' | translate }}</mat-label>
+        <input matInput formControlName="description" required>
       </mat-form-field>
-      <div>
-        <button mat-button matStepperNext>{{ 'createGroup.next' | translate }}</button>
-      </div>
+      <button mat-button matStepperNext>{{ 'createGroup.next' | translate }}</button>
     </form>
   </mat-step>
+
   <mat-step>
-    <form>
-      <ng-template matStepLabel>
-        {{ 'createGroup.confirmation' | translate }}
-      </ng-template>
-      <p>{{ 'createGroup.newGroupCreated' | translate }}</p>
-      <div>
-        <button mat-button matPrimary (click)="createNewGroup()">{{ 'createGroup.done' | translate }}</button>
-      </div>
-    </form>
+    <ng-template matStepLabel>{{ 'createGroup.confirmation' | translate }}</ng-template>
+    <p>{{ 'createGroup.newGroupCreated' | translate }}</p>
+    <button mat-button (click)="createNewGroup()">{{ 'createGroup.done' | translate }}</button>
   </mat-step>
 </mat-stepper>

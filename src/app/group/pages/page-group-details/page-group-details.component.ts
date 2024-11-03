@@ -7,6 +7,7 @@ import { ExpensesService } from '../../../expenses/services/expenses.service';
 import { PaymentService } from '../../../payments/services/payment.service';
 import { AuthenticationService } from '../../../iam/services/authentication.service';
 import { PartnerService } from '../../../pockets/services/Partner.service';
+import { GroupMembersService } from '../../services/group-members.service';
 
 @Component({
   selector: 'app-page-group-details',
@@ -17,19 +18,19 @@ export class PageGroupDetailsComponent implements OnInit {
   idOfUser = 1;
   id: number = 0;
   group: GroupEntity = new GroupEntity();
-  groupMembers: any;
+  groupMembers: any[] = [];
   totalExpenses: number = 0;
   totalOfMembers: number = 0;
   amountOfPayToYou: number = 0;
   amountEachMemberShouldPay: number = 0;
   paidMembers: Set<number> = new Set<number>();
-  currentCurrency: string = 'PEN';
   pieChart!: Chart<"pie", number[], string>;
-  groupMemberInformation: any[] = [];
-  invitationToken: string = '';  // Agregamos esta línea para el token de invitación
+  invitationToken: string = '';  
+  currentUserId!: number;
 
   constructor(
     private route: ActivatedRoute,
+    private groupMembersService: GroupMembersService,
     private groupService: GroupService,
     private expensesService: ExpensesService,
     private paymentService: PaymentService,
@@ -48,27 +49,25 @@ export class PageGroupDetailsComponent implements OnInit {
     if (this.id) {
       this.groupService.getById(this.id).subscribe((group: any) => {
         this.group = group;
-        this.invitationToken = group.invitationToken;  // Asegúrate de que el token de invitación esté en la respuesta
-        this.currentCurrency = group.currency[0].code;
         this.calculateAmountToYou();
+        this.getAllGroupMembers();
       });
     }
+
+    this.authenticationService.currentUserId.subscribe((userId: any) => {
+      this.currentUserId = userId;
+    } );
+    console.log(this.currentUserId);
+    console.log(this.idOfUser);
+    console.log(this.group.adminId);
   }
 
-  // Método para generar el enlace de invitación
-  generateInvitationLink(): string {
-    return `http://localhost:4200/invite?groupId=${this.group.id}&token=${this.invitationToken}`;
-  }
 
-  // El resto del código permanece igual
+  
   getAllGroupMembers() {
     this.groupService.getAllMembersByIdGroup(this.group.id).subscribe((members: any) => {
       this.groupMembers = members;
-      members.forEach((member: any) => {
-        this.partnerService.getUserInformationById(member.userId).subscribe((user: any) => {
-          this.groupMemberInformation.push(user);
-        });
-      });
+      this.totalOfMembers = members.length;
     });
   }
 
@@ -95,8 +94,12 @@ export class PageGroupDetailsComponent implements OnInit {
   }
 
   calculateAmountEachMemberShouldPay() {
+
     this.groupService.getAllMembersByIdGroup(this.group.id).subscribe((group: any) => {
+
+
       const numberOfMembers = group.length;
+
       if (numberOfMembers > 0) {
         this.totalOfMembers = numberOfMembers;
         this.amountEachMemberShouldPay = this.totalExpenses / numberOfMembers;
@@ -142,8 +145,12 @@ export class PageGroupDetailsComponent implements OnInit {
     });
   }
 
+<<<<<<< HEAD
   goToDetailedDistribution(groupId: string) {
     this.router.navigate(['/page-group-expenses-details', groupId]);
   }
+=======
+
+>>>>>>> 3a5a5b618a9ae2e6b2b3b3371de3a3f713cef1a4
 
 }

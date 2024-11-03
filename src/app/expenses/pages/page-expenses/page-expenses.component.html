@@ -1,5 +1,5 @@
 <div class="search-bar">
-  <input type="text" [(ngModel)]="searchText" [placeholder]="'expense.search' | translate" /> <!-- Traducción para el placeholder -->
+  <input type="text" [(ngModel)]="searchText" [placeholder]="'expense.search' | translate" /> 
 </div>
 <div class="content" *ngIf="!isLoading; else loading">
   <app-expense-card *ngFor="let expense of filteredExpenses()"

@@ -15,11 +15,16 @@ export class GroupMembersService extends BaseService<GroupEntity> {
     this.resourceEndpoint = '/groups';
   }
 
-  getAllMembersByIdGroup(id: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.resourcePath()}/${id}/members`, this.httpOptions);
+  addGroupMember(groupId: number, memberId: number): Observable<any> {
+    return this.http.post<any>(`${this.resourcePath()}/${groupId}/members`, { memberId }, this.httpOptions);
   }
 
-  postGroupMember(groupId: number, memberId: number) {
-    return this.http.post<GroupEntity>(`${this.resourcePath()}/${groupId}/members/${memberId}`, null, this.httpOptions);
+  deleteGroupMember(groupId: number, userId: number): Observable<void> {
+    return this.http.delete<void>(`${this.resourcePath()}/${groupId}/members/${userId}`, this.httpOptions);
   }
+
+  getGroupMembers(groupId: number): Observable<any> {
+    return this.http.get<any>(`${this.resourcePath()}/${groupId}/members`, this.httpOptions);
+  }
+
 }

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { GroupEntity } from "../../../group/model/group.entity";
-import { GroupService } from "../../../group/services/group.service";
 import { PaymentEntity } from "../../model/payment-entity";
 import { ContactEntity } from "../../../contacts/model/contact.entity";
-import { GroupOperationsService } from "../../../group/services/group-operations.service";
 import { PaymentService } from "../../services/payment.service";
 import { ContactService } from "../../../contacts/services/contact.service";
 import { OperationEntity } from "../../../group/model/operation-entity";
 import { ExpensesService } from "../../../expenses/services/expenses.service";
+import { GroupOperationsService } from '../../../group/services/group-operations.service';
+import { GroupService } from '../../../group/services/group.service';
 
 @Component({
   selector: 'app-pages',

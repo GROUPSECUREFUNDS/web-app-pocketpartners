@@ -6,30 +6,30 @@
 }
 
 .language-toggle-group {
-  background-color: #ffffff; /* Fondo blanco para un contraste limpio */
-  border-radius: 20px; /* Bordes redondeados */
+  background-color: #ffffff; 
+  border-radius: 20px; 
   padding: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave para profundidad */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
 }
 
 .language-toggle {
-  background-color: #ffe0b2; /* Color naranja pastel claro */
-  color: #6a1b9a; /* Texto en un morado oscuro para contraste */
-  border-radius: 15px; /* Bordes redondeados */
-  transition: background-color 0.3s, transform 0.3s; /* Transición suave */
+  background-color: #ffe0b2; 
+  color: #6a1b9a; 
+  border-radius: 15px; 
+  transition: background-color 0.3s, transform 0.3s; 
 }
 
 .language-toggle:hover {
-  background-color: #ffe5b4; /* Naranja muy claro al pasar el mouse */
-  transform: scale(1.05); /* Efecto de aumento */
+  background-color: #ffe5b4; 
+  transform: scale(1.05); 
 }
 
 .language-toggle.mat-button-toggle-checked {
-  background-color: #e1bee7; /* Color morado suave activo */
-  color: #6a1b9a; /* Texto en un morado oscuro */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra suave para el botón activo */
+  background-color: #e1bee7; 
+  color: #6a1b9a; 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
 }
 
 .language-toggle:focus {
-  outline: none; /* Sin borde de enfoque */
+  outline: none; 
 }

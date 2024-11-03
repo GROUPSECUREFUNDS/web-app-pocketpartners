@@ -15,7 +15,7 @@ export class ContactComponent implements OnInit {
   form!: FormGroup;
   public isEditing: boolean = false;
   public userId: number | undefined;
-  image: string | null = null; // Variable to hold the uploaded image URL
+  image: string | null = null; 
   selectedFileName: string = '';
 
 
@@ -124,12 +124,12 @@ export class ContactComponent implements OnInit {
       const file = event.target.files[0];
       this.selectedFileName = file.name;
       let reader = new FileReader();
-      let name = "USER_PROFILE_" + Date.now(); // Unique name for the image
+      let name = "USER_PROFILE_" + Date.now(); 
       reader.readAsDataURL(file);
       reader.onloadend = () => {
         this.storageService.uploadFile(name, reader.result).then((url) => {
-          this.image = url; // Save the uploaded image URL
-          this.form.patchValue({ photo: this.image }); // Update the form control with the image URL
+          this.image = url; 
+          this.form.patchValue({ photo: this.image }); 
         }).catch((error) => {
           console.error('Error uploading image:', error);
         });

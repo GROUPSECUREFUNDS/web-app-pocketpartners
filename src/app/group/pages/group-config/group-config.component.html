@@ -1,0 +1,87 @@
+<div class="group-config">
+  <h1 class="title">Configuración del Grupo</h1>
+
+  
+  <section class="image-update">
+    <label for="imageUpload" class="label">Imagen del Grupo</label>
+    <input id="imageUpload" type="file" (change)="onImageChange($event)" class="file-input" accept=".png, .jpg, .jpeg" />
+    @if (selectedFileName) {
+      <span class="file-name">{{ selectedFileName }}</span>
+    }
+    <button (click)="newImageBase64 && updateGroupImage(newImageBase64)" class="button image" [disabled]="isLoadingImage || !newImageBase64">
+      Actualizar Imagen
+    </button>
+    @if (isLoadingImage) {
+      <div class="loading">
+        <div class="spinner"></div>
+        Cargando imagen...
+      </div>
+    }
+  </section>
+
+  
+  @if (group()) {
+    <section class="group-details">
+      <label for="name" class="label">Nombre del Grupo</label>
+      <input id="name" type="text" class="input" [(ngModel)]="group()!.name" placeholder="Nombre del Grupo" />
+      <label for="description" class="label">Descripción</label>
+      <textarea id="description" class="textarea" [(ngModel)]="group()!.description" placeholder="Descripción"></textarea>
+      <button (click)="saveTextChanges()" class="button save" [disabled]="isLoadingText">
+        Guardar Cambios
+      </button>
+      @if (isLoadingText) {
+        <div class="loading">
+          <div class="spinner"></div>
+          Guardando cambios...
+        </div>
+      }
+    </section>
+  }
+
+  
+  @if (members() && group()) {
+  <section class="members">
+    <h2 class="subtitle">Miembros</h2>
+    @if (isLoadingMembers) {
+      <div class="loading">
+        <div class="spinner"></div>
+        Eliminando miembro...
+      </div>
+    } @else {
+      <ul class="member-list">
+        @for (member of members(); track member.userId) {
+          <li class="member-item">
+            <span>{{ member.fullName }}</span>
+            <span>{{ member.role }}</span>
+            @if (member.userId !== currentUserId) {
+              <button (click)="deleteMember(member.userId)" class="delete-button">Eliminar</button>
+            }
+          </li>
+        } @empty {
+          <li class="empty-message">No hay miembros en este grupo.</li>
+        }
+      </ul>
+    }
+  </section>
+  }
+  
+
+  
+<section class="invitation">
+  <button (click)="generateToken()" class="button invite">Generar Invitación</button>
+
+  @if (invitationToken()) {
+    <div class="invitation-token-wrapper">
+      <p class="invitation-token">Token de Invitación: {{ invitationToken() }}</p>
+
+      <button 
+        (click)="copyToken()" 
+        class="button copy-token" 
+        [class.copied]="isTokenCopied">
+        {{ isTokenCopied ? 'Copiado!' : 'Copiar Token' }}
+      </button>  </div>
+  }
+</section>
+
+  
+</div>
