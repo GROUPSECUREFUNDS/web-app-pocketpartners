@@ -1,15 +1,15 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ExpensesEntity } from '../../model/expenses.entity';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import {PartnerEntity} from "../../../pockets/model/partnerEntity";
-import {OperationEntity} from "../../../group/model/operation-entity";
-import {PaymentEntity} from "../../../payments/model/payment-entity";
-import {PaymentService} from "../../../payments/services/payment.service";
-import {GroupMembersService} from "../../../group/services/group-members.service";
-import {ExpensesService} from "../../services/expenses.service";
-import {GroupOperationsService} from "../../../group/services/group-operations.service";
-
+import { PartnerEntity } from "../../../pockets/model/partnerEntity";
+import { OperationEntity } from "../../../group/model/operation-entity";
+import { PaymentEntity } from "../../../payments/model/payment-entity";
+import { PaymentService } from "../../../payments/services/payment.service";
+import { GroupMembersService } from "../../../group/services/group-members.service";
+import { ExpensesService } from "../../services/expenses.service";
+import { GroupOperationsService } from "../../../group/services/group-operations.service";
+import { GroupService } from "../../../group/services/group.service";
 @Component({
   selector: 'app-form-expense',
   templateUrl: './form-expense.component.html',
@@ -36,7 +36,9 @@ export class FormExpenseComponent {
   @Input() joinedGroups: any;
   private Expense = new ExpensesEntity();
   @Output() onAddExpense: EventEmitter<ExpensesEntity> = new EventEmitter<ExpensesEntity>();
-  constructor(private _formBuilder: FormBuilder, private router: Router,private paymentService: PaymentService, private groupMembersService: GroupMembersService, private expenseService: ExpensesService, private groupOperationService: GroupOperationsService) { }
+  constructor(private _formBuilder: FormBuilder, private router: Router, private paymentService: PaymentService, private groupMembersService: GroupMembersService, private expenseService: ExpensesService, private groupOperationService: GroupOperationsService,
+    private groupService: GroupService
+  ) { }
 
   onSubmit() {
     this.Expense.name = this.firstFormGroup.value.firstCtrl as string;
@@ -47,7 +49,7 @@ export class FormExpenseComponent {
     this.onAddExpense.emit(this.Expense);
 
     const groupId = this.Expense.groupId;
-    this.groupMembersService.getAllMembersByIdGroup(groupId).subscribe((members: any[]) => {
+    this.groupService.getAllMembersByIdGroup(groupId).subscribe((members: any[]) => {
       this.expenseService.getExpensesByGroupId(groupId).subscribe((expenses: any) => {
         const paymentAmount = this.Expense.amount / members.length;
         const expenseId = expenses[expenses.length - 1].id;
@@ -59,11 +61,11 @@ export class FormExpenseComponent {
           payment.description = this.firstFormGroup.value.firstCtrl as string;
           const desc = this.firstFormGroup.value.firstCtrl as string;
 
-          this.paymentService.create({description:desc, amount:paymentAmount, userId:member.userId, expenseId:expenseId}).subscribe((payment: any) => {
+          this.paymentService.create({ description: desc, amount: paymentAmount, userId: member.userId, expenseId: expenseId }).subscribe((payment: any) => {
             const paymentId = payment.id;
 
             const groupID = this.fourthFormGroup.value.firstCtrl as unknown as number;
-            this.groupOperationService.create({groupId:groupID ,expenseId:expenseId, paymentId:paymentId}).subscribe();
+            this.groupOperationService.create({ groupId: groupID, expenseId: expenseId, paymentId: paymentId }).subscribe();
           });
         });
       });
