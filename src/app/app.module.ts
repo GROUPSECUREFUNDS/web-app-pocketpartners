@@ -94,7 +94,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AuthenticationSectionComponent,
     SignInComponent,
     SignUpComponent,
-
+    GroupJoinDialogComponent,
+    PageGroupExpensesDetailsComponent
   ],
   exports: [],
   bootstrap: [AppComponent],
@@ -142,7 +143,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatAutocompleteModule,
     MatButtonModule,
     MatIconModule,
-    MatSlideToggle, AdvertisementComponent], providers: [
+    MatSlideToggle, AdvertisementComponent, DarkModeSwitcherComponent], providers: [
     provideAnimationsAsync(),
     provideHttpClient(withInterceptors([authenticationInterceptor])),
     GroupService,
