@@ -1,26 +1,26 @@
 <form [formGroup]="myform" (ngSubmit)="Saveuser()">
-  <h1 mat-dialog-title>{{ 'newContact.title' | translate }}</h1> <!-- Traducción para "New Contact" -->
+  <h1 mat-dialog-title>{{ 'newContact.title' | translate }}</h1> 
   <div mat-dialog-content>
     <mat-form-field>
-      <mat-label>{{ 'newContact.name' | translate }}</mat-label> <!-- Traducción para "Name" -->
+      <mat-label>{{ 'newContact.name' | translate }}</mat-label> 
       <input formControlName="name" matInput>
     </mat-form-field>
     <mat-form-field>
-      <mat-label>{{ 'newContact.email' | translate }}</mat-label> <!-- Traducción para "Email" -->
+      <mat-label>{{ 'newContact.email' | translate }}</mat-label> 
       <input matInput formControlName="email">
     </mat-form-field>
     <mat-form-field>
-      <mat-label>{{ 'newContact.phone' | translate }}</mat-label> <!-- Traducción para "Phone" -->
+      <mat-label>{{ 'newContact.phone' | translate }}</mat-label> 
       <input matInput formControlName="phone">
     </mat-form-field>
     <mat-form-field>
-      <mat-label>{{ 'newContact.photo' | translate }}</mat-label> <!-- Traducción para "Photo (link)" -->
+      <mat-label>{{ 'newContact.photo' | translate }}</mat-label> 
       <input matInput formControlName="photo">
     </mat-form-field>
   </div>
 
   <mat-dialog-actions>
-    <button mat-raised-button type="submit" color="accent">{{ 'newContact.save' | translate }}</button> <!-- Traducción para "Save" -->
-    <a (click)="closePopUp()" mat-raised-button color="warn">{{ 'newContact.close' | translate }}</a> <!-- Traducción para "Close" -->
+    <button mat-raised-button type="submit" color="accent">{{ 'newContact.save' | translate }}</button> 
+    <a (click)="closePopUp()" mat-raised-button color="warn">{{ 'newContact.close' | translate }}</a> 
   </mat-dialog-actions>
 </form>

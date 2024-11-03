@@ -1,6 +1,6 @@
 <div class="user-profile">
   <form [formGroup]="form" (ngSubmit)="saveChanges()">
-    <!-- Foto del perfil -->
+    
     <div class="photo-container">
       <img *ngIf="!isEditing" [src]="userProfile?.photo" alt="{{ 'userProfile.photoAlt' | translate }}" class="user-photo">
     </div>
@@ -17,27 +17,27 @@
       </div>
     </div>
 
-    <!-- Nombre completo cuando no está editando -->
+    
     <div *ngIf="!isEditing">
       <h2>{{ userProfile?.fullName }}</h2>
     </div>
 
 
-    <!-- Campos firstName y lastName al editar -->
+    
     <div *ngIf="isEditing">
       <input type="text" formControlName="firstName" [placeholder]="'userProfile.firstNamePlaceholder' | translate" class="form-input">
       <input type="text" formControlName="lastName" [placeholder]="'userProfile.lastNamePlaceholder' | translate" class="form-input">
     </div>
 
-    <!-- Email -->
+    
     <p *ngIf="!isEditing">{{ userProfile?.email }}</p>
     <input *ngIf="isEditing" type="email" formControlName="email" [placeholder]="'userProfile.emailPlaceholder' | translate" class="form-input">
 
-    <!-- Teléfono -->
+    
     <p *ngIf="!isEditing">{{ userProfile?.phoneNumber }}</p>
     <input *ngIf="isEditing" type="text" formControlName="phoneNumber" [placeholder]="'userProfile.phonePlaceholder' | translate" class="form-input">
 
-    <!-- Botones de acción -->
+    
     <button *ngIf="!isEditing" class="edit-icon" (click)="enableEditing()">
       <mat-icon>edit</mat-icon>
     </button>
@@ -52,5 +52,5 @@
 
 </div>
 
-<app-language-switcher></app-language-switcher> <!-- Colocado aquí para mayor visibilidad -->
+<app-language-switcher></app-language-switcher> 
 
