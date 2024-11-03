@@ -13,33 +13,33 @@
             } @else {
               {{ 'group.upToDate' | translate }}
             }
-            @if (currentCurrency == 'PEN') {
-              {{ 'group.currencySol' | translate }}
-            } @else {
-              {{ currentCurrency }}
-            }
+           
           </mat-card-title>
         </mat-card-title-group>
       </mat-card-header>
       <mat-card-content>
+        <p>{{ 'group.description' | translate }}: {{ group.description }}</p>
         <p>{{ 'group.creationDate' | translate }}: {{ group.createdAt | date: 'dd/MM/yyyy' }}</p>
-        <p *ngFor="let currency of group.currency">{{ 'group.currency' | translate }}: {{ currency.code }}</p>
         <p>{{ 'group.members' | translate }}: {{ totalOfMembers }}</p>
-        <p>
-          {{ 'group.invitationToken' | translate }}: {{ group.invitationToken }}
-        </p>
+       
+        @if (group.adminId === currentUserId) {
+          <a routerLink="/group-config/{{ group.id }}" mat-raised-button color="primary">
+           Editar Grupo
+          </a> 
+         }
+      
       </mat-card-content>
     </mat-card>
 
     <mat-card>
       <mat-card-title>{{ 'group.eachMemberMustPay' | translate }}</mat-card-title>
       <mat-card-content>
-        <div *ngFor="let member of groupMemberInformation">
+        <div *ngFor="let member of groupMembers">
           <label [class.checked]="isMemberPaid(member.userId)">
             <input type="checkbox" [checked]="isMemberPaid(member.userId)" (change)="togglePaidMember(member.userId)">
             <span>{{ member.fullName }}</span>
           </label>
-          <span class="amount">{{ amountEachMemberShouldPay }} {{ group.currency[0].code || null }}</span>
+          <span class="amount">{{ amountEachMemberShouldPay }}</span>
         </div>
       </mat-card-content>
     </mat-card>
