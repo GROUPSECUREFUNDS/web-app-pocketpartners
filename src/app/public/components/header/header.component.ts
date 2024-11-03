@@ -10,6 +10,8 @@ import { MatMenu, MatMenuItem, MatMenuTrigger } from "@angular/material/menu";
 import { AuthenticationService } from '../../../iam/services/authentication.service';
 import { TranslateModule } from '@ngx-translate/core';
 import {DarkModeSwitcherComponent} from "../dark-mode-switcher/dark-mode-switcher.component";
+import {AdvertisementComponent} from "../advertisement/advertisement.component";
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -32,7 +34,9 @@ import {DarkModeSwitcherComponent} from "../dark-mode-switcher/dark-mode-switche
     MatMenuItem,
     MatAnchor,
     TranslateModule,
-    DarkModeSwitcherComponent
+    DarkModeSwitcherComponent,
+    AdvertisementComponent,
+    CommonModule,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
@@ -42,7 +46,6 @@ export class HeaderComponent implements OnInit {
   currentId: any = 0;
   constructor(private authenticationService: AuthenticationService) {
   }
-
   ngOnInit() {
     this.currentUsername = this.authenticationService.currentUsername;
     this.currentId = this.authenticationService.currentUserId;

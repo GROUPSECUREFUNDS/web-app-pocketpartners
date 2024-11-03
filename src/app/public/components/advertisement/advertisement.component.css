@@ -1,0 +1,13 @@
+/* Container styles */
+div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Image styles */
+img {
+  height: 220px;
+  width: auto; /* This will keep the aspect ratio */
+  object-fit: contain; /* Ensures that the image fits within the height */
+}

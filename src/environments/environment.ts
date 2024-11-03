@@ -2,6 +2,7 @@ export const environment = {
   production: true,
   baseURL: 'http://localhost:8080/api/v1',
   //baseURL: 'https://pocketpartners-backend.onrender.com/api/v1',
+  imgURL: 'https://my-json-server.typicode.com/vargas3470/ads/img',
   firebaseConfig: {
     apiKey: "AIzaSyA4RzVQ5SXfExHEwo_0JAWZcn7q-rZxq7w",
     authDomain: "agroconnect-demo-8c7ab.firebaseapp.com",
