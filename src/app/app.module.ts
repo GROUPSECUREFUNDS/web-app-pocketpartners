@@ -66,7 +66,6 @@ import { PageGroupExpensesDetailsComponent } from './group/pages/page-group-expe
 import { GroupConfigComponent } from './group/pages/group-config/group-config.component';
 import { GroupService } from './group/services/group.service';
 import { HomeComponent } from './pockets/pages/home/home.component';
-import { ChatComponent } from './group/components/chat/chat.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -98,8 +97,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SignUpComponent,
     GroupJoinDialogComponent,
     PageGroupExpensesDetailsComponent,
-    GroupConfigComponent,
-    ChatComponent
+    GroupConfigComponent
   ],
   exports: [],
   bootstrap: [AppComponent],
