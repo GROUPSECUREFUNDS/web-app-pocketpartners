@@ -21,6 +21,7 @@
     "@angular/platform-browser": "^18.2.9",
     "@angular/platform-browser-dynamic": "^18.2.9",
     "@angular/router": "^18.2.9",
+    "@ngx-translate/core": "^16.0.4",
     "@ngx-translate/http-loader": "^8.0.0",
     "angular-highcharts": "^17.0.1",
     "chart.js": "^4.4.4",
