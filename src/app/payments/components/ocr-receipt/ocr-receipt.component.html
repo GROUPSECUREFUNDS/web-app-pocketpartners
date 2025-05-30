@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Procesamiento OCR</h2>
+<mat-dialog-content>
+  @if (isLoading) {
+    <p>Estamos procesando el recibo que has subido. Por favor, espera un momento.</p>
+    <mat-spinner></mat-spinner>
+  } @else {
+    <div class="result-ocr-container">
+      <div class="ocr-image">
+        <img
+          [src]="imageService.getImageUrlById(ocrData?.imagePath!)"
+          alt="Receipt Image"
+          class="receipt-image"
+        />
+      </div>
+      <div class="ocr-fields">
+        <h2>Campos encontrados</h2>
+        <pre>{{ocrData?.text! | json}}</pre>
+
+      </div>
+    </div>
+
+  }
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close>Close</button>
+</mat-dialog-actions>
