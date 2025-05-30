@@ -6,6 +6,7 @@
     "groups": "Grupos",
     "newGroup": "Nuevo Grupo",
     "expenses": "Gastos",
+      "payments": "Pagos",
     "incomingPayments": "Pagos Entrantes",
     "outgoingPayments": "Pagos Salientes",
     "logout": "Cerrar Sesión"

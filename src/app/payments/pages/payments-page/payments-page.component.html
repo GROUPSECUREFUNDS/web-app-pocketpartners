@@ -1,0 +1,7 @@
+<div class="title-container">
+  <h1>{{ 'header.payments' | translate }}</h1>
+</div>
+<mat-tab-group>
+  <mat-tab [label]="'payments.made' | translate"> <app-payments-made-page></app-payments-made-page> </mat-tab>
+  <mat-tab [label]="'payments.toDo' | translate"> <app-payments-todo-page></app-payments-todo-page> </mat-tab>
+</mat-tab-group>

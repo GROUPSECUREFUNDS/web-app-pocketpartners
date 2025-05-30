@@ -1,0 +1,57 @@
+@if(showFormAddReceipt){
+  <h2 mat-dialog-title><mat-icon matPrefix>receipt</mat-icon> Deseas agregar comprobantes de pago? </h2>
+  <mat-dialog-content>
+    <p>Si deseas agregar comprobantes de pago, puedes hacerlo a continuación. Si no, puedes cerrar este diálogo.</p>
+    <form [formGroup]="receiptData">
+      <div class="all-fields-container">
+        <div class="fields-container">
+          <mat-form-field appearance="fill">
+            <mat-label>Nombre del comprobante</mat-label>
+            <input matInput formControlName="name" placeholder="Descripción del comprobante">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Monto del comprobante</mat-label>
+            <input matInput type="number" formControlName="amount" placeholder="Monto del comprobante">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Fecha de emisión</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="issueDate" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <mat-divider [vertical]="true"></mat-divider>
+        <div class="img-container">
+          <!-- Botón con icono que abre el selector de archivos -->
+          <button mat-raised-button color="accent" (click)="fileInput.click()">
+            <mat-icon>upload</mat-icon><mat-icon>photo_camera</mat-icon> Agregar foto del recibo (opcional)
+          </button>
+
+          <!-- Input real oculto -->
+          <input #fileInput type="file" accept="image/*" (change)="onFileSelected($event)" hidden>
+
+          <!-- Vista previa de imagen -->
+          <div class="image-preview" *ngIf="previewUrl">
+            <img [src]="previewUrl" alt="Vista previa del comprobante">
+          </div>
+        </div>
+      </div>
+      <button mat-raised-button color="primary" (click)="addReceipt()">Agregar Comprobante</button>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close>Close</button>
+  </mat-dialog-actions>
+} @else {
+  <h2 mat-dialog-title><mat-icon matPrefix>receipt</mat-icon> Comprobante de pago agregado </h2>
+  <mat-dialog-content>
+    <p>El comprobante de pago ha sido agregado correctamente.</p>
+    <mat-icon>check_circle</mat-icon>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="showFormAddReceipt=true">Agregar otro comprobante</button>
+    <button mat-raised-button mat-dialog-close>Close</button>
+  </mat-dialog-actions>
+}
+
+

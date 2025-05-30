@@ -1,0 +1,16 @@
+@for (payment of payments; track payment){
+  <app-card-payment
+    [payment]="payment"
+    [mode]="PaymentCardMode.TO_DO"
+    (onPaymentComplete)="fetchPayments()"
+
+  ></app-card-payment>
+}
+
+@if(payments.length==0){
+  <div class="no-payments">
+    <mat-icon>payments</mat-icon>
+    <h2>No hay pagos pendientes</h2>
+    <p>Cuando se creen pagos pendientes, aparecerán aquí.</p>
+  </div>
+}
