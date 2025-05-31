@@ -12,6 +12,9 @@
           <label style="color: #aa67f2;">¿Qué gastos harás hoy?</label>
         </div>
         <div class="form-group">
+          <div *ngIf="errorMessage" class="alert alert-danger" style="margin-bottom: 10px;">
+            <mat-error>{{ errorMessage }}</mat-error>
+          </div>
           <mat-form-field>
             <input matInput placeholder="Coloca tu e-mail o nombre de usuario" id="username" name="username" required formControlName="username">
             <mat-error *ngIf="isInvalidControl(form,'username')">{{ errorMessagesForControl(form,'username')}}</mat-error>

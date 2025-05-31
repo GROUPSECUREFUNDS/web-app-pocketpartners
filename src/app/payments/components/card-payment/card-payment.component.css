@@ -1,0 +1,27 @@
+.card-payment {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around; /* mejor distribución */
+  margin: 10px auto;
+  width: 90%;
+  min-height: 120px; /* define una altura visible */
+  background-color: white;
+  border-radius: 15px;
+  padding: 10px 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-payment .data {
+  flex: 1;       /* ocupará el espacio disponible sin romper layout */
+  max-width: 70%;
+}
+
+.data .btn-pay{
+  background-color: greenyellow;
+  padding:5px;
+}
+.data .btn-receipts{
+  background-color: blue;
+  padding:5px;
+}
