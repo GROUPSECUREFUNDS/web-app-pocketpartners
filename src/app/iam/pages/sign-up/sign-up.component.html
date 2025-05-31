@@ -11,6 +11,10 @@
         <div class="form-group">
           <label style="color: #aa67f2;">¡Es fácil y rápido!</label>
         </div>
+        <div *ngIf="formErrorMessage">
+          <mat-error>{{ formErrorMessage }}</mat-error>
+        </div>
+
         <div class="form-group row">
           <mat-form-field class="half-width">
             <input matInput placeholder="Username" id="username" name="username" required formControlName="username">
@@ -41,6 +45,9 @@
             <mat-error *ngIf="isInvalidControl(form,'phoneNumber')">{{ errorMessagesForControl(form,'phoneNumber')}}</mat-error>
           </mat-form-field>
         </div>
+        <mat-error *ngIf="imageErrorMessage">
+          {{ imageErrorMessage }}
+        </mat-error>
 
         <div class="profile-photo">
           <div class="profile-items">
