@@ -32,14 +32,7 @@ import { PageCreateGroupComponent } from './group/pages/page-create-group/page-c
 import { FormCreateGroupComponent } from './group/components/form-create-group/form-create-group.component';
 import { MatIcon } from "@angular/material/icon";
 import { MatSidenav, MatSidenavContainer, MatSidenavContent } from "@angular/material/sidenav";
-import {
-  MatList,
-  MatListItem,
-  MatListItemAvatar, MatListItemIcon,
-  MatListItemLine,
-  MatListItemTitle,
-  MatNavList
-} from "@angular/material/list";
+import { MatListItem, MatListItemAvatar, MatListItemLine, MatNavList } from "@angular/material/list";
 import { PageGroupComponent } from './group/pages/page-group/page-group.component';
 import { IncomingComponent } from './payments/incoming/pages/incoming.component';
 import { OutgoingComponent } from './payments/outgoing/pages/outgoing.component';
@@ -73,22 +66,6 @@ import { PageGroupExpensesDetailsComponent } from './group/pages/page-group-expe
 import { GroupConfigComponent } from './group/pages/group-config/group-config.component';
 import { GroupService } from './group/services/group.service';
 import { HomeComponent } from './pockets/pages/home/home.component';
-import { PaymentsPageComponent } from './payments/pages/payments-page/payments-page.component';
-import {MatTab, MatTabGroup} from "@angular/material/tabs";
-import { CardPaymentComponent } from './payments/components/card-payment/card-payment.component';
-import { PaymentsMadePageComponent } from './payments/pages/payments-made-page/payments-made-page.component';
-import { PaymentsTodoPageComponent } from './payments/pages/payments-todo-page/payments-todo-page.component';
-import {MatDivider} from "@angular/material/divider";
-import { AddReceiptsComponent } from './payments/components/add-receipts/add-receipts.component';
-import { ReceiptPageComponent } from './payments/pages/receipt-page/receipt-page.component';
-import {
-  MatAccordion, MatExpansionModule,
-  MatExpansionPanel,
-  MatExpansionPanelDescription,
-  MatExpansionPanelTitle
-} from "@angular/material/expansion";
-import { OcrReceiptComponent } from './payments/components/ocr-receipt/ocr-receipt.component';
-import {MatProgressBar} from "@angular/material/progress-bar";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -120,14 +97,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SignUpComponent,
     GroupJoinDialogComponent,
     PageGroupExpensesDetailsComponent,
-    GroupConfigComponent,
-    PaymentsPageComponent,
-    CardPaymentComponent,
-    PaymentsMadePageComponent,
-    PaymentsTodoPageComponent,
-    AddReceiptsComponent,
-    ReceiptPageComponent,
-    OcrReceiptComponent
+    GroupConfigComponent
   ],
   exports: [],
   bootstrap: [AppComponent],
@@ -156,7 +126,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormsModule,
     ReactiveFormsModule,
     MatIcon,
-    MatExpansionModule,
     MatSidenavContent,
     MatListItemAvatar,
     MatListItemLine,
@@ -165,7 +134,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatListItem,
     MatSidenav,
     MatCard,
-    MatButtonModule,
     MatCardModule,
     MatCardHeader,
     MatCardTitleGroup,
@@ -178,7 +146,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatAutocompleteModule,
     MatButtonModule,
     MatIconModule,
-    MatSlideToggle, AdvertisementComponent, DarkModeSwitcherComponent, MatTabGroup, MatTab, MatList, MatListItemTitle, MatListItemIcon, MatDivider, MatAccordion, MatExpansionPanel, MatExpansionPanelTitle, MatExpansionPanelDescription, MatProgressBar], providers: [
+    MatSlideToggle, AdvertisementComponent, DarkModeSwitcherComponent], providers: [
     provideAnimationsAsync(),
     provideHttpClient(withInterceptors([authenticationInterceptor])),
     provideHttpClient(withInterceptorsFromDi()),

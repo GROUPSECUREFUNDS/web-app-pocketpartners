@@ -30,9 +30,6 @@
         <button routerLink="expenses" mat-button><mat-icon>money</mat-icon> {{ 'header.expenses' | translate }}</button>
       </mat-list-item>
       <mat-list-item>
-        <button routerLink="payments" mat-button><mat-icon>payments</mat-icon> {{ 'header.payments' | translate }}</button>
-      </mat-list-item>
-      <mat-list-item>
         <button routerLink="incoming" mat-button><mat-icon>money</mat-icon> {{ 'header.incomingPayments' | translate }}</button>
       </mat-list-item>
       <mat-list-item>
@@ -47,7 +44,7 @@
 
   </mat-drawer>
   <mat-drawer-content>
-    <div style="min-height: 90vh;">
+    <div style="min-height: 600px;">
       <router-outlet></router-outlet>
     </div>
   </mat-drawer-content>

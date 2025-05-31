@@ -1,12 +1,8 @@
 <div class="user-profile">
   <form [formGroup]="form" (ngSubmit)="saveChanges()">
-
+    
     <div class="photo-container">
-      <!-- Mostrar la foto actual si no estás editando -->
-      <img *ngIf="!isEditing" [src]="userProfile?.photo || 'assets/images/default-user.png'" alt="Foto de perfil" class="user-photo">
-
-      <!-- Mostrar la nueva imagen en edición si ya fue subida -->
-      <img *ngIf="isEditing" [src]="image || userProfile?.photo || 'assets/images/default-user.png'" alt="Nueva foto" class="user-photo">
+      <img *ngIf="!isEditing" [src]="userProfile?.photo" alt="{{ 'userProfile.photoAlt' | translate }}" class="user-photo">
     </div>
     <div *ngIf="isEditing">
       <div class="profile-photo">
@@ -21,27 +17,27 @@
       </div>
     </div>
 
-
+    
     <div *ngIf="!isEditing">
       <h2>{{ userProfile?.fullName }}</h2>
     </div>
 
 
-
+    
     <div *ngIf="isEditing">
       <input type="text" formControlName="firstName" [placeholder]="'userProfile.firstNamePlaceholder' | translate" class="form-input">
       <input type="text" formControlName="lastName" [placeholder]="'userProfile.lastNamePlaceholder' | translate" class="form-input">
     </div>
 
-
+    
     <p *ngIf="!isEditing">{{ userProfile?.email }}</p>
     <input *ngIf="isEditing" type="email" formControlName="email" [placeholder]="'userProfile.emailPlaceholder' | translate" class="form-input">
 
-
+    
     <p *ngIf="!isEditing">{{ userProfile?.phoneNumber }}</p>
     <input *ngIf="isEditing" type="text" formControlName="phoneNumber" [placeholder]="'userProfile.phonePlaceholder' | translate" class="form-input">
 
-
+    
     <button *ngIf="!isEditing" class="edit-icon" (click)="enableEditing()">
       <mat-icon>edit</mat-icon>
     </button>
@@ -56,5 +52,5 @@
 
 </div>
 
-<app-language-switcher></app-language-switcher>
+<app-language-switcher></app-language-switcher> 
 

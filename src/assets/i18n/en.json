@@ -6,8 +6,7 @@
     "groups": "Groups",
     "newGroup": "New Group",
     "expenses": "Expenses",
-      "payments": "Payments",
-      "incomingPayments": "Incoming Payments",
+    "incomingPayments": "Incoming Payments",
     "outgoingPayments": "Outgoing Payments",
     "logout": "Logout"
   } ,

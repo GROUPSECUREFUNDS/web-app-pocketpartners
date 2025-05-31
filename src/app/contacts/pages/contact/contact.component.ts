@@ -15,7 +15,7 @@ export class ContactComponent implements OnInit {
   form!: FormGroup;
   public isEditing: boolean = false;
   public userId: number | undefined;
-  image: string | null = null;
+  image: string | null = null; 
   selectedFileName: string = '';
 
 
@@ -74,19 +74,18 @@ export class ContactComponent implements OnInit {
   enableEditing() {
     this.isEditing = true;
 
-    const fullName = this.userProfile?.fullName || '';
-    const [firstName, ...lastNameParts] = fullName.split(' ');
-    const lastName = lastNameParts.join(' ');
 
-    this.userProfile.firstName = this.userProfile.firstName || firstName;
-    this.userProfile.lastName = this.userProfile.lastName || lastName;
+    if (!this.userProfile.firstName || !this.userProfile.lastName) {
+      const names = this.userProfile.fullName ? this.userProfile.fullName.split(' ') : ['', ''];
+      this.userProfile.firstName = names[0];
+      this.userProfile.lastName = names.slice(1).join(' ');
+    }
 
     this.form.patchValue({
       firstName: this.userProfile.firstName,
       lastName: this.userProfile.lastName
     });
   }
-
 
 
   saveChanges() {
@@ -96,22 +95,16 @@ export class ContactComponent implements OnInit {
         lastName: this.form.value.lastName,
         email: this.form.value.email,
         phoneNumber: this.form.value.phoneNumber,
-        photo: this.image ?? this.userProfile.photo,
+        photo: this.image,
       };
 
       this.contactService.updateUserById(this.userId, updatedData).subscribe({
         next: (response) => {
-          this.userProfile = {
-            ...this.userProfile,
-            fullName: `${updatedData.firstName} ${updatedData.lastName}`,
-            firstName: updatedData.firstName,
-            lastName: updatedData.lastName,
-            email: updatedData.email,
-            phoneNumber: updatedData.phoneNumber,
-            photo: updatedData.photo,
-          };
+
+          this.userProfile.fullName = `${updatedData.firstName} ${updatedData.lastName}`;
 
           this.isEditing = false;
+          this.getUserDetails();
         },
         error: (error) => {
           console.error('Error actualizando el perfil:', error);
@@ -119,7 +112,6 @@ export class ContactComponent implements OnInit {
       });
     }
   }
-
 
 
   cancelEditing() {
@@ -132,18 +124,16 @@ export class ContactComponent implements OnInit {
       const file = event.target.files[0];
       this.selectedFileName = file.name;
       let reader = new FileReader();
-      let name = "USER_PROFILE_" + Date.now();
+      let name = "USER_PROFILE_" + Date.now(); 
       reader.readAsDataURL(file);
       reader.onloadend = () => {
         this.storageService.uploadFile(name, reader.result).then((url) => {
-          this.image = url;
-          this.form.patchValue({ photo: this.image });
-          this.userProfile.photo = this.image; // ✅ Esto actualiza la vista inmediatamente
+          this.image = url; 
+          this.form.patchValue({ photo: this.image }); 
         }).catch((error) => {
           console.error('Error uploading image:', error);
         });
       };
-
     }
   }
 }

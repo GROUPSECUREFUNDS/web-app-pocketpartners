@@ -17,8 +17,6 @@ import { SignInComponent } from "./iam/pages/sign-in/sign-in.component";
 import { SignUpComponent } from "./iam/pages/sign-up/sign-up.component";
 import { PageGroupExpensesDetailsComponent } from "./group/pages/page-group-expenses-details/page-group-expenses-details.component";
 import { GroupConfigComponent } from './group/pages/group-config/group-config.component';
-import {PaymentsPageComponent} from "./payments/pages/payments-page/payments-page.component";
-import {ReceiptPageComponent} from "./payments/pages/receipt-page/receipt-page.component";
 
 
 const routes: Routes = [
@@ -32,8 +30,6 @@ const routes: Routes = [
   { path: 'outgoing', component: OutgoingComponent, canActivate: [authenticationGuard], },
   { path: 'create-group', component: PageCreateGroupComponent, canActivate: [authenticationGuard], },
   { path: 'expenses', component: PageExpensesComponent, canActivate: [authenticationGuard], },
-  { path: 'payments', component: PaymentsPageComponent, canActivate: [authenticationGuard], },
-  {path:'payments/:paymentId/receipts', component:ReceiptPageComponent, canActivate:[authenticationGuard]},
   { path: 'expenses/add-expense', component: AddExpenseComponent, canActivate: [authenticationGuard], },
   { path: 'outgoing/add-payment', component: AddPaymentComponent, canActivate: [authenticationGuard], },
   { path: 'page-group-expenses-details/:id', component: PageGroupExpensesDetailsComponent, canActivate: [authenticationGuard],},
