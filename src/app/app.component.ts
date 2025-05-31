@@ -35,6 +35,5 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.authenticationService.restoreSession();
   }
 }

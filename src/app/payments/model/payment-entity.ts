@@ -3,7 +3,7 @@ export class PaymentEntity {
   id: number;
   description: string;
   amount: number;
-  status: number|string;
+  status: number;
   userId: number;
   expenseId: number;
 

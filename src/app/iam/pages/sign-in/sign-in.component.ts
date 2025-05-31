@@ -12,7 +12,6 @@ import { BaseFormComponent } from "../../../shared/components/base-form.componen
 export class SignInComponent extends BaseFormComponent implements OnInit {
   form!: FormGroup;
   submitted = false;
-  errorMessage: string | null = null; // NUEVO: mensaje de error general
 
   constructor(private builder: FormBuilder, private authenticationService: AuthenticationService) {
     super();
@@ -23,27 +22,16 @@ export class SignInComponent extends BaseFormComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
-
-    // SUSCRIPCIÓN AL MENSAJE DE ERROR
-    this.authenticationService.loginError.subscribe(error => {
-      this.errorMessage = error;
-    });
   }
-
-
 
   onSubmit() {
     if (this.form.invalid) return;
-
-    const signInRequest = new SignInRequest(
-      this.form.value.username,
-      this.form.value.password
-    );
-
-    this.authenticationService.signIn(signInRequest); // 🔄 ya hace todo internamente
+    let username = this.form.value.username;
+    let password = this.form.value.password;
+    const signInRequest = new SignInRequest(username, password);
+    this.authenticationService.signIn(signInRequest);
     this.submitted = true;
   }
-
 
 
 }

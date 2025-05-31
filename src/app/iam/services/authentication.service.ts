@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable, Subscription} from "rxjs";
+import { BehaviorSubject } from "rxjs";
 import { Router } from "@angular/router";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { SignInRequest } from "../model/sign-in.request";
@@ -18,12 +18,10 @@ import { PartnerEntity } from '../../pockets/model/partnerEntity';
  */
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-  public loginError: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
 
   basePath: string = `${environment.baseURL}`;
   httpOptions = { headers: new HttpHeaders({ 'Content-type': 'application/json' }) };
-  private authErrorSubject = new BehaviorSubject<string | null>(null);
-  authError$: Observable<string | null> = this.authErrorSubject.asObservable();
+
   private signedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private signedInUserId: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   private signedInUsername: BehaviorSubject<string> = new BehaviorSubject<string>('');
@@ -42,12 +40,11 @@ export class AuthenticationService {
    * @param signUpRequest The sign up request.
    * @returns The sign up response.
    */
-
   signUp(signUpRequest: SignUpRequest, signInInfo: SignInInfo) {
     return this.http.post<SignUpResponse>(`${this.basePath}/authentication/sign-up`, signUpRequest, this.httpOptions)
       .subscribe({
         next: (response) => {
-
+          
           const infoToSave = new SignInInfo(signInInfo.firstName, signInInfo.lastName, signInInfo.phoneNumber, signInInfo.photo, signInInfo.email, response.id);
           this.currentUserInformation = new BehaviorSubject<SignInInfo>(infoToSave);
           this.router.navigate(['/sign-in']).then();
@@ -68,8 +65,8 @@ export class AuthenticationService {
    * @param signInRequest The sign in request.
    * @returns The sign in response.
    */
-  signIn(signInRequest: SignInRequest): void {
-    this.http.post<SignInResponse>(`${this.basePath}/authentication/sign-in`, signInRequest, this.httpOptions)
+  signIn(signInRequest: SignInRequest) {
+    return this.http.post<SignInResponse>(`${this.basePath}/authentication/sign-in`, signInRequest, this.httpOptions)
       .subscribe({
         next: (response) => {
           this.signedIn.next(true);
@@ -78,55 +75,41 @@ export class AuthenticationService {
           localStorage.removeItem('token');
           localStorage.setItem('token', response.token);
           console.log(`Signed in as ${response.username} with token ${response.token}`);
-          this.loginError.next(null); // 🔄 limpiar errores
 
-          const currentId = this.currentUserInformation.value.userId;
-
-          if (currentId === response.id) {
+          if (this.currentUserInformation.value.userId == response.id) {
             this.saveUserInfo(this.currentUserInformation.value).subscribe({
-              next: () => this.router.navigate(['/home']),
+              next: (response: any) => {
+                this.router.navigate(['/home']).then();
+              },
               error: (error) => {
                 console.error(`Error while saving user information: ${error}`);
-                this.router.navigate(['/home']); // Navegar igual para no bloquear
               }
             });
           } else {
-            // Obtener info del backend, luego navegar
-            this.http.get<PartnerEntity>(`${this.basePath}/usersInformation/userId/${response.id}`, this.httpOptions)
-              .subscribe({
-                next: (userInfo: any) => {
-                  this.currentUserInformation.next(userInfo); // 🔄 CORRECTO: no reemplaza el subject
-                  this.router.navigate(['/home']);
-                },
-                error: (error) => {
-                  console.error(`Error while obtaining user information: ${error}`);
-                  this.router.navigate(['/home']); // Redirige igual para no dejar al usuario colgado
-                }
-              });
+            
+            this.signedInUserId.subscribe((userId: any) => {
+              this.http.get<PartnerEntity>(`${this.basePath}/usersInformation/userId/${response.id}`, this.httpOptions)
+                .subscribe({
+                  next: (response: any) => {
+                    this.currentUserInformation = new BehaviorSubject<SignInInfo>(response);
+                  },
+                  error: (error) => {
+                    console.error(`Error while obtaining user information: ${error}`);
+                  }
+                });
+              this.router.navigate(['/home']).then();
+            });
           }
         },
+
         error: (error) => {
           this.signedIn.next(false);
           this.signedInUserId.next(0);
           this.signedInUsername.next('');
-
-          if (error.status === 401) {
-            this.loginError.next('La contraseña ingresada no es correcta.');
-          } else if (error.status === 404) {
-            this.loginError.next('El usuario no existe.');
-          } else {
-            this.loginError.next('Ocurrió un error inesperado. Intenta nuevamente.');
-          }
-
-          this.router.navigate(['/sign-in']);
+          console.error(`Error while signing in: ${error}`);
+          this.router.navigate(['/sign-in']).then();
         }
       });
-  }
-
-
-
-  restoreSession(){
-    //this.signIn(new SignInRequest("josehp","josehp"));
   }
 
   /**
