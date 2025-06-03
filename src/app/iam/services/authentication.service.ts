@@ -43,25 +43,53 @@ export class AuthenticationService {
    * @returns The sign up response.
    */
 
-  signUp(signUpRequest: SignUpRequest, signInInfo: SignInInfo) {
-    return this.http.post<SignUpResponse>(`${this.basePath}/authentication/sign-up`, signUpRequest, this.httpOptions)
+  signUp(signUpRequest: SignUpRequest, signInInfo: SignInInfo): void {
+    this.http.post<SignUpResponse>(`${this.basePath}/authentication/sign-up`, signUpRequest, this.httpOptions)
       .subscribe({
         next: (response) => {
+          let signInRequest = new SignInRequest(signUpRequest.username, signUpRequest.password);
+          this.http.post<SignInResponse>(`${this.basePath}/authentication/sign-in`, signInRequest, this.httpOptions)
+            .subscribe({
+              next: () => {
+                signInInfo.userId = response.id;
+                this.saveUserInfo(signInInfo).subscribe({
+                  next: () => this.router.navigate(['/home']),
+                  error: (err) => {
+                    console.error('Error al guardar la info del usuario después del registro:', err);
+                    this.router.navigate(['/home']);
+                  }
+                });
+              },
+              error: (err) => {
+                console.error('Error al iniciar sesión', err)
+              }
+            })
 
-          const infoToSave = new SignInInfo(signInInfo.firstName, signInInfo.lastName, signInInfo.phoneNumber, signInInfo.photo, signInInfo.email, response.id);
-          this.currentUserInformation = new BehaviorSubject<SignInInfo>(infoToSave);
-          this.router.navigate(['/sign-in']).then();
         },
         error: (error) => {
-          console.error(`Error while signing up: ${error}`);
-          this.router.navigate(['/sign-up']).then();
+          if (error.status === 409) {
+            this.authErrorSubject.next('El correo ya está registrado.');
+          } else {
+            this.authErrorSubject.next('Error inesperado durante el registro.');
+          }
+          console.error('Sign-up error:', error);
         }
       });
   }
 
+
   saveUserInfo(signInInfo: SignInInfo) {
-    return this.http.post<SignInInfo>(`${this.basePath}/usersInformation`, signInInfo, this.httpOptions);
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    console.log('[saveUserInfo] Token:', token);
+
+    return this.http.post<SignInInfo>(`${this.basePath}/usersInformation`, signInInfo, { headers });
   }
+
+
 
   /**
    * Sign in a user.
@@ -128,7 +156,6 @@ export class AuthenticationService {
   restoreSession(){
     //this.signIn(new SignInRequest("josehp","josehp"));
   }
-
   /**
    * Sign out a user.
    *

@@ -15,7 +15,7 @@ export class ContactService extends BaseService<ContactEntity> {
   }
 
   getUserById(userId: any) {
-    return this.http.get<any>(`${this.resourcePath()}/${userId}`, this.httpOptions)
+    return this.http.get<any>(`${this.resourcePath()}/userId/${userId}`, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 
