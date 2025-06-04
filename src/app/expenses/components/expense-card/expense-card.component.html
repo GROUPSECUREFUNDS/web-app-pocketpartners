@@ -1,14 +1,27 @@
-<mat-card class="expense-card">
+
+
+<!-- Botón global para mostrar los cards ocultos -->
+<div style="margin-bottom: 10px;">
+  <button mat-raised-button color="primary" (click)="showAllCards()">
+    Mostrar tarjetas ocultas
+  </button>
+</div>
+
+<!-- Card visible solo si su ID está marcado como visible -->
+<mat-card *ngIf="visibleCards[expense.id]" class="expense-card">
   <mat-card-header class="expense-header">
     <mat-card-title>{{ 'expense.title' | translate }}: {{ expense.name }}</mat-card-title>
     <mat-card-subtitle>{{ 'expense.created' | translate }}: {{ expense.createdAt | date: 'medium' }}</mat-card-subtitle>
   </mat-card-header>
+
   <mat-card-content class="expense-content">
     <p>{{ 'expense.totalAmount' | translate }}: {{ expense.amount }}</p>
     <p>{{ 'expense.uploadedBy' | translate }}: {{ user?.fullName }}</p>
     <p>{{ 'expense.dueDate' | translate }}: {{ expense.dueDate | date: 'shortDate' }}</p>
   </mat-card-content>
+
   <mat-card-actions style="display: flex; justify-content: space-between;" class="expense-actions">
+
     <button
       mat-icon-button
       [routerLink]="['/outgoing', 'add-payment']"
@@ -16,13 +29,16 @@
     >
       <mat-icon>payment</mat-icon>
     </button>
+    <!-- Botón para ocultar el card -->
     <button
       mat-icon-button
-      class="red-light"
-      [attr.aria-label]=" 'expense.delete' | translate "
-      (click)="deleteExpense(expense.id)"
+      color="warn"
+      [attr.aria-label]=" 'expense.hide' | translate "
+      (click)="hideCard(expense.id)"
     >
-      <mat-icon>delete</mat-icon>
+      <mat-icon>visibility_off</mat-icon>
     </button>
+
+
   </mat-card-actions>
 </mat-card>
