@@ -6,11 +6,35 @@
         <mat-label>{{ 'createGroup.groupName' | translate }}</mat-label>
         <input matInput formControlName="firstCtrl" required>
       </mat-form-field>
-      <mat-form-field>
-        <mat-label>{{ 'createGroup.groupImage' | translate }}</mat-label>
-        <input matInput formControlName="secondCtrl" required>
-      </mat-form-field>
-      <button mat-button matStepperNext>{{ 'createGroup.next' | translate }}</button>
+
+      <div class="upload-section">
+        <input
+          id="uploadImage"
+          hidden
+          type="file"
+          accept=".png, .jpg, .jpeg"
+          (change)="uploadImagegroup($event)"
+        />
+        <label for="uploadImage" class="upload-label">
+          <mat-icon>image</mat-icon> CARGAR IMAGEN
+        </label>
+        <span *ngIf="selectedFileName" class="file-name">{{ selectedFileName }}</span>
+      </div>
+
+
+      <input type="hidden" formControlName="secondCtrl" />
+
+
+      <button mat-button matStepperNext  class="next-button">{{ 'createGroup.next' | translate }}</button>
+
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 20px;">
+      <div *ngIf="previewImageUrl" style="margin-left: 20px;">
+        <img [src]="previewImageUrl" alt="Vista previa"
+             style="max-width: 300px; max-height: 300px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);" />
+      </div>
+      </div>
+
+
     </form>
   </mat-step>
 
@@ -21,13 +45,13 @@
         <mat-label>{{ 'createGroup.description' | translate }}</mat-label>
         <input matInput formControlName="description" required>
       </mat-form-field>
-      <button mat-button matStepperNext>{{ 'createGroup.next' | translate }}</button>
+      <button mat-button matStepperNext class="next-button">{{ 'createGroup.next' | translate }}</button>
     </form>
   </mat-step>
 
   <mat-step>
     <ng-template matStepLabel>{{ 'createGroup.confirmation' | translate }}</ng-template>
     <p>{{ 'createGroup.newGroupCreated' | translate }}</p>
-    <button mat-button (click)="createNewGroup()">{{ 'createGroup.done' | translate }}</button>
+    <button mat-button class="next-button" (click)="createNewGroup() ">{{ 'createGroup.done' | translate }}</button>
   </mat-step>
 </mat-stepper>

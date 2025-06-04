@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { GroupEntity } from '../../model/group.entity';
 import { PartnerEntity } from '../../../pockets/model/partnerEntity';
 import { PartnerService } from '../../../pockets/services/Partner.service';
 import { GroupMembersService } from '../../services/group-members.service';
 import { AuthenticationService } from '../../../iam/services/authentication.service';
 import { GroupService } from '../../services/group.service';
+import {StorageService} from "../../../shared/services/storage.service";
 
 @Component({
   selector: 'app-form-create-group',
@@ -16,8 +17,14 @@ export class FormCreateGroupComponent implements OnInit {
 
   groupMembers = new FormControl();
   groupMembersList: any[] = [];
+  form!: FormGroup;
+  submitted = false;
+  image: string | null = null;
+  selectedFileName: string = '';
+  formErrorMessage: string | null = null;
+  imageErrorMessage: string | null = null;
+  previewImageUrl: string | ArrayBuffer | null = null;
 
-  
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required],
     secondCtrl: ['', Validators.required]
@@ -38,6 +45,7 @@ export class FormCreateGroupComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private groupMember: GroupMembersService,
+    private storageService: StorageService,
     private groupService: GroupService,
     private authenticationService: AuthenticationService
   ) {}
@@ -57,19 +65,40 @@ export class FormCreateGroupComponent implements OnInit {
 
   onChanges(): void {
     this.firstFormGroup.valueChanges.subscribe(val => {
-      
+
     });
   }
 
+
+  uploadImagegroup(event: any) {
+    if (event.target.files && event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.selectedFileName = file.name;
+      let reader = new FileReader();
+      let name = "GROUP_IMAGE_" + Date.now();
+
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        this.previewImageUrl = reader.result;
+        this.storageService.uploadimagegroup(name, reader.result).then((url) => {
+          this.image = url;
+          this.firstFormGroup.get('secondCtrl')?.setValue(this.image);
+        }).catch((error) => {
+          console.error('Error uploading image:', error);
+        });
+      };
+    }
+  }
+
   createNewGroup() {
-    
+
     this.group.name = this.firstFormGroup.get('firstCtrl')?.value as string;
     this.group.groupPhoto = this.firstFormGroup.get('secondCtrl')?.value as string;
     console.log(this.currentUserId);
     this.group.adminId = this.currentUserId;
     this.group.description = this.thirdFormGroup.get('description')?.value as string;
 
-    
+
     this.createGroup.emit(this.group);
   }
 }

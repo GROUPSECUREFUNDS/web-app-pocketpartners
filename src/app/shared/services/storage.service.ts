@@ -24,4 +24,16 @@ export class StorageService {
       return null;
     }
   }
+  //cargar imagen de grupo en ña ventana de nuevo grupo
+  async uploadimagegroup(name: string, imgBase64: any) {
+    try {
+      let respuesta = await this.storageRef.child("imagesgroups/" + name).putString(imgBase64, 'data_url');
+      console.log(respuesta);
+      return respuesta.ref.getDownloadURL();
+    }
+    catch(error) {
+      console.log(error);
+      return null;
+    }
+  }
 }

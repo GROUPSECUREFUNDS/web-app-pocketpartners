@@ -24,29 +24,41 @@ export class GroupService extends BaseService<GroupEntity> {
     return this.http.put<GroupEntity>(`${this.resourcePath()}/${id}`, { name, description }, this.httpOptions);
   }
 
-  updateGroupImage(id: number, image: string): Observable<GroupEntity> {
+
+
+  updateGroupImage(id: number , image: string): Observable<GroupEntity> {
     return this.http.put<GroupEntity>(`${this.resourcePath()}/${id}/image`, { image }, this.httpOptions);
   }
+
+
 
   deleteGroup(id: number): Observable<{}> {
     return this.http.delete(`${this.resourcePath()}/${id}`, this.httpOptions);
   }
 
 
-  
+
 
   getAllGroups(): Observable<GroupEntity[]> {
     return this.http.get<GroupEntity[]>(this.resourceEndpoint, this.httpOptions);
   }
 
- 
+
   getAllGroupsByUserId(userId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.resourceEndpoint}/user/${userId}`, this.httpOptions);
   }
 
-  createGroup(groupName: string,  groupPhoto: string, description: string, adminId: number) {  
-    return this.http.post<GroupEntity>(`${this.resourcePath()}`, { name: groupName, groupPhoto: groupPhoto, description: description, adminId: adminId  }, this.httpOptions);
+  createGroup(groupName: string, groupPhoto: string, description: string, adminId: number) {
+    const body = {
+      name: groupName,
+      groupPhoto: groupPhoto,
+      description: description,
+      adminId: adminId
+    };
+    return this.http.post<GroupEntity>(`${this.resourcePath()}`, body, this.httpOptions);
   }
+
+
 
   getAllMembersByIdGroup(id: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.resourcePath()}/${id}/members`, this.httpOptions);

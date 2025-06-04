@@ -22,7 +22,7 @@ export class GroupConfigComponent implements OnInit {
   isLoadingImage: boolean = false;
   isLoadingMembers: boolean = false;
   message: string | null = null;
-  selectedFileName: string = ''; 
+  selectedFileName: string = '';
   currentUserId!: number;
   isTokenCopied: boolean = false;
 
@@ -67,7 +67,7 @@ export class GroupConfigComponent implements OnInit {
       if (imageUrl) {
         this.groupService.updateGroupImage(group.id, imageUrl).subscribe(
           (updatedGroup) => {
-            this.group.set(updatedGroup); 
+            this.group.set(updatedGroup);
             this.message = 'Imagen del grupo actualizada exitosamente.';
             this.isLoadingImage = false;
           },
@@ -83,11 +83,12 @@ export class GroupConfigComponent implements OnInit {
     }
   }
 
+
   onImageChange(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
       const file = input.files[0];
-      this.selectedFileName = file.name; 
+      this.selectedFileName = file.name;
       const reader = new FileReader();
       reader.onload = () => {
         this.newImageBase64 = reader.result as string;
@@ -105,7 +106,7 @@ export class GroupConfigComponent implements OnInit {
         () => {
           this.message = 'Nombre y descripción actualizados exitosamente.';
           this.isLoadingText = false;
-          this.loadGroupData(group.id); 
+          this.loadGroupData(group.id);
         },
         () => {
           this.message = 'Error al actualizar el nombre y descripción.';
@@ -128,9 +129,9 @@ export class GroupConfigComponent implements OnInit {
     const token = this.invitationToken();
     if (token) {
       navigator.clipboard.writeText(token).then(() => {
-        this.isTokenCopied = true;  
+        this.isTokenCopied = true;
         setTimeout(() => {
-          this.isTokenCopied = false;  
+          this.isTokenCopied = false;
         }, 2000);
       }).catch(() => {
         console.error('Error al copiar el token.');
@@ -142,14 +143,14 @@ export class GroupConfigComponent implements OnInit {
   deleteMember(userId: number) {
     const group = this.group();
     if (group) {
-      this.isLoadingMembers = true; 
+      this.isLoadingMembers = true;
       this.groupMembersService.deleteGroupMember(group.id, userId).subscribe({
         next: () => {
           console.log('Miembros antes de eliminar:', this.members());
           this.members.update(members => members.filter(member => member.userId !== userId));
           console.log('Miembros después de eliminar:', this.members());
           this.loadGroupData(group.id);
-          this.isLoadingMembers = false; 
+          this.isLoadingMembers = false;
           console.log('Miembro eliminado exitosamente.');
         },
         error: () => {
