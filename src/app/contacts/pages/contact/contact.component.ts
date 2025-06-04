@@ -17,7 +17,7 @@ export class ContactComponent implements OnInit {
   public userId: number | undefined;
   image: string | null = null;
   selectedFileName: string = '';
-
+  userInformationId: number | undefined;
 
   constructor(
     private contactService: ContactService,
@@ -43,7 +43,7 @@ export class ContactComponent implements OnInit {
         this.contactService.getUserById(userId)
           .subscribe((profile: any) => {
             this.userProfile = profile;
-
+            this.userInformationId= profile.id;
 
             if (profile.fullName) {
               const names = profile.fullName.split(' ');
@@ -87,8 +87,6 @@ export class ContactComponent implements OnInit {
     });
   }
 
-
-
   saveChanges() {
     if (this.form.valid) {
       const updatedData = {
@@ -99,7 +97,7 @@ export class ContactComponent implements OnInit {
         photo: this.image ?? this.userProfile.photo,
       };
 
-      this.contactService.updateUserById(this.userId, updatedData).subscribe({
+      this.contactService.updateUserById(this.userInformationId, updatedData).subscribe({
         next: (response) => {
           this.userProfile = {
             ...this.userProfile,

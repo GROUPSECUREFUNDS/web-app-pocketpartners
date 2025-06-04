@@ -50,7 +50,8 @@ export class AuthenticationService {
           let signInRequest = new SignInRequest(signUpRequest.username, signUpRequest.password);
           this.http.post<SignInResponse>(`${this.basePath}/authentication/sign-in`, signInRequest, this.httpOptions)
             .subscribe({
-              next: () => {
+              next: (res) => {
+                localStorage.setItem('token', res.token)
                 signInInfo.userId = response.id;
                 this.saveUserInfo(signInInfo).subscribe({
                   next: () => this.router.navigate(['/home']),
