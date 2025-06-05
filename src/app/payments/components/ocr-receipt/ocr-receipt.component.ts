@@ -14,15 +14,15 @@ export class OcrReceiptComponent {
     isLoading:boolean=false;
 
     constructor(
-      @Inject(MAT_DIALOG_DATA) public data: { imagePath:string},
+      @Inject(MAT_DIALOG_DATA) public data: { receiptId:number},
       protected imageService:ImageService,
       private ocrReceiptService:OcrReceiptService
     ) {
     }
     ngOnInit() {
       this.isLoading = true;
-      if (this.data && this.data.imagePath) {
-        this.ocrReceiptService.sendRequestForOcr(this.data.imagePath).subscribe({
+      if (this.data && this.data.receiptId) {
+        this.ocrReceiptService.getOcrReceiptByReceiptId(this.data.receiptId).subscribe({
           next: (data) => {
             this.ocrData = data;
             this.isLoading = false;

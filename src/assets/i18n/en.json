@@ -105,7 +105,8 @@
     "toDo": "Payments to Do",
     "makePayment": "Make Payment",
     "groups": "Groups",
-    "noPayments": "No payments yet. Make one!"
+    "noPayments": "No payments yet. Make one!",
+    "paymentDetails": "Payment Details"
   },
   "expenses": {
     "uploadedByYou": "Expenses Uploaded by YOU"

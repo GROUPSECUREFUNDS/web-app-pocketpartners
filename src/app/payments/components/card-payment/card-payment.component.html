@@ -1,20 +1,25 @@
 <div class="card-payment">
-  <div class="data">
-    <mat-list>
-      <mat-list-item>
-        <mat-icon matListItemIcon>payment</mat-icon>
-        <span matListItemTitle>Amount: {{payment.amount}}</span>
-        <span matListItemLine>Description: {{payment.description}}</span>
-        <span matListItemLine>Expense: {{expense.name}}</span>
-        <span matListItemLine>Group: {{group.name}}</span>
-        <span matListItemLine>Admin: {{admin.fullName}}</span>
-      </mat-list-item>
-    </mat-list>
-  </div>
-  @if(mode==PaymentCardMode.TO_DO){
-    <button  mat-raised-button (click)="showAddReceipts()" color="accent"><mat-icon matPrefix>check</mat-icon> Marcar como pagado</button>
-  } @else if (mode== PaymentCardMode.MADE) {
-    <button  mat-raised-button (click)="navigateToReceipts()" color="warn"><mat-icon matPrefix>receipt</mat-icon>Ver recibos</button>
-  }
-
+    <mat-card class="custom-card">
+      <mat-card-title>{{expense.name}} - {{payment.amount | currency}}</mat-card-title>
+      <mat-card-subtitle>
+        Due date: {{expense.dueDate| date: 'dd/MM/yyyy'}}
+      </mat-card-subtitle>
+      <mat-card-content>
+        <mat-list>
+            <span matListItemLine>Description: {{payment.description}}</span>
+            <span matListItemLine>Expense: {{expense.name}}</span>
+            <span matListItemLine>Group: {{group.name}}</span>
+            <span matListItemLine>Admin: {{admin.fullName}}</span>
+        </mat-list>
+      </mat-card-content>
+        @if(mode==PaymentCardMode.TO_DO){
+          <mat-card-actions>
+          <button  mat-raised-button (click)="showAddReceipts()" color="accent"><mat-icon matPrefix>check</mat-icon> Marcar como pagado</button>
+          </mat-card-actions>
+        } @else if (mode== PaymentCardMode.MADE) {
+          <mat-card-actions>
+          <button  mat-raised-button (click)="navigateToReceipts()" color="warn"><mat-icon matPrefix>receipt</mat-icon>Ver recibos</button>
+          </mat-card-actions>
+        }
+    </mat-card>
 </div>

@@ -7,6 +7,7 @@ import { ContactService } from "../../../contacts/services/contact.service";
 import { OperationEntity } from "../../../group/model/operation-entity";
 import { GroupOperationsService } from '../../../group/services/group-operations.service';
 import { GroupService } from '../../../group/services/group.service';
+import {AuthenticationService} from "../../../iam/services/authentication.service";
 
 
 @Component({
@@ -24,7 +25,7 @@ export class IncomingComponent implements OnInit {
     private groupService: GroupService,
     private groupOperations: GroupOperationsService,
     private paymentService: PaymentService,
-    private userService: ContactService
+    private authService: AuthenticationService
   ) { }
 
   getAllGroups() {
