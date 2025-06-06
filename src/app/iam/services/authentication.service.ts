@@ -155,7 +155,7 @@ export class AuthenticationService {
 
 
   restoreSession(){
-    this.signIn(new SignInRequest("josehp","josehp"));
+    //this.signIn(new SignInRequest("josehp","josehp"));
   }
   /**
    * Sign out a user.
