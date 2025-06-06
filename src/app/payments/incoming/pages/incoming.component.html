@@ -1,43 +1,20 @@
 @if (dataLoaded | async) {
   <div class="title-container">
-    <h1>{{ 'payments.incoming' | translate }}</h1> 
+    <h1>{{ 'payments.incoming' | translate }}</h1>
   </div>
-
-  <mat-card *ngFor="let group of groups" class="group-card">
-    <mat-card-header>
-      <mat-card-title-group>
-        <mat-card-title>{{ group.name }}</mat-card-title>
-      </mat-card-title-group>
-    </mat-card-header>
-    @if (groupPayments[group.id]) {
-      <mat-card-content>
-        <div class="container">
-          <div class="box name">
-            <h3><b>{{ 'payments.members' | translate }}</b></h3> 
-            <div *ngFor="let payment of groupPayments[group.id]">
-              {{ users[payment.userId].fullName || payment.userId }}
-            </div>
-          </div>
-          <div class="box date">
-            <h4><b>{{ 'payments.description' | translate }}</b></h4> 
-            <div *ngFor="let payment of groupPayments[group.id]">
-              {{ payment.description }}
-            </div>
-          </div>
-          <div class="box amount">
-            <h4><b>{{ 'payments.amount' | translate }}</b></h4> 
-            <div *ngFor="let payment of groupPayments[group.id]">
-              {{ payment.amount | currency }}
-            </div>
-          </div>
-        </div>
-      </mat-card-content>
-    } @else {
-      <mat-card-content>
-        {{ 'payments.noMovements' | translate }} 
-      </mat-card-content>
-    }
-  </mat-card>
+  @for (payment of payments; track payment){
+    <app-card-payment
+      [payment]="payment"
+      [mode]="PaymentCardMode.INCOMING"
+    ></app-card-payment>
+  }
+  @if(payments.length==0){
+    <div class="no-payments">
+      <mat-icon>payments</mat-icon>
+      <h2>No hay pagos entrantes</h2>
+      <p>Tus pagos entrantes sobre algún gasto, aparecerán aquí.</p>
+    </div>
+  }
 } @else {
   <div class="loading-container">
     <mat-spinner></mat-spinner>

@@ -12,6 +12,9 @@ import {AddReceiptsComponent} from "../add-receipts/add-receipts.component";
 import {PaymentService} from "../../services/payment.service";
 import {Router} from "@angular/router";
 import {PaymentCardMode} from "../../model/payment-card-mode";
+import {PaymentDetailsMode} from "../../model/payment-details-mode";
+import {AuthenticationService} from "../../../iam/services/authentication.service";
+import {firstValueFrom} from "rxjs";
 
 @Component({
   selector: 'app-card-payment',
@@ -26,6 +29,7 @@ export class CardPaymentComponent{
   expense:ExpensesEntity;
   group:GroupEntity;
   admin: ContactEntity;
+  member:ContactEntity;
 
   constructor(
     private expenseService:ExpensesService,
@@ -33,11 +37,13 @@ export class CardPaymentComponent{
     private contactService:ContactService,
     private dialog:MatDialog,
     private paymentService:PaymentService,
-    private router:Router
+    private router:Router,
+    private authService:AuthenticationService
     ) {
     this.expense = new ExpensesEntity();
     this.group = new GroupEntity();
     this.admin = new ContactEntity();
+    this.member = new ContactEntity();
   }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['payment'] && this.payment?.expenseId) {
@@ -55,6 +61,10 @@ export class CardPaymentComponent{
         })
       })
     })
+
+      this.contactService.getUserById(this.payment.userId).subscribe((contactData)=>{
+        this.member = contactData;
+      });
   }
 
   showAddReceipts(){
@@ -70,8 +80,15 @@ export class CardPaymentComponent{
           this.onPaymentComplete.emit(data);
       })
   }
-  navigateToReceipts(){
-      this.router.navigate([`/payments/${this.payment.id}/receipts`]).then();
+  async navigateToReceipts(){
+    let currentUser = await firstValueFrom(this.authService.currUserInformation);
+    this.router.navigate([`/payments/${this.payment.id}/receipts`], {
+        queryParams: {
+          mode: this.payment.userId === currentUser.userId?
+              PaymentDetailsMode.PRIVATE:
+              PaymentDetailsMode.PUBLIC
+        }
+      }).then();
   }
   protected readonly PaymentStatus = PaymentStatus;
   protected readonly PaymentCardMode = PaymentCardMode;

@@ -9,7 +9,7 @@
             <span matListItemLine>Description: {{payment.description}}</span>
             <span matListItemLine>Expense: {{expense.name}}</span>
             <span matListItemLine>Group: {{group.name}}</span>
-            <span matListItemLine>Admin: {{admin.fullName}}</span>
+            <span matListItemLine>Member: {{member.fullName}}</span>
         </mat-list>
       </mat-card-content>
         @if(mode==PaymentCardMode.TO_DO){
@@ -19,6 +19,15 @@
         } @else if (mode== PaymentCardMode.MADE) {
           <mat-card-actions>
           <button  mat-raised-button (click)="navigateToReceipts()" color="warn"><mat-icon matPrefix>receipt</mat-icon>Ver recibos</button>
+          </mat-card-actions>
+        } @else if (mode==PaymentCardMode.INCOMING && payment.status== PaymentStatus.COMPLETED.toLowerCase()) {
+          <mat-card-actions>
+          <button  mat-raised-button color="accent"><mat-icon matPrefix>check</mat-icon>PAGADO</button>
+          <button  mat-raised-button (click)="navigateToReceipts()" color="warn"><mat-icon matPrefix>receipt</mat-icon>Ver recibos</button>
+          </mat-card-actions>
+        } @else if (mode==PaymentCardMode.INCOMING && payment.status== PaymentStatus.PENDING.toLowerCase()) {
+          <mat-card-actions>
+          <button  mat-raised-button color="warn"><mat-icon matPrefix>schedule</mat-icon>Pendiente de pago</button>
           </mat-card-actions>
         }
     </mat-card>
