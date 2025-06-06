@@ -51,14 +51,19 @@
 
         <div class="profile-photo">
           <div class="profile-items">
+            <div class="image-container">
+              <img *ngIf="!isUploading && image" [src]="image" alt="Imagen de perfil" class="profile-image">
+              <mat-spinner *ngIf="isUploading" diameter="40" class="spinner-overlay"></mat-spinner>
+            </div>
+
             <input id="uploadImage" hidden (change)="uploadImage($event)" type="file" accept=".png, .jpg, .jpeg">
             <label id="imageButton" for="uploadImage">
               <mat-icon>image</mat-icon>
               Subir foto de perfil
             </label>
-            <span *ngIf="selectedFileName" id="imageName">{{ selectedFileName }}</span>
           </div>
         </div>
+
 
         <div class="form-group">
           <button mat-raised-button color="primary" style="background-color: #aa67f2; color: #ffffff; width: 100%;">Registrarse</button>

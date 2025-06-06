@@ -18,7 +18,7 @@ export class SignUpComponent extends BaseFormComponent implements OnInit {
   selectedFileName: string = '';
   formErrorMessage: string | null = null;
   imageErrorMessage: string | null = null;
-
+  isUploading = false;
 
   constructor(
     private builder: FormBuilder,
@@ -42,6 +42,7 @@ export class SignUpComponent extends BaseFormComponent implements OnInit {
 
   uploadImage(event: any) {
     if (event.target.files && event.target.files.length > 0) {
+      this.isUploading = true;
       const file = event.target.files[0];
       this.selectedFileName = file.name;
       let reader = new FileReader();
@@ -50,9 +51,11 @@ export class SignUpComponent extends BaseFormComponent implements OnInit {
       reader.onloadend = () => {
         this.storageService.uploadFile(name, reader.result).then((url) => {
           this.image = url;
+          this.isUploading = false;
           this.form.patchValue({ photo: this.image });
         }).catch((error) => {
           console.error('Error uploading image:', error);
+          this.isUploading = false;
         });
       };
     }

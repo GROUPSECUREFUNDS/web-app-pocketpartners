@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  padding: 20px; 
+  padding: 20px;
   box-sizing: border-box;
 }
 
@@ -23,14 +23,14 @@
 
 .mat-card {
   width: 100%;
-  max-width: 500px; 
-  max-height: 550px;
+  max-width: 500px;
+  height: auto;
   padding: 20px;
   box-sizing: border-box;
   background-color: #ffffff;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
-  overflow-y: auto; 
+  overflow-y: auto;
 }
 
 
@@ -53,7 +53,7 @@
 }
 
 .half-width {
-  width: 48%; 
+  width: 48%;
 }
 
 
@@ -63,9 +63,9 @@ mat-form-field {
 
 
 .mat-form-field-label {
-  color: #9c27b0 !important; 
-  font-size: 16px; 
-  font-weight: bold; 
+  color: #9c27b0 !important;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 
@@ -77,13 +77,13 @@ mat-form-field {
 .form-group button {
   background-color: #9c27b0;
   color: #ffffff;
-  border-radius: 8px; 
+  border-radius: 8px;
 }
 
 
 .social-icons {
   margin-top: 20px;
-  text-align: center; 
+  text-align: center;
 }
 
 .social-icon {
@@ -92,14 +92,56 @@ mat-form-field {
 }
 
 .social-icon img {
-  width: 40px; 
+  width: 40px;
   height: auto;
 }
 
 .profile-photo {
-  width: 60%;
-  margin: 10px 20%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
 }
+
+.profile-items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image-container {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin-bottom: 12px;
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.spinner-overlay {
+  position: absolute;
+  top: 40%;
+  left: 40%;
+}
+
+#imageButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ff9a69;
+  color: #FFFFFF;
+  padding: 10px 20px;
+  border-radius: 35px;
+  text-align: center;
+  cursor: pointer;
+}
+
 
 #imageButton{
   display: flex;
@@ -111,4 +153,24 @@ mat-form-field {
   border-radius: 35px;
   text-align: center;
   align-content: center;
+}
+
+.image-container {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin-bottom: 12px;
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.spinner-overlay {
+  position: absolute;
+  top: 40%;
+  left: 40%;
 }
