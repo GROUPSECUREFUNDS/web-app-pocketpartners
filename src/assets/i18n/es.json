@@ -1,142 +1,156 @@
 {
-    "header":{
+  "header": {
     "appTitle": "PocketPartners",
     "home": "Inicio",
     "profile": "Perfil",
     "groups": "Grupos",
     "newGroup": "Nuevo Grupo",
     "expenses": "Gastos",
-      "payments": "Pagos",
+    "payments": "Pagos",
     "incomingPayments": "Pagos Entrantes",
     "outgoingPayments": "Pagos Salientes",
     "logout": "Cerrar Sesión"
-    },
-
-    "pageNotFound": {
-      "title": "Página no encontrada",
-      "message": "La página {{page}} que estás buscando no existe.",
-      "redirect": "Redirigiendo en",
-      "button": "Regresar a la página principal"
-    },
-    "createGroup": {
-      "title": "Crear Grupo",
-      "groupInfo": "Información del Grupo",
-      "groupName": "Nombre del Grupo",
-      "groupImage": "Imagen del Grupo (enlace)",
-      "next": "Siguiente",
-      "groupCurrency": "Moneda del Grupo",
-      "currency": "Moneda",
-      "confirmation": "Confirmación",
-      "newGroupCreated": "Nuevo Grupo Creado",
-      "done": "Hecho"
-    },
-    "groups": {
-      "allGroups": "Todos los Grupos",
-      "searchGroup": "Buscar grupo",
-      "youAreInGroup": "Estás en el grupo",
-      "viewDetails": "Ver detalles",
-      "joinGroup": "Unirse al grupo",
-      "createGroup": "Crear grupo"
-    },
-    "group": {
-      "debtInfo": "El grupo {{groupName}}",
-      "photoAlt": "Foto del grupo",
-      "owesYou": "te debe",
-      "youOwe": "tú debes",
-      "upToDate": "Al día",
-      "currencySol": "Soles",
-      "creationDate": "Creación",
-      "currency": "Moneda",
-      "members": "Miembros",
-      "eachMemberMustPay": "Cada miembro debe pagar",
-      "thisAreTheTotalExpenses": "Estos son los gastos totales",
-      "paymentDistribution": "Distribución de pagos",
-      "ExpensesDetailsGroup": "Detalle de Gastos del Grupo",
-      "viewDetailedDistribution" : "Vista detallada de la distribución de gastos"
-    },
-    "expense": {
-      "title": "Gasto",
-      "created": "Creado",
-      "totalAmount": "Monto Total",
-      "uploadedBy": "Subido Por",
-      "makePayment": "Hacer Pago",
-      "delete": "Eliminar Gasto",
-      "new": "Nuevo Gasto",
-      "name": "Dale un nombre",
-      "amount": "¿Cuánto?",
-      "setAmount": "Establece el monto",
-      "group": "¿Qué grupo?",
-      "pickGroup": "Selecciona un grupo",
-      "summary": "Resumen",
-      "search": "Buscar gastos...",
-      "addNew": "Agregar Nuevo Gasto",
-      "which": "¿Qué Gasto?",
-      "pick": "Selecciona un gasto",
-      "uploadedByYou": "Gastos Subidos por TI"
-    },
-    "common": {
-      "next": "Siguiente",
-      "back": "Atrás",
-      "submit": "Enviar",
-      "done": "Hecho"
-    },
-    "summary": {
-      "title": "Resumen",
-      "heading": "Resumen",
-      "group": "Grupo",
-      "expense": "Gasto"
-    },
-    "payment": {
-      "addNew": "Agregar Nuevo Pago"
-    },
-    "payments": {
-      "incoming": "Pagos Entrantes",
-      "members": "Miembros",
-      "description": "Descripción",
-      "amount": "Monto",
-      "noMovements": "No hay movimientos aún...",
-      "outgoing": "Pagos Salientes",
-      "made": "Pagos Realizados",
-      "toDo": "Pagos Pendientes",
-      "makePayment": "Hacer Pago",
-      "groups": "Grupos",
-      "noPayments": "No hay pagos aún. ¡Haz uno!",
-      "paymentDetails": "Detalles del Pago"
-    },
-    "transaction": {
-      "timeline": "Línea de Tiempo de Transacciones",
-      "payments": "Pagos",
-      "noPayments": "No hay pagos disponibles.",
-      "description": "Descripción",
-      "status": "Estado",
-      "totalAmount": "Monto Total",
-      "expenses": "Gastos",
-      "noExpenses": "No hay gastos disponibles."
-    },
-    "welcome": {
-      "greeting": "Bienvenido",
-      "hiMessage": "¡Hola! Esperamos que tengas un buen día."
-    },
-    "report": {
-      "generateButton": "Generar Reporte de Gastos"
-    },
-    "newContact": {
-      "title": "Nuevo Contacto",
-      "name": "Nombre",
-      "email": "Correo Electrónico",
-      "phone": "Teléfono",
-      "photo": "Foto (enlace)",
-      "save": "Guardar",
-      "close": "Cerrar"
-    },
-    "userProfile": {
-      "photoAlt": "Foto de usuario",
-      "photoPlaceholder": "URL de la foto",
-      "firstNamePlaceholder": "Nombre",
-      "lastNamePlaceholder": "Apellido",
-      "emailPlaceholder": "Correo Electrónico",
-      "phonePlaceholder": "Teléfono",
-      "saveChanges": "Guardar Cambios",
-      "cancel": "Cancelar"
+  },
+  "pageNotFound": {
+    "title": "Página no encontrada",
+    "message": "La página {{page}} que estás buscando no existe.",
+    "redirect": "Redirigiendo en",
+    "button": "Regresar a la página principal"
+  },
+  "createGroup": {
+    "title": "Crear Grupo",
+    "groupInfo": "Información del Grupo",
+    "groupName": "Nombre del Grupo",
+    "groupDescription": "Descripción del Grupo",
+    "groupImage": "Imagen del Grupo (enlace)",
+    "next": "Siguiente",
+    "groupCurrency": "Moneda del Grupo",
+    "currency": "Moneda",
+    "confirmation": "Confirmación",
+    "newGroupCreated": "Nuevo Grupo Creado",
+    "done": "Hecho"
+  },
+  "groups": {
+    "allGroups": "Todos los Grupos",
+    "searchGroup": "Buscar grupo",
+    "youAreInGroup": "Estás en el grupo",
+    "viewDetails": "Ver detalles",
+    "joinGroup": "Unirse al grupo",
+    "createGroup": "Crear grupo"
+  },
+  "group": {
+    "debtInfo": "El grupo {{groupName}}",
+    "photoAlt": "Foto del grupo",
+    "owesYou": "te debe",
+    "youOwe": "tú debes",
+    "upToDate": "Al día",
+    "currencySol": "Soles",
+    "creationDate": "Creación",
+    "currency": "Moneda",
+    "members": "Miembros",
+    "eachMemberMustPay": "Cada miembro debe pagar",
+    "thisAreTheTotalExpenses": "Estos son los gastos totales",
+    "paymentDistribution": "Distribución de pagos",
+    "ExpensesDetailsGroup": "Detalle de Gastos del Grupo",
+    "viewDetailedDistribution": "Vista detallada de la distribución de gastos"
+  },
+  "expense": {
+    "title": "Gasto",
+    "created": "Creado",
+    "totalAmount": "Monto Total",
+    "uploadedBy": "Subido Por",
+    "makePayment": "Hacer Pago",
+    "delete": "Eliminar Gasto",
+    "new": "Nuevo Gasto",
+    "name": "Dale un nombre",
+    "amount": "¿Cuánto?",
+    "setAmount": "Establece el monto",
+    "group": "¿Qué grupo?",
+    "pickGroup": "Selecciona un grupo",
+    "summary": "Resumen",
+    "search": "Buscar gastos...",
+    "addNew": "Agregar Nuevo Gasto",
+    "which": "¿Qué Gasto?",
+    "pick": "Selecciona un gasto",
+    "uploadedByYou": "Gastos Subidos por TI"
+  },
+  "common": {
+    "next": "Siguiente",
+    "back": "Atrás",
+    "submit": "Enviar",
+    "done": "Hecho"
+  },
+  "summary": {
+    "title": "Resumen",
+    "heading": "Resumen",
+    "group": "Grupo",
+    "expense": "Gasto"
+  },
+  "payment": {
+    "addNew": "Agregar Nuevo Pago"
+  },
+  "payments": {
+    "incoming": "Pagos Entrantes",
+    "members": "Miembros",
+    "description": "Descripción",
+    "amount": "Monto",
+    "noMovements": "No hay movimientos aún...",
+    "outgoing": "Pagos Salientes",
+    "made": "Pagos Realizados",
+    "toDo": "Pagos Pendientes",
+    "makePayment": "Hacer Pago",
+    "groups": "Grupos",
+    "noPayments": "No hay pagos aún. ¡Haz uno!",
+    "paymentDetails": "Detalles del Pago"
+  },
+  "transaction": {
+    "timeline": "Línea de Tiempo de Transacciones",
+    "payments": "Pagos",
+    "noPayments": "No hay pagos disponibles.",
+    "description": "Descripción",
+    "status": "Estado",
+    "totalAmount": "Monto Total",
+    "expenses": "Gastos",
+    "noExpenses": "No hay gastos disponibles."
+  },
+  "welcome": {
+    "greeting": "Bienvenido",
+    "hiMessage": "¡Hola! Esperamos que tengas un buen día."
+  },
+  "report": {
+    "generateButton": "Generar Reporte de Gastos"
+  },
+  "newContact": {
+    "title": "Nuevo Contacto",
+    "name": "Nombre",
+    "email": "Correo Electrónico",
+    "phone": "Teléfono",
+    "photo": "Foto (enlace)",
+    "save": "Guardar",
+    "close": "Cerrar"
+  },
+  "userProfile": {
+    "photoAlt": "Foto de usuario",
+    "photoPlaceholder": "URL de la foto",
+    "firstNamePlaceholder": "Nombre",
+    "lastNamePlaceholder": "Apellido",
+    "emailPlaceholder": "Correo Electrónico",
+    "phonePlaceholder": "Teléfono",
+    "saveChanges": "Guardar Cambios",
+    "cancel": "Cancelar"
+  },
+  "cardPayment": {
+    "name": "Nombre",
+    "dueDate": "Fecha de vencimiento",
+    "description": "Descripción",
+    "expense": "Gasto",
+    "group": "Grupo",
+    "member": "Miembro",
+    "btn": {
+      "payed": "Pagado",
+      "seeReceipts": "Ver Recibos",
+      "pending": "Pendiente de pago",
+      "makePayment": "Pagar"
     }
   }
+}

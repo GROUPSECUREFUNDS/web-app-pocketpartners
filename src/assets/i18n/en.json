@@ -21,6 +21,7 @@
     "title": "Create Group",
     "groupInfo": "Group Information",
     "groupName": "Group Name",
+    "groupDescription": "Group Description",
     "groupImage": "Group Image (link)",
     "dueDate": "Due Date",
     "next": "Next",
@@ -146,5 +147,19 @@
     "phonePlaceholder": "Phone",
     "saveChanges": "Save Changes",
     "cancel": "Cancel"
+  },
+  "cardPayment": {
+    "name": "Name",
+    "dueDate": "Due Date",
+    "description": "Description",
+    "expense": "Expense",
+    "group": "Group",
+    "member": "Member",
+    "btn": {
+      "payed": "Payed",
+      "seeReceipts": "See Receipts",
+      "pending": "Pending",
+      "makePayment": "Make Payment"
+    }
   }
 }
