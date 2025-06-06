@@ -100,7 +100,8 @@
       "toDo": "Pagos Pendientes",
       "makePayment": "Hacer Pago",
       "groups": "Grupos",
-      "noPayments": "No hay pagos aún. ¡Haz uno!"
+      "noPayments": "No hay pagos aún. ¡Haz uno!",
+      "paymentDetails": "Detalles del Pago"
     },
     "transaction": {
       "timeline": "Línea de Tiempo de Transacciones",

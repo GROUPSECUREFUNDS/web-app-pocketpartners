@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {PaymentCardMode} from "../../model/payment-card-mode";
 import {PaymentEntity} from "../../model/payment-entity";
 import {PaymentService} from "../../services/payment.service";
@@ -10,6 +10,7 @@ import {sendPasswordResetEmail} from "@angular/fire/auth";
 import {MatDialog} from "@angular/material/dialog";
 import {AddReceiptsComponent} from "../../components/add-receipts/add-receipts.component";
 import {OcrReceiptComponent} from "../../components/ocr-receipt/ocr-receipt.component";
+import {PaymentDetailsMode} from "../../model/payment-details-mode";
 
 @Component({
   selector: 'app-receipt-page',
@@ -19,6 +20,7 @@ import {OcrReceiptComponent} from "../../components/ocr-receipt/ocr-receipt.comp
 export class ReceiptPageComponent {
   payment: PaymentEntity | undefined;
   receipts: ReceiptEntity[] = [];
+  mode: PaymentDetailsMode = PaymentDetailsMode.PRIVATE;
 
   constructor(
     private paymentService:PaymentService,
@@ -33,6 +35,12 @@ export class ReceiptPageComponent {
 
   ngOnInit(){
     let paymentId = this.router.snapshot.paramMap.get('paymentId');
+    if (this.router.snapshot.queryParamMap.get('mode') === PaymentDetailsMode.PUBLIC) {
+      this.mode = PaymentDetailsMode.PUBLIC;
+    } else {
+      this.mode = PaymentDetailsMode.PRIVATE;
+    }
+
     if (paymentId) {
       this.paymentService.getPaymentById(paymentId).subscribe((data) => {
         this.payment = data;
@@ -68,8 +76,7 @@ export class ReceiptPageComponent {
     });
   }
 
-
-
   protected readonly PaymentCardMode = PaymentCardMode;
   protected readonly sendPasswordResetEmail = sendPasswordResetEmail;
+  protected readonly PaymentDetailsMode = PaymentDetailsMode;
 }

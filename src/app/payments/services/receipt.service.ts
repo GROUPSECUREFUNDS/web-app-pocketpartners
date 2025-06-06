@@ -20,8 +20,22 @@ export class ReceiptService extends  BaseService<ReceiptEntity>{
     return this.http.get<any>(`${this.resourcePath()}/payment/${paymentId}`, this.httpOptions);
   }
 
-  createReceipt(requestReceipt: any) {
-    return this.http.post<any>(`${this.resourcePath()}`, requestReceipt, this.httpOptions).pipe(
+  createReceiptByExpense(requestReceipt: any, expenseId:number) {
+
+    requestReceipt = {...requestReceipt, "expenseId": expenseId};
+
+    return this.http.post<any>(`${this.resourcePath()}/expense`, requestReceipt, this.httpOptions).pipe(
+      catchError(error => {
+        console.error('Error al crear recibo:', error);
+        return throwError(() => error); // o un error custom si quieres
+      })
+    );
+  }
+  createReceiptByPayment(requestReceipt: any, paymentId:number): Observable<ReceiptEntity> {
+
+    requestReceipt = {...requestReceipt, "paymentId": paymentId};
+
+    return this.http.post<ReceiptEntity>(`${this.resourcePath()}/payment`, requestReceipt, this.httpOptions).pipe(
       catchError(error => {
         console.error('Error al crear recibo:', error);
         return throwError(() => error); // o un error custom si quieres

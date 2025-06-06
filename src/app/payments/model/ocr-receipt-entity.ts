@@ -1,4 +1,10 @@
 export interface OcrReceiptEntity {
+  receiptNumber: string;
   imagePath: string;
-  text:any;
+  name: string;
+  issueDate: Date;
+  amount: number;
+  dataFields: any;
+  text: string;
+
 }

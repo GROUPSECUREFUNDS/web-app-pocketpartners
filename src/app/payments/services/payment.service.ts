@@ -33,6 +33,9 @@ export class PaymentService extends BaseService<PaymentEntity> {
   getPaymentByUserIdAndStatus(userId: any, status: any) {
     return this.http.get<any>(`${this.resourcePath()}/userId/${userId}/status/${status}`, this.httpOptions)
   }
+  getIncomingPaymentsByUserInformationId(userInformationId: number) {
+    return this.http.get<any>(`${this.resourcePath()}/incoming/${userInformationId}`, this.httpOptions);
+  }
 
   postCompletePaymentById(paymentId: any) {
     return this.http.post<any>(`${this.resourcePath()}/${paymentId}/completed`, this.httpOptions)

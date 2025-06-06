@@ -1,4 +1,8 @@
 <div class="payment-details-page">
+  <div class="title-container">
+    <h1>{{ 'payments.paymentDetails' | translate }}</h1>
+  </div>
+
   <app-card-payment [payment]="payment!" [mode]="PaymentCardMode.VIEW"></app-card-payment>
   <mat-divider></mat-divider>
 
@@ -28,7 +32,7 @@
       }
     </mat-accordion>
   }
-  <div class="add-button">
+  <div *ngIf="mode==PaymentDetailsMode.PRIVATE" class="add-button">
     <button (click)="showAddReceiptDialog()" mat-fab extended color="primary">
       <mat-icon>add</mat-icon>
       Agregar recibo
