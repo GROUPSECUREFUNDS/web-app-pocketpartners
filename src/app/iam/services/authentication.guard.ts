@@ -17,3 +17,20 @@ export const authenticationGuard: CanActivateFn = () => {
     })
   );
 };
+
+export const noAuthGuard: CanActivateFn = () => {
+  const authenticationService = inject(AuthenticationService);
+  const router = inject(Router);
+  return authenticationService.isSignedIn.pipe(
+    take(1), map(isSignedIn => {
+      if (isSignedIn) {
+        router.navigate(['/home']).then();
+        return false;
+      } else {
+
+        return true;
+      }
+    })
+  );
+};
+

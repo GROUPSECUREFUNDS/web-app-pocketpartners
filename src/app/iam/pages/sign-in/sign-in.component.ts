@@ -3,6 +3,7 @@ import { SignInRequest } from "../../model/sign-in.request";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthenticationService } from "../../services/authentication.service";
 import { BaseFormComponent } from "../../../shared/components/base-form.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-sign-in',
@@ -14,21 +15,26 @@ export class SignInComponent extends BaseFormComponent implements OnInit {
   submitted = false;
   errorMessage: string | null = null; // NUEVO: mensaje de error general
 
-  constructor(private builder: FormBuilder, private authenticationService: AuthenticationService) {
+  constructor(private builder: FormBuilder,
+              private authenticationService: AuthenticationService,
+              private router: Router) {
     super();
-  }
-
-  ngOnInit(): void {
     this.form = this.builder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
+  }
 
-    // SUSCRIPCIÓN AL MENSAJE DE ERROR
-    this.authenticationService.loginError.subscribe(error => {
-      this.errorMessage = error;
+  async ngOnInit(): Promise<void> {
+
+
+    // CONFIGURACIÓN DEL FORMULARIO
+    this.form = this.builder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
     });
   }
+
 
 
 

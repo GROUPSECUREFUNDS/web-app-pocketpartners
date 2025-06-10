@@ -152,6 +152,14 @@ export class AuthenticationService {
       });
   }
 
+  getIsLogged() {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const token = localStorage.getItem('token');
+      return !!token;
+    }
+    return false;
+  }
+
 
 
   restoreSession(){
@@ -169,4 +177,10 @@ export class AuthenticationService {
     localStorage.removeItem('token');
     this.router.navigate(['/sign-in']).then();
   }
+
+  initializeAuthState(): void {
+    const hasToken = !!localStorage.getItem('token');
+    this.signedIn.next(hasToken);
+  }
+
 }

@@ -25,6 +25,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   constructor(translate: TranslateService, public router: Router, private authenticationService: AuthenticationService) {
     translate.setDefaultLang('en');
     translate.use('en');
+    this.authenticationService.initializeAuthState();
+
   }
   ngAfterViewInit(): void {
     this.authenticationService.isSignedIn.subscribe(

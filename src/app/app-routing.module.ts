@@ -12,7 +12,7 @@ import { PageExpensesComponent } from './expenses/pages/page-expenses/page-expen
 import { AddExpenseComponent } from './expenses/pages/add-expense/add-expense.component';
 import { PageGroupDetailsComponent } from './group/pages/page-group-details/page-group-details.component';
 import { AddPaymentComponent } from "./payments/incoming/pages/add-payment/add-payment.component";
-import { authenticationGuard } from "./iam/services/authentication.guard";
+import {authenticationGuard, noAuthGuard} from "./iam/services/authentication.guard";
 import { SignInComponent } from "./iam/pages/sign-in/sign-in.component";
 import { SignUpComponent } from "./iam/pages/sign-up/sign-up.component";
 import { PageGroupExpensesDetailsComponent } from "./group/pages/page-group-expenses-details/page-group-expenses-details.component";
@@ -22,7 +22,7 @@ import {ReceiptPageComponent} from "./payments/pages/receipt-page/receipt-page.c
 
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent, canActivate: [authenticationGuard], },
+  { path: 'home', component: HomeComponent, canActivate: [authenticationGuard ], },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'groups', component: PageGroupComponent, canActivate: [authenticationGuard], },
   { path: 'group-detail/:id', component: PageGroupDetailsComponent, canActivate: [authenticationGuard], },
@@ -37,8 +37,8 @@ const routes: Routes = [
   { path: 'expenses/add-expense', component: AddExpenseComponent, canActivate: [authenticationGuard], },
   { path: 'outgoing/add-payment', component: AddPaymentComponent, canActivate: [authenticationGuard], },
   { path: 'page-group-expenses-details/:id', component: PageGroupExpensesDetailsComponent, canActivate: [authenticationGuard],},
-  { path: 'sign-in', component: SignInComponent },
-  { path: 'sign-up', component: SignUpComponent },
+  { path: 'sign-in', component: SignInComponent, canActivate: [noAuthGuard], },
+  { path: 'sign-up', component: SignUpComponent, canActivate: [noAuthGuard], },
   { path: '*', component: PageNotFoundComponent },
 ];
 
