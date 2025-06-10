@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GroupService } from '../../services/group.service';
 import { GroupEntity } from '../../model/group.entity';
 import { Chart } from 'chart.js/auto';
@@ -28,6 +28,11 @@ export class PageGroupDetailsComponent implements OnInit {
   invitationToken: string = '';
   currentUserId!: number;
 
+  // --- NUEVO PARA EXPENSES ---
+  showExpenses = false;
+  groupExpenses: any[] = [];
+  // ---------------------------
+
   constructor(
     private route: ActivatedRoute,
     private groupMembersService: GroupMembersService,
@@ -51,18 +56,26 @@ export class PageGroupDetailsComponent implements OnInit {
         this.group = group;
         this.calculateAmountToYou();
         this.getAllGroupMembers();
+        this.getGroupExpenses(); // <-- Cargar gastos del grupo
       });
     }
 
     this.authenticationService.currentUserId.subscribe((userId: any) => {
       this.currentUserId = userId;
-    } );
-    console.log(this.currentUserId);
-    console.log(this.idOfUser);
-    console.log(this.group.adminId);
+    });
   }
 
+  // --- NUEVO PARA EXPENSES ---
+  toggleExpenses() {
+    this.showExpenses = !this.showExpenses;
+  }
 
+  getGroupExpenses() {
+    this.expensesService.getExpensesByGroupId(this.id).subscribe((expenses: any[]) => {
+      this.groupExpenses = expenses;
+    });
+  }
+  // ---------------------------
 
   getAllGroupMembers() {
     this.groupService.getAllMembersByIdGroup(this.group.id).subscribe((members: any) => {
@@ -94,12 +107,8 @@ export class PageGroupDetailsComponent implements OnInit {
   }
 
   calculateAmountEachMemberShouldPay() {
-
     this.groupService.getAllMembersByIdGroup(this.group.id).subscribe((group: any) => {
-
-
       const numberOfMembers = group.length;
-
       if (numberOfMembers > 0) {
         this.totalOfMembers = numberOfMembers;
         this.amountEachMemberShouldPay = this.totalExpenses / numberOfMembers;
@@ -145,10 +154,7 @@ export class PageGroupDetailsComponent implements OnInit {
     });
   }
 
-
   goToDetailedDistribution(groupId: string) {
     this.router.navigate(['/page-group-expenses-details', groupId]);
   }
-
-
 }
