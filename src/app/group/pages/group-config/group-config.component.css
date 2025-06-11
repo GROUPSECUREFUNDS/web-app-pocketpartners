@@ -1,19 +1,18 @@
-
 :root {
-  --primary-color: #6a1b9a;     
-  --secondary-color: #f57c00;   
-  --background-color: #ffffff;  
-  --text-color: #333333;        
-  --button-color: #6200ea;      
-  --button-hover: #3700b3;      
-  --border-radius: 8px;
+  --primary-color: #4826ae;
+  --secondary-color: #f57c00;
+  --text-color: #333333;
+  --bg-color: #ffffff;
+  --input-bg: #f9f9f9;
+  --border-color: #cccccc;
+  --button-color: #6200ea;
+  --button-hover: #3700b3;
+  --copy-token-bg: #f57c00;
   --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-
 body {
   color: var(--text-color);
-  background-color: var(--background-color);
   display: flex;
   margin: 0;
   height: 100vh;
@@ -24,7 +23,6 @@ body {
   width: 100%;
   margin: 20px auto;
   padding: 30px;
-  background-color: var(--background-color);
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
   display: flex;
@@ -88,7 +86,6 @@ body {
 
 
 .button {
-  color: #fff;
   background-color: var(--button-color);
   border: none;
   border-radius: var(--border-radius);
@@ -129,7 +126,7 @@ body {
 }
 
 .copy-token.copied {
-  background-color: #4caf50; 
+  background-color: #4caf50;
   color: #fff;
   transform: scale(1.05);
 }
@@ -171,7 +168,6 @@ body {
   padding: 8px 0;
   border-bottom: 1px solid #e0e0e0;
   font-size: 0.85rem;
-  color: var(--text-color);
 }
 
 .delete-button {
@@ -210,7 +206,7 @@ body {
     padding: 20px;
     box-shadow: none;
   }
-  
+
   .title {
     font-size: 1.5rem;
     margin-bottom: 10px;
@@ -229,11 +225,11 @@ body {
     padding: 6px 8px;
     font-size: 0.8rem;
   }
-  
+
   .member-list {
     font-size: 0.85rem;
   }
-  
+
   .member-item {
     flex-direction: column;
     gap: 5px;
@@ -254,11 +250,11 @@ body {
     font-size: 0.8rem;
     padding: 8px;
   }
-  
+
   .group-config {
     padding: 15px;
   }
-  
+
   .input, .textarea {
     font-size: 0.8rem;
   }

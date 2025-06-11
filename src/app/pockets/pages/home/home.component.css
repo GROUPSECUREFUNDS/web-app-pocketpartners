@@ -29,7 +29,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 5px; 
+  gap: 5px;
 }
 
 
@@ -39,7 +39,6 @@
 
 
 .welcome-card {
-  background-color: #ffffff;
   border-radius: 15px;
   padding: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -48,19 +47,19 @@
 
 @media (max-width: 768px) {
   .container {
-    flex-direction: column; 
+    flex-direction: column;
   }
 
   .right-container,
   .left-container {
-    width: 100%; 
+    width: 100%;
   }
 }
 
 .report-button-container {
   display: flex;
-  justify-content: center; 
-  margin-top: 20px; 
+  justify-content: center;
+  margin-top: 20px;
 }
 
 

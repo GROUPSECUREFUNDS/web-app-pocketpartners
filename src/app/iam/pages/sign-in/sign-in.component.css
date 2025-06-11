@@ -48,9 +48,9 @@ mat-form-field {
 
 
 .mat-form-field-label {
-  color: #9c27b0 !important; 
-  font-size: 16px; 
-  font-weight: bold; 
+  color: #9c27b0 !important;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 
@@ -62,13 +62,13 @@ mat-form-field {
 .form-group button {
   background-color: #9c27b0;
   color: #ffffff;
-  border-radius: 8px; 
+  border-radius: 8px;
 }
 
 
 .social-icons {
   margin-top: 20px;
-  text-align: center; 
+  text-align: center;
 }
 
 .social-icon {
@@ -77,6 +77,6 @@ mat-form-field {
 }
 
 .social-icon img {
-  width: 40px; 
+  width: 40px;
   height: auto;
 }

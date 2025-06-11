@@ -14,7 +14,7 @@
 
 .expense-content {
   padding: 16px;
-  color: black;
+  color: #838383;
 }
 
 .expense-actions button {
@@ -31,5 +31,5 @@
 }
 
 .red-light {
-  color: #f44336; 
+  color: #f44336;
 }

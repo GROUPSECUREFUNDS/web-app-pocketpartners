@@ -2,7 +2,7 @@
 /*@angular/material/prebuilt-themes/indigo-pink.css*/
 
 @use '@angular/material' as mat;
-
+@use '@angular/material/core/theming/palette' as palette;
 @include mat.core();
 
 /*
@@ -70,7 +70,23 @@ $dark-background: (
   unselected-chip: mat.define-palette(mat.$grey-palette, 50),
   disabled-list-option: mat.define-palette(mat.$grey-palette, 100)
 );
-
+$custom-dark-foreground: (
+  base: white,
+  divider: rgba(255, 255, 255, 0.12),
+  dividers: rgba(255, 255, 255, 0.12),
+  disabled: rgba(255, 255, 255, 0.38),
+  disabled-button: rgba(255, 255, 255, 0.38),
+  disabled-text: rgba(255, 255, 255, 0.38),
+  elevation: white,
+  hint-text: rgba(255, 255, 255, 0.38),
+  secondary-text: rgba(255, 255, 255, 0.54),
+  icon: white,
+  icons: white,
+  text: white,
+  slider-min: white,
+  slider-off: rgba(255, 255, 255, 0.26),
+  slider-off-active: rgba(255, 255, 255, 0.38)
+);
 $dark-theme: mat.define-dark-theme(
     (
       color: (
@@ -78,12 +94,14 @@ $dark-theme: mat.define-dark-theme(
         accent: $dark-accent,
         warn: $dark-warn,
         background: $dark-background,
-        foreground: mat.define-palette(mat.$grey-palette, A100),
+        foreground:  $custom-dark-foreground,
       ),
       typography: mat.define-typography-config(),
       density: 0,
     )
 );
+
+
 
 @include mat.all-component-themes($light-theme);
 

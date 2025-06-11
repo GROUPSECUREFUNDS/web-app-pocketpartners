@@ -2,18 +2,17 @@
 
 
 .transactions-card {
-  margin: 40px auto; 
+  margin: 40px auto;
   padding: 20px;
-  width: 100%; 
-  max-width: 1100px; 
-  background-color: #ffffff; 
+  width: 100%;
+  max-width: 1100px;
   border-radius: 20px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 
 .header {
-  background-color: #b39ddb; 
+  background-color: #b39ddb;
   color: white;
   padding: 20px;
   border-radius: 15px 15px 0 0;
@@ -26,7 +25,7 @@
 }
 
 .timeline-section h2 {
-  color: #9575cd; 
+  color: #9575cd;
   font-size: 1.6em;
   margin-bottom: 15px;
 }
@@ -34,43 +33,43 @@
 
 .transaction-card {
   margin-bottom: 10px;
-  background-color: #f8fcfd; 
-  border-left: 6px solid #ceeaff; 
+  background-color: #f8fcfd;
+  border-left: 6px solid #ceeaff;
   border-radius: 15px;
   width: 100%;
 }
 
 .transaction-card mat-card-title {
   font-size: 1.1em;
-  color: #7986cb; 
+  color: #7986cb;
 }
 
 .transaction-card mat-card-subtitle {
   font-size: 1em;
-  color: #9575cd; 
+  color: #9575cd;
 }
 
 
 .amount {
   font-size: 1em;
   font-weight: bold;
-  color: #4db6ac; 
+  color: #4db6ac;
 }
 
 
 .no-data {
   text-align: center;
   font-style: italic;
-  color: #bdbdbd; 
+  color: #bdbdbd;
 }
 
 
 @media (max-width: 768px) {
   .transactions-card {
-    width: 95%; 
+    width: 95%;
   }
 
   .transaction-card {
-    width: 100%; 
+    width: 100%;
   }
 }
