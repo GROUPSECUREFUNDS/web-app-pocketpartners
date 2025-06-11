@@ -13,7 +13,7 @@
             } @else {
               {{ 'group.upToDate' | translate }}
             }
-           
+
           </mat-card-title>
         </mat-card-title-group>
       </mat-card-header>
@@ -21,13 +21,35 @@
         <p>{{ 'group.description' | translate }}: {{ group.description }}</p>
         <p>{{ 'group.creationDate' | translate }}: {{ group.createdAt | date: 'dd/MM/yyyy' }}</p>
         <p>{{ 'group.members' | translate }}: {{ totalOfMembers }}</p>
-       
+
         @if (group.adminId === currentUserId) {
           <a routerLink="/group-config/{{ group.id }}" mat-raised-button color="primary">
            Editar Grupo
-          </a> 
+          </a>
          }
-      
+
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-title (click)="toggleExpenses()" style="cursor: pointer;">
+        {{ 'group.expenses' | translate }}
+        <mat-icon>{{ showExpenses ? 'expand_less' : 'expand_more' }}</mat-icon>
+      </mat-card-title>
+      <mat-card-content *ngIf="showExpenses">
+        <div *ngFor="let expense of groupExpenses" class="expense-detail" style="margin-bottom: 10px;">
+          <div>
+            <strong>{{ expense.title }}</strong>
+            <span style="margin-left: 10px;">{{ expense.amount | currency }}</span>
+          </div>
+          <div>
+            <span>{{ 'group.paidBy' | translate }}: {{ expense.paidBy }}</span>
+            <span style="margin-left: 10px;">{{ expense.date | date: 'dd/MM/yyyy' }}</span>
+          </div>
+        </div>
+        <div *ngIf="groupExpenses.length === 0">
+          {{ 'group.noExpenses' | translate }}
+        </div>
       </mat-card-content>
     </mat-card>
 
