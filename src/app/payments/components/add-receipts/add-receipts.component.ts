@@ -19,6 +19,7 @@ export class AddReceiptsComponent {
   showFormAddReceipt: boolean = true;
   imageIsLoading: boolean = false;
   ocrIsLoading: boolean = false;
+  addReceiptIsLoading: boolean = false;
 
   constructor(private formBuilder: FormBuilder,
               private imageService: ImageService,
@@ -34,7 +35,7 @@ export class AddReceiptsComponent {
       issueDate: [new Date(), Validators.required],
       receiptNumber: ['', Validators.required],
       amount: [0, Validators.required],
-      imagePath: ['', Validators.required],
+      imagePath: [''],
     });
   }
 
@@ -54,7 +55,7 @@ export class AddReceiptsComponent {
         console.error('Neither payment nor expense is provided');
         return;
       }
-
+      this.addReceiptIsLoading = true; // Start loading before the operation
       postReceipt$.subscribe({
         next: (response) => {
           console.log('Receipt created successfully:', response);
@@ -62,6 +63,10 @@ export class AddReceiptsComponent {
         },
         error: (error) => {
           console.error('Error creating receipt:', error);
+          this.addReceiptIsLoading = false; // Stop loading on error
+        }
+        , complete: () => {
+          this.addReceiptIsLoading = false; // Stop loading after the operation completes
         }
       });
 

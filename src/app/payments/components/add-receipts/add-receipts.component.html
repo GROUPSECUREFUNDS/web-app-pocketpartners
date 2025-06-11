@@ -1,4 +1,15 @@
 @if (showFormAddReceipt) {
+  @if(addReceiptIsLoading){
+    <h2 mat-dialog-title>
+      <mat-icon matPrefix>receipt</mat-icon>
+      Agregando comprobante de pago...
+    </h2>
+    <mat-dialog-content>
+      <p>Por favor, espera mientras se agrega el comprobante de pago.</p>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </mat-dialog-content>
+  }@else{
+
   <h2 mat-dialog-title>
     <mat-icon matPrefix>receipt</mat-icon>
     Deseas agregar comprobantes de pago?
@@ -73,6 +84,8 @@
   <mat-dialog-actions>
     <button mat-raised-button mat-dialog-close>Close</button>
   </mat-dialog-actions>
+
+  }
 } @else {
   <h2 mat-dialog-title>
     <mat-icon matPrefix>receipt</mat-icon>
