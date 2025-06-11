@@ -106,6 +106,7 @@ export class AuthenticationService {
           this.signedInUsername.next(response.username);
           localStorage.removeItem('token');
           localStorage.setItem('token', response.token);
+          localStorage.setItem('userId', String(response.id));
           console.log(`Signed in as ${response.username} with token ${response.token}`);
           this.loginError.next(null); // 🔄 limpiar errores
 
@@ -179,8 +180,16 @@ export class AuthenticationService {
   }
 
   initializeAuthState(): void {
-    const hasToken = !!localStorage.getItem('token');
-    this.signedIn.next(hasToken);
+    const token = localStorage.getItem('token');
+    const userId = localStorage.getItem('userId');
+
+    const isLogged = !!token;
+    this.signedIn.next(isLogged);
+
+    if (isLogged && userId) {
+      this.signedInUserId.next(Number(userId));
+    }
   }
+
 
 }

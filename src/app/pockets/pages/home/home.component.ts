@@ -19,18 +19,20 @@ export class HomeComponent implements OnInit {
   partner: PartnerEntity = new PartnerEntity();
   public groups: GroupEntity[] = [];
   public groupPayments: { [key: number]: PaymentEntity[] } = {};
-  currentUsername: any;
+  currentUername: any;
   userId: any;
   expenses: ExpensesEntity[] = [];
 
-  constructor(private partnerService: PartnerService, private expensesService: ExpensesService, private authenticationService: AuthenticationService, private groupService: GroupService, private paymentService: PaymentService,) { }
+  constructor(private partnerService: PartnerService, private expensesService: ExpensesService, private authenticationService: AuthenticationService, private groupService: GroupService, private paymentService: PaymentService,) {
+    this.authenticationService.initializeAuthState();
+  }
 
   ngOnInit(): void {
     this.authenticationService.currentUserId.subscribe(userId => {
       this.userId = userId;
       this.getPartnerById(userId);
       this.authenticationService.currentUsername.subscribe(username => {
-        this.currentUsername = username;
+        this.currentUername = username;
         this.getExpenses();
       });
     });
@@ -52,8 +54,8 @@ export class HomeComponent implements OnInit {
     this.expensesService.getExpenses()
       .subscribe(
         (expenses: ExpensesEntity[]) => {
-          
-          
+
+
           this.expenses = expenses.filter(expense => expense.userId !== this.userId);
         },
         (error) => {
@@ -63,11 +65,11 @@ export class HomeComponent implements OnInit {
   }
 
   generateUserReport() {
-    
+
     this.expensesService.getExpensesByUserId(this.userId).subscribe(expenses => {
-      
+
       this.groupService.getById(this.userId).subscribe((groups: any) => {
-        
+
         if (expenses.length === 0) {
           alert('No hay gastos disponibles para generar el reporte.');
           return;
@@ -79,7 +81,7 @@ export class HomeComponent implements OnInit {
           totalExpenses: expenses.reduce((sum, expense) => sum + expense.amount, 0)
         };
 
-        
+
         this.downloadReport(reportData);
       });
     });
@@ -88,12 +90,12 @@ export class HomeComponent implements OnInit {
   downloadReport(reportData: any) {
     const csvRows = [];
 
-    
+
     csvRows.push(['Gastos', '', '', '']);
     const expenseHeaders = ['Expense Name', 'Amount', 'Created At', 'Uploaded By'];
     csvRows.push(expenseHeaders.join(','));
 
-    
+
     reportData.expenses.forEach((expense: { name: any; amount: any; createdAt: string | number | Date; uploadedBy: any; }) => {
       const row = [
         expense.name,
@@ -104,16 +106,16 @@ export class HomeComponent implements OnInit {
       csvRows.push(row.join(','));
     });
 
-    
+
     csvRows.push(['', 'Total Expenses:', reportData.totalExpenses, '']);
 
-    
+
     csvRows.push(['', '', '', '']);
     csvRows.push(['Grupos', '', '', '']);
     const groupHeaders = ['Group Name', 'Group ID'];
     csvRows.push(groupHeaders.join(','));
 
-    
+
     if (reportData.groups.length > 0) {
       reportData.groups.forEach((group: { name: any; id: any; }) => {
         const row = [group.name, group.id];
@@ -123,19 +125,19 @@ export class HomeComponent implements OnInit {
       csvRows.push(['No hay grupos disponibles.', '', '']);
     }
 
-    
+
     const csvString = csvRows.join('\n');
 
-    
+
     const blob = new Blob([csvString], { type: 'text/csv' });
 
-    
+
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.setAttribute('href', url);
     a.setAttribute('download', 'user_expenses_report.csv');
-    a.click(); 
-    window.URL.revokeObjectURL(url); 
+    a.click();
+    window.URL.revokeObjectURL(url);
   }
 
 
