@@ -70,6 +70,20 @@ export class PageGroupDetailsComponent implements OnInit {
     this.showExpenses = !this.showExpenses;
   }
 
+  togglePayments(expense: any) {
+    expense.showPayments = !expense.showPayments;
+    if (expense.showPayments && !expense.payments) {
+      this.paymentService.getPaymentByExpenseId(expense.id).subscribe((payments: any[]) => {
+        expense.payments = payments;
+      });
+    }
+  }
+
+  getUserNameById(userId: number): string {
+    const user = this.groupMembers.find(u => u.userId === userId);
+    return user ? user.fullName : 'Unknown User';
+  }
+
   getGroupExpenses() {
     this.expensesService.getExpensesByGroupId(this.id).subscribe((expenses: any[]) => {
       this.groupExpenses = expenses;

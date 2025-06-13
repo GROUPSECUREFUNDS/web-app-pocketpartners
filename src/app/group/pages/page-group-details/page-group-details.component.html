@@ -33,23 +33,41 @@
 
     <mat-card>
       <mat-card-title (click)="toggleExpenses()" style="cursor: pointer;">
-        {{ 'group.expenses' | translate }}
+        {{ 'Expenses' | translate }}
         <mat-icon>{{ showExpenses ? 'expand_less' : 'expand_more' }}</mat-icon>
       </mat-card-title>
       <mat-card-content *ngIf="showExpenses">
-        <div *ngFor="let expense of groupExpenses" class="expense-detail" style="margin-bottom: 10px;">
-          <div>
-            <strong>{{ expense.title }}</strong>
-            <span style="margin-left: 10px;">{{ expense.amount | currency }}</span>
-          </div>
-          <div>
-            <span>{{ 'group.paidBy' | translate }}: {{ expense.paidBy }}</span>
-            <span style="margin-left: 10px;">{{ expense.date | date: 'dd/MM/yyyy' }}</span>
-          </div>
-        </div>
-        <div *ngIf="groupExpenses.length === 0">
-          {{ 'group.noExpenses' | translate }}
-        </div>
+        <ng-container *ngIf="groupExpenses.length > 0; else noExpenses">
+          <mat-card *ngFor="let expense of groupExpenses" style="margin-bottom: 10px;">
+            <mat-card-title>
+              {{ expense.name }} - {{ expense.amount | currency }}
+            </mat-card-title>
+            <mat-card-content>
+              <div>
+                <strong>{{ 'Done by' | translate }}:</strong> {{ getUserNameById(expense.userId) }}
+              </div>
+              <button mat-button (click)="togglePayments(expense)">
+                {{ expense.showPayments ? ('Hide payments' | translate) : ('Show payments' | translate) }}
+              </button>
+              <div *ngIf="expense.showPayments">
+                <div *ngIf="expense.payments?.length > 0; else noPayments">
+                  <div *ngFor="let payment of expense.payments">
+                    <div><strong>{{ 'Done by: ' }}</strong><span>{{ getUserNameById(payment.userId) }}</span></div>
+                    <span>{{ payment.description }}</span>:
+                    <span>{{ payment.amount | currency }}</span>
+                    <span>({{ payment.status }})</span>
+                  </div>
+                </div>
+                <ng-template #noPayments>
+                  <span>{{ 'Not payments' | translate }}</span>
+                </ng-template>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </ng-container>
+        <ng-template #noExpenses>
+          <span>{{ 'Not Expenses' | translate }}</span>
+        </ng-template>
       </mat-card-content>
     </mat-card>
 
