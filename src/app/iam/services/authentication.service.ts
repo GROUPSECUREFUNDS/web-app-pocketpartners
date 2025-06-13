@@ -185,7 +185,7 @@ export class AuthenticationService {
 
     const isLogged = !!token;
     this.signedIn.next(isLogged);
-
+    console.log(`AuthenticationService initialized. Is logged in: ${isLogged}`);
     if (isLogged && userId) {
       this.signedInUserId.next(Number(userId));
     }

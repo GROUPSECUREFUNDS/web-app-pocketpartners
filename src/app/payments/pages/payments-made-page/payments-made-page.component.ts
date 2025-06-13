@@ -19,8 +19,8 @@ export class PaymentsMadePageComponent {
   }
 
   fetchPayments() {
-    this.authService.currUserInformation.subscribe((value) => {
-      this.paymentService.getPaymentByUserIdAndStatus(value.userId, PaymentStatus.COMPLETED).subscribe((data)=>{
+    this.authService.currentUserId.subscribe((userId) => {
+      this.paymentService.getPaymentByUserIdAndStatus(userId, PaymentStatus.COMPLETED).subscribe((data)=>{
         this.payments = [...data];
       });
     });

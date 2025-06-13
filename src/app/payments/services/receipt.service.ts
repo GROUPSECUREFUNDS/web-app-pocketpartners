@@ -16,6 +16,7 @@ export class ReceiptService extends  BaseService<ReceiptEntity>{
   getReceiptById(receiptId: any) {
     return this.http.get<any>(`${this.resourcePath()}/${receiptId}`, this.httpOptions);
   }
+
   getReceiptsByPaymentId(paymentId:number):Observable<ReceiptEntity[]> {
     return this.http.get<any>(`${this.resourcePath()}/payment/${paymentId}`, this.httpOptions);
   }
@@ -38,6 +39,15 @@ export class ReceiptService extends  BaseService<ReceiptEntity>{
     return this.http.post<ReceiptEntity>(`${this.resourcePath()}/payment`, requestReceipt, this.httpOptions).pipe(
       catchError(error => {
         console.error('Error al crear recibo:', error);
+        return throwError(() => error); // o un error custom si quieres
+      })
+    );
+  }
+
+  deleteReceipt(receiptId: number): Observable<void> {
+    return this.http.delete<void>(`${this.resourcePath()}/${receiptId}`, this.httpOptions).pipe(
+      catchError(error => {
+        console.error('Error al eliminar recibo:', error);
         return throwError(() => error); // o un error custom si quieres
       })
     );

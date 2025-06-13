@@ -18,8 +18,8 @@ export class PaymentsTodoPageComponent {
   }
 
   fetchPayments() {
-    this.authService.currUserInformation.subscribe((value) => {
-      this.paymentService.getPaymentByUserIdAndStatus(value.userId, PaymentStatus.PENDING).subscribe((data) => {
+    this.authService.currentUserId.subscribe((userId) => {
+      this.paymentService.getPaymentByUserIdAndStatus(userId, PaymentStatus.PENDING).subscribe((data) => {
         this.payments = [...data];
       });
     });
