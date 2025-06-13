@@ -11,24 +11,27 @@ export class PageExpensesComponent implements OnInit {
   public expenses: ExpensesEntity[] = [];
   public searchText: string = '';
   public isLoading: boolean = true;
+  public userId: number = 0;
+  public showHidden: boolean = false;
 
   constructor(public expensesService: ExpensesService) { }
 
   ngOnInit(): void {
+    const storedUserId = localStorage.getItem('userId');
+    this.userId = storedUserId ? parseInt(storedUserId, 10) : 0;
     this.loadExpenses();
   }
 
   loadExpenses(): void {
-    this.isLoading = true; 
-    this.expensesService.getExpenses().subscribe({
+    this.isLoading = true;
+    this.expensesService.getExpensesByUserId(this.userId).subscribe({
       next: (expenses: ExpensesEntity[]) => {
         this.expenses = expenses;
-        console.log('Expenses loaded:', this.expenses);
-        this.isLoading = false; 
+        this.isLoading = false;
       },
       error: (err) => {
         console.error('Error fetching expenses:', err);
-        this.isLoading = false; 
+        this.isLoading = false;
       }
     });
   }
@@ -39,11 +42,15 @@ export class PageExpensesComponent implements OnInit {
   }
 
   filteredExpenses(): ExpensesEntity[] {
-    if (!this.searchText) {
-      return this.expenses;
+    if (this.showHidden) {
+      return [];
     }
+
     return this.expenses.filter(expense =>
       expense.name.toLowerCase().includes(this.searchText.toLowerCase())
     );
+  }
+  toggleShowHidden(): void {
+    this.showHidden = !this.showHidden;
   }
 }

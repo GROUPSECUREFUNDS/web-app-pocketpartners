@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  //baseURL: 'http://localhost:8080/api/v1',
+//baseURL: 'http://localhost:8080/api/v1',
   baseURL: 'https://backend-pocketpartners.onrender.com/api/v1',
   imgURL: 'https://my-json-server.typicode.com/vargas3470/ads/img',
   firebaseConfig: {

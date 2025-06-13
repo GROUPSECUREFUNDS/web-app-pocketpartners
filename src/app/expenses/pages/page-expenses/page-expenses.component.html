@@ -1,20 +1,37 @@
 <div class="search-bar">
-  <input type="text" [(ngModel)]="searchText" [placeholder]="'expense.search' | translate" /> 
+  <input type="text" [(ngModel)]="searchText" [placeholder]="'expense.search' | translate" />
 </div>
+
+<div class="toggle-button-container">
+  <button
+    mat-raised-button
+    class="purple-button"
+    (click)="toggleShowHidden()"
+  >
+    {{ showHidden ? 'Mostrar mis gastos' : 'Ocultar mis gastos' }}
+  </button>
+</div>
+
+
+
 <div class="content" *ngIf="!isLoading; else loading">
-  <app-expense-card *ngFor="let expense of filteredExpenses()"
-                    class="expense-card" [expense]="expense"
-                    (expenseDeleted)="handleExpenseDeleted($event)">
+  <app-expense-card
+    *ngFor="let expense of filteredExpenses()"
+    class="expense-card"
+    [expense]="expense"
+    (expenseDeleted)="handleExpenseDeleted($event)">
   </app-expense-card>
 </div>
+
 <ng-template #loading>
   <div class="loading-spinner">
     <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
   </div>
 </ng-template>
+
 <div class="add-button">
   <button [routerLink]="'add-expense'" mat-fab extended color="primary">
     <mat-icon>add</mat-icon>
-    {{ 'expense.new' | translate }} 
+    {{ 'expense.new' | translate }}
   </button>
 </div>
