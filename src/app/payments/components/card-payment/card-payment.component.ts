@@ -81,10 +81,10 @@ export class CardPaymentComponent{
       })
   }
   async navigateToReceipts(){
-    let currentUser = await firstValueFrom(this.authService.currUserInformation);
+    let userId = await firstValueFrom(this.authService.currentUserId);
     this.router.navigate([`/payments/${this.payment.id}/receipts`], {
         queryParams: {
-          mode: this.payment.userId === currentUser.userId?
+          mode: this.payment.userId === userId?
               PaymentDetailsMode.PRIVATE:
               PaymentDetailsMode.PUBLIC
         }

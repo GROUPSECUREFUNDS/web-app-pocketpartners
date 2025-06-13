@@ -6,27 +6,52 @@
   <app-card-payment [payment]="payment!" [mode]="PaymentCardMode.VIEW"></app-card-payment>
   <mat-divider></mat-divider>
 
-  @if(this.receipts.length==0){
-  <div class="no-payments">
-    <mat-icon>receipt</mat-icon>
-    <h2>No hay recibos</h2>
-    <p>Los recibos de pago aparecerán aquí.</p>
-  </div>
-  }
-  @else {
+  @if (this.receipts.length == 0) {
+    <div class="no-payments">
+      <mat-icon>receipt</mat-icon>
+      <h2>No hay recibos</h2>
+      <p>Los recibos de pago aparecerán aquí.</p>
+    </div>
+  } @else {
     <h2>Comprobantes de pago</h2>
     <mat-accordion>
-      @for (receipt of receipts; track receipt){
+      @for (receipt of receipts; track receipt) {
         <mat-expansion-panel hideToggle>
           <mat-expansion-panel-header>
-            <mat-panel-title>{{receipt.name}} </mat-panel-title>
-            <mat-panel-description>Fecha de emisión: {{receipt.issueDate | date}} </mat-panel-description>
-            <mat-panel-description>Monto: {{receipt.amount | currency}}</mat-panel-description>
+            <mat-panel-title>{{ receipt.name }}</mat-panel-title>
+            <mat-panel-description>Monto: {{ receipt.amount | currency }}</mat-panel-description>
+            <button *ngIf="mode==PaymentDetailsMode.PRIVATE" (click)="deleteReceipt(receipt)" mat-icon-button color="warn">
+              <mat-icon>delete</mat-icon>
+            </button>
           </mat-expansion-panel-header>
-          <div class="panel-content">
-                <img [src]="imageService.getImageUrlById(receipt.imagePath)" alt="Recibo de pago" class="receipt-image">
-                <button mat-raised-button (click)="showOcrReceiptDialog(receipt.imagePath)">OCR</button>
-          </div>
+          <mat-card class="panel-content">
+            <div class="fields-container">
+              <mat-form-field appearance="fill">
+                <mat-label>Nombre del comprobante</mat-label>
+                <input matInput [ngModel]="receipt.name" placeholder="Descripción del comprobante" [disabled]="true">
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>Número del comprobante</mat-label>
+                <input matInput [(ngModel)]="receipt.receiptNumber" placeholder="Número del comprobante"
+                       [disabled]="true">
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>Monto del comprobante</mat-label>
+                <input matInput type="number" [ngModel]="receipt.amount" placeholder="Monto del comprobante"
+                       [disabled]="true">
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>Fecha de emisión</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="receipt.issueDate"  [disabled]="true">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker ></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <mat-divider [vertical]="true"></mat-divider>
+            <div class="img-container" *ngIf="receipt.imagePath">
+              <img [src]="receipt.imagePath" alt="Vista previa del comprobante">
+            </div>
+          </mat-card>
         </mat-expansion-panel>
 
       }
