@@ -3,10 +3,10 @@
     {{ 'payment.addNew' | translate }}
   </h1>
   <app-form-payment
-    (onAddPayment)="onSubmit($event)"
     [user]="user"
     [joinedGroups]="joinedGroups"
     [expenses]="expenses"
+    (onAddPayment)="onSubmit($event)"
     (groupChange)="onGroupChange($event)">
   </app-form-payment>
 </div>

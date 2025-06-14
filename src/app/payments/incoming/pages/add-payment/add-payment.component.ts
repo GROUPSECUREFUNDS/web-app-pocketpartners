@@ -7,6 +7,7 @@ import { AuthenticationService } from "../../../../iam/services/authentication.s
 import { GroupOperationsService } from '../../../../group/services/group-operations.service';
 import { GroupService } from '../../../../group/services/group.service';
 import {ExpensesService} from "../../../../expenses/services/expenses.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-add-payment',
@@ -25,6 +26,7 @@ export class AddPaymentComponent implements OnInit {
     private groupService: GroupService,
     private groupOperationService: GroupOperationsService,
     private expensesService: ExpensesService,
+    private router: Router,
   ) { }
   user: PartnerEntity = new PartnerEntity();
 
@@ -32,6 +34,7 @@ export class AddPaymentComponent implements OnInit {
     this.authenticationService.currentUserId.subscribe((userId: any) => {
       this.userId = userId;
       this.partnerService.getPartnerById(userId).subscribe((partner: any) => {
+        this.user = partner; // <-- Asigna el usuario aquí
         this.paymentService.getJoinedUserGroups(userId).subscribe((groups: any) => {
           groups.forEach((group: any) => {
             this.groupService.getById(group.groupId).subscribe((group: any) => {
@@ -50,7 +53,14 @@ export class AddPaymentComponent implements OnInit {
     });
   }
 
-  onSubmit(payment: PaymentEntity): void {
-    this.paymentService.postCompletePaymentById(payment.id).subscribe();
+  onSubmit(payment: PaymentEntity) {
+    if (!payment.userId || !payment.expenseId) {
+      console.error('Faltan userId o expenseId en el payment');
+      return;
+    }
+    this.paymentService.postPayment(payment).subscribe({
+      next: () => this.router.navigate(['/outgoing']),
+      error: err => console.error('Error al guardar el payment', err)
+    });
   }
 }
