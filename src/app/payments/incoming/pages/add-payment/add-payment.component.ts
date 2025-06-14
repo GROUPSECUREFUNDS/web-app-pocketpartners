@@ -6,6 +6,7 @@ import { PaymentEntity } from "../../../model/payment-entity";
 import { AuthenticationService } from "../../../../iam/services/authentication.service";
 import { GroupOperationsService } from '../../../../group/services/group-operations.service';
 import { GroupService } from '../../../../group/services/group.service';
+import {ExpensesService} from "../../../../expenses/services/expenses.service";
 
 @Component({
   selector: 'app-add-payment',
@@ -16,12 +17,14 @@ export class AddPaymentComponent implements OnInit {
   userId: number = 0;
   joinedGroups: any = [];
   pendingPayments: any = [];
+  expenses: any[] = [];
   constructor(
     private partnerService: PartnerService,
     private paymentService: PaymentService,
     private authenticationService: AuthenticationService,
     private groupService: GroupService,
     private groupOperationService: GroupOperationsService,
+    private expensesService: ExpensesService,
   ) { }
   user: PartnerEntity = new PartnerEntity();
 
@@ -41,15 +44,9 @@ export class AddPaymentComponent implements OnInit {
   }
 
   onGroupChange(groupId: number): void {
-    this.pendingPayments = []; 
-    this.groupOperationService.getAllGroupOperationsByGroupId(groupId).subscribe((groupOperations: any) => {
-      groupOperations.forEach((groupOperation: any) => {
-        this.paymentService.getPaymentByUserIdAndStatus(this.userId, groupOperation.status="PENDING").subscribe((payments: any) => {
-          if (groupOperation.status == "PENDING") {
-            this.pendingPayments.push(...payments);
-          }
-        });
-      });
+    this.expenses = [];
+    this.expensesService.getExpensesByGroupId(groupId).subscribe((expenses: any[]) => {
+      this.expenses = expenses;
     });
   }
 

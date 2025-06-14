@@ -26,6 +26,7 @@ export class FormPaymentComponent {
   @Input() user: PartnerEntity = new PartnerEntity();
   @Input() joinedGroups: any;
   @Input() pendingPayments: any;
+  @Input() expenses: any[] = [];
   @Output() onAddPayment: EventEmitter<PaymentEntity> = new EventEmitter<PaymentEntity>();
   @Output() groupChange: EventEmitter<number> = new EventEmitter<number>();
 
@@ -38,7 +39,7 @@ export class FormPaymentComponent {
 
     this.onAddPayment.emit(this.Payment);
 
-    
+
     this.router.navigate(['/outgoing']);
   }
 

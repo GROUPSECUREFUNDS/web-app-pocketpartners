@@ -25,8 +25,8 @@
       <mat-form-field>
         <mat-label>Pick an expense</mat-label>
         <mat-select formControlName="firstCtrl" required>
-          <mat-option *ngFor="let payment of pendingPayments" [value]="payment.id">
-            {{ payment.description }}
+          <mat-option *ngFor="let expense of expenses" [value]="expense.id">
+            {{ expense.name }}
           </mat-option>
         </mat-select>
       </mat-form-field>
