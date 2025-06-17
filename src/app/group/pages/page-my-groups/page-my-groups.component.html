@@ -1,0 +1,27 @@
+@if (isDataLoaded | async) {
+<h1 class="title">{{ 'groups.allGroups' | translate }}</h1>
+
+<div class="search-container">
+  <input type="text" placeholder="{{ 'groups.searchGroup' | translate }}" [(ngModel)]="searchTerm" />
+</div>
+
+<div class="groups-container">
+  <div class="group-item" *ngFor="let group of filteredGroups()">
+    <h2>{{ group.name }}</h2>
+    <p>{{ group.createdAt | date: 'dd/MM/yyyy' }}</p>
+
+
+    @if (group.isMember) {
+    <p>{{ 'groups.youAreInGroup' | translate }}</p>
+    <div class="group-item" (click)="openGroup(group.id)">
+      <mat-icon>open_in_new</mat-icon> {{ 'groups.viewDetails' | translate }}
+    </div>
+    }
+  </div>
+</div>
+
+} @else {
+<div class="loading-container">
+  <mat-spinner></mat-spinner>
+</div>
+}

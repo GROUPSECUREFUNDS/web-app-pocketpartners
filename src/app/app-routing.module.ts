@@ -19,6 +19,7 @@ import { PageGroupExpensesDetailsComponent } from "./group/pages/page-group-expe
 import { GroupConfigComponent } from './group/pages/group-config/group-config.component';
 import {PaymentsPageComponent} from "./payments/pages/payments-page/payments-page.component";
 import {ReceiptPageComponent} from "./payments/pages/receipt-page/receipt-page.component";
+import { PageMyGroupsComponent } from './group/pages/page-my-groups/page-my-groups.component';
 
 
 const routes: Routes = [
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'groups', component: PageGroupComponent, canActivate: [authenticationGuard], },
   { path: 'group-detail/:id', component: PageGroupDetailsComponent, canActivate: [authenticationGuard], },
+  {path: 'my-groups', component: PageMyGroupsComponent, canActivate: [authenticationGuard]},
   { path: 'profile', component: ContactComponent, canActivate: [authenticationGuard], },
   {path: 'group-config/:id', component: GroupConfigComponent, canActivate: [authenticationGuard],},
   { path: 'incoming', component: IncomingComponent, canActivate: [authenticationGuard], },
