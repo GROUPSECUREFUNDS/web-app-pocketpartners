@@ -4,18 +4,22 @@
       {{ expense.name }} - {{ expense.amount | currency }}
     </mat-card-title>
     <mat-card-subtitle>
-      {{ 'DueDate' | translate }}: {{ expense.dueDate | date: 'dd/MM/yyyy' }}
+      {{ 'expense.dueDate' | translate }}: {{ expense.dueDate | date: 'dd/MM/yyyy' }}
     </mat-card-subtitle>
     <mat-card-content>
       <mat-list>
-        <span matListItemLine>{{ 'Name' | translate }}: {{ expense.name }}</span>
+        <span matListItemLine>{{ 'expense.title' | translate }}: {{ expense.name }}</span>
         <span matListItemLine>{{ 'Group' | translate }}: {{ group.name }}</span>
         <span matListItemLine>{{ 'CreatedBy' | translate }}: {{ expense.userId }}</span>
         <span matListItemLine>{{ 'CreatedBy' | translate }}: {{ getCreatorName() }}</span>
       </mat-list>
-      <button mat-raised-button color="primary"
-              [routerLink]="['/page-group-expenses-details', expense.id]">
-        Ver detalles
+      <button
+        *ngIf="showDetailsButton"
+        mat-raised-button
+        color="primary"
+        [routerLink]="['/page-group-expenses-details', expense.id]"
+      >
+        {{ 'expense.see_details' | translate }}
       </button>
     </mat-card-content>
   </mat-card>

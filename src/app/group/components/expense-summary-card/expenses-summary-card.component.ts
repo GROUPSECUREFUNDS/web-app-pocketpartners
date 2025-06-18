@@ -11,6 +11,7 @@ import {GroupService} from "../../services/group.service";
 export class ExpensesSummaryCardComponent implements OnInit {
   @Input() expense!: ExpensesEntity;
   @Input() groupMembers: any[] = [];
+  @Input() showDetailsButton: boolean = true;
   group: GroupEntity = new GroupEntity();
 
   constructor(private groupService: GroupService) {}

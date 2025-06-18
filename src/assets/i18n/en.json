@@ -76,8 +76,8 @@
     "pick": "Pick an expense",
     "uploadedByYou": "Expenses Uploaded by YOU",
     "dueDate": "Due Date",
-    "add_new": "Add New Expense"
-
+    "add_new": "Add New Expense",
+    "see_details": "See Details"
   },
   "common": {
     "next": "Next",

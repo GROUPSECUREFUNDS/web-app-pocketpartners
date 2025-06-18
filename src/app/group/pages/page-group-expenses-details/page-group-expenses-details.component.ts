@@ -5,6 +5,7 @@ import {ExpensesEntity} from "../../../expenses/model/expenses.entity";
 import {PaymentEntity} from "../../../payments/model/payment-entity";
 import {ExpensesService} from "../../../expenses/services/expenses.service";
 import {GroupService} from "../../services/group.service";
+import {PaymentStatus} from "../../../payments/model/payment-status";
 
 
 @Component({
@@ -41,6 +42,23 @@ export class PageGroupExpensesDetailsComponent implements OnInit {
         this.payments = payments;
       });
     }
+  }
+  getStatusKey(status: string | number): string {
+    if (typeof status === 'number') {
+      // Mapea los valores numéricos a los del enum según tu lógica de negocio
+      return status === 1 ? PaymentStatus.COMPLETED : PaymentStatus.PENDING;
+    }
+    // Si ya es string, normaliza
+    const s = (status + '').trim().toUpperCase();
+    return s === PaymentStatus.COMPLETED ? PaymentStatus.COMPLETED : PaymentStatus.PENDING;
+  }
+
+  getStatusClass(status: string | number): string {
+    return this.getStatusKey(status) === PaymentStatus.COMPLETED ? 'btn-success' : 'btn-danger';
+  }
+
+  getStatusLabel(status: string | number): string {
+    return this.getStatusKey(status) === PaymentStatus.COMPLETED ? 'Completado' : 'Pendiente';
   }
 }
 

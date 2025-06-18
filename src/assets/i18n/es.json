@@ -72,7 +72,9 @@
     "addNew": "Agregar Nuevo Gasto",
     "which": "¿Qué Gasto?",
     "pick": "Selecciona un gasto",
-    "uploadedByYou": "Gastos Subidos por TI"
+    "uploadedByYou": "Gastos Subidos por TI",
+    "dueDate": "Fecha de Vencimiento",
+    "see_details": "Ver Detalles"
   },
   "common": {
     "next": "Siguiente",
