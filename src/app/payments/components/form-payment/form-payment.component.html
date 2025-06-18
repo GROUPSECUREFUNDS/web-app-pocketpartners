@@ -36,6 +36,25 @@
       </div>
     </form>
   </mat-step>
+  <mat-step [stepControl]="memberFormGroup">
+    <form [formGroup]="memberFormGroup">
+      <ng-template matStepLabel>
+        {{ 'expense.pick_member' | translate }}
+      </ng-template>
+      <mat-form-field>
+        <mat-label>{{ 'expense.pick_member' | translate }}</mat-label>
+        <mat-select formControlName="memberCtrl" required>
+          <mat-option *ngFor="let member of groupMembers" [value]="member.userId">
+            {{ member.fullName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>{{ 'common.back' | translate }}</button>
+        <button mat-button matStepperNext [disabled]="!memberFormGroup.valid">{{ 'common.next' | translate }}</button>
+      </div>
+    </form>
+  </mat-step>
   <mat-step [stepControl]="thirdFormGroup">
     <form [formGroup]="thirdFormGroup">
       <ng-template matStepLabel>
