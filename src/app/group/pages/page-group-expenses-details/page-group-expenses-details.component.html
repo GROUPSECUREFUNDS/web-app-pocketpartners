@@ -1,50 +1,51 @@
-<div class="container">
-  <div class="right-cards">
-    <div class="back-button">
-      <button (click)="goBack()" style="margin: 20px; padding: 10px 20px; border-radius: 5px; background-color: #ff9900; color: white; border: none; cursor: pointer;">
-        Back
-      </button>
+<div class="payment-details-page">
+  <div class="title-container">
+    <h1>Detalle del Gasto</h1>
+  </div>
+
+  <app-expense-summary-card
+    *ngIf="expense"
+    [expense]="expense"
+    [groupMembers]="groupMembers">
+  </app-expense-summary-card>
+  <mat-divider></mat-divider>
+
+  <ng-container *ngIf="payments.length === 0; else paymentsList">
+    <div class="no-payments">
+      <mat-icon>payments</mat-icon>
+      <h2>No hay pagos asociados</h2>
+      <p>Los pagos asociados a este gasto aparecerán aquí.</p>
     </div>
-    <mat-card>
-      <mat-card-title>{{ group.name }}</mat-card-title>
-      <mat-card-header>
-        <img [src]="group.groupPhoto" alt="{{ 'group.photoAlt' | translate }}">
-        <mat-card-title-group>
-          <mat-card-title>
-            {{ 'group.debtInfo' | translate: { groupName: group.name } }}
-            <p>{{'group.ExpensesDetailsGroup' | translate }}</p>
-          </mat-card-title>
-        </mat-card-title-group>
-      </mat-card-header>
-      <mat-card-content>
-        <p>{{ 'group.creationDate' | translate }}: {{ group.createdAt | date: 'dd/MM/yyyy' }}</p>
-        <p *ngFor="let currency of group.currency">{{ 'group.currency' | translate }}: {{ currency.code }}</p>
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card>
-      <mat-card-title>{{ 'group.thisAreTheTotalExpenses' | translate }}</mat-card-title>
-      <p *ngFor="let expense of expenses">
-        <mat-checkbox [(ngModel)]="expense.checked" (change)="onExpenseCheckChange()">
-          {{ expense.name || 'Gasto sin nombre' }}: {{ expense.amount | currency: currentCurrency }}
-        </mat-checkbox>
-      </p>
-    </mat-card>
-  </div>
-
-  <div class="left-card">
-    <mat-card>
-      <mat-card-title>{{ 'group.paymentDistribution' | translate }}</mat-card-title>
-      <mat-card-content>
-        <div class="completed">
-          <p *ngIf="allPaymentsCompleted" style="color: #aa67f2; font-weight: bold;">
-            Payments Completed
-          </p>
-        </div>
-        <div style="display: flex; justify-content: center;">
-          <canvas id="expensesPieChart"></canvas>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
+  </ng-container>
+  <ng-template #paymentsList>
+    <h2>Pagos asociados</h2>
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let payment of payments">
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ payment.description }}</mat-panel-title>
+          <mat-panel-description>Monto: {{ payment.amount | currency }}</mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-card class="panel-content">
+          <div class="fields-container">
+            <mat-form-field appearance="fill">
+              <mat-label>Descripción</mat-label>
+              <input matInput [ngModel]="payment.description" [disabled]="true">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Monto</mat-label>
+              <input matInput type="number" [ngModel]="payment.amount" [disabled]="true">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Estado</mat-label>
+              <input matInput [ngModel]="payment.status" [disabled]="true">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>ID Usuario</mat-label>
+              <input matInput [ngModel]="payment.userId" [disabled]="true">
+            </mat-form-field>
+          </div>
+        </mat-card>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </ng-template>
 </div>
