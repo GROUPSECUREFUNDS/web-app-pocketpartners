@@ -33,6 +33,16 @@
               {{ 'payments.' + getStatusKey(payment.status) | translate }}
             </button>
           </mat-panel-description>
+          <mat-panel-description>
+            <button mat-raised-button
+                    class="btn-receipts"
+                    style="margin-left: 8px;"
+                    *ngIf="getStatusKey(payment.status) === 'COMPLETED'"
+                    (click)="navigateToReceipts(payment)">
+              <mat-icon matPrefix>receipt</mat-icon>
+              {{ 'cardPayment.btn.seeReceipts' | translate }}
+            </button>
+          </mat-panel-description>
         </mat-expansion-panel-header>
         <mat-card class="panel-content">
           <div class="fields-container">

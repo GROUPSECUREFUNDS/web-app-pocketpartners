@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {PaymentService} from "../../../payments/services/payment.service";
 import {ExpensesEntity} from "../../../expenses/model/expenses.entity";
 import {PaymentEntity} from "../../../payments/model/payment-entity";
@@ -23,7 +23,8 @@ export class PageGroupExpensesDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private paymentService: PaymentService,
     private expenseService: ExpensesService,
-    private groupService: GroupService
+    private groupService: GroupService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -57,6 +58,9 @@ export class PageGroupExpensesDetailsComponent implements OnInit {
 
   getStatusLabel(status: string | number): string {
     return this.getStatusKey(status) === PaymentStatus.COMPLETED ? 'Completado' : 'Pendiente';
+  }
+  navigateToReceipts(payment: PaymentEntity) {
+    this.router.navigate([`/payments/${payment.id}/receipts`]);
   }
 }
 

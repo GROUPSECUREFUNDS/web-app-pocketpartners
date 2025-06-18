@@ -12,4 +12,7 @@
   min-width: 120px;
   text-align: center;
 }
-
+.btn-receipts {
+  background-color: #1976d2 !important; /* Azul Material */
+  color: #fff !important;
+}
