@@ -18,13 +18,13 @@
         </mat-card-title-group>
       </mat-card-header>
       <mat-card-content>
-        <p>{{ 'group.description' | translate }}: {{ group.description }}</p>
+        <p>{{ 'createGroup.groupDescription' | translate }}: {{ group.description }}</p>
         <p>{{ 'group.creationDate' | translate }}: {{ group.createdAt | date: 'dd/MM/yyyy' }}</p>
         <p>{{ 'group.members' | translate }}: {{ totalOfMembers }}</p>
 
         @if (group.adminId === currentUserId) {
           <a routerLink="/group-config/{{ group.id }}" mat-raised-button color="primary">
-           Editar Grupo
+            {{ 'group.editGroup' | translate }}
           </a>
          }
 
@@ -33,7 +33,7 @@
 
     <mat-card>
       <mat-card-title (click)="toggleExpenses()" style="cursor: pointer;">
-        {{ 'Expenses' | translate }}
+        {{ 'expense.title' | translate }}
         <mat-icon>{{ showExpenses ? 'expand_less' : 'expand_more' }}</mat-icon>
       </mat-card-title>
       <mat-card-content *ngIf="showExpenses">
@@ -45,7 +45,7 @@
           </app-expense-summary-card>
         </ng-container>
         <ng-template #noExpenses>
-          <span>{{ 'Not Expenses' | translate }}</span>
+          <span>{{ 'expense.not_expense' | translate }}</span>
         </ng-template>
       </mat-card-content>
     </mat-card>

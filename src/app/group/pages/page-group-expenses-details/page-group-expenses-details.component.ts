@@ -45,10 +45,8 @@ export class PageGroupExpensesDetailsComponent implements OnInit {
   }
   getStatusKey(status: string | number): string {
     if (typeof status === 'number') {
-      // Mapea los valores numéricos a los del enum según tu lógica de negocio
       return status === 1 ? PaymentStatus.COMPLETED : PaymentStatus.PENDING;
     }
-    // Si ya es string, normaliza
     const s = (status + '').trim().toUpperCase();
     return s === PaymentStatus.COMPLETED ? PaymentStatus.COMPLETED : PaymentStatus.PENDING;
   }

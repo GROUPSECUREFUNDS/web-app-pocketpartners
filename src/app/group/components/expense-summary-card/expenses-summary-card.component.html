@@ -9,9 +9,9 @@
     <mat-card-content>
       <mat-list>
         <span matListItemLine>{{ 'expense.title' | translate }}: {{ expense.name }}</span>
-        <span matListItemLine>{{ 'Group' | translate }}: {{ group.name }}</span>
-        <span matListItemLine>{{ 'CreatedBy' | translate }}: {{ expense.userId }}</span>
-        <span matListItemLine>{{ 'CreatedBy' | translate }}: {{ getCreatorName() }}</span>
+        <span matListItemLine>{{ 'summary.group' | translate }}: {{ group.name }}</span>
+        <span matListItemLine>{{ 'expense.uploadedBy' | translate }}: {{ expense.userId }}</span>
+        <span matListItemLine>{{ 'expense.uploadedBy' | translate }}: {{ getCreatorName() }}</span>
       </mat-list>
       <button
         *ngIf="showDetailsButton"
