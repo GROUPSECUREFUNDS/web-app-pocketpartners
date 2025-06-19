@@ -7,6 +7,8 @@
 
 <div class="groups-container">
   <div class="group-item" *ngFor="let group of filteredGroups()">
+    <img *ngIf="group.groupPhoto" [src]="group.groupPhoto" class="group-image" />
+
     <h2>{{ group.name }}</h2>
     <p>{{ group.createdAt | date: 'dd/MM/yyyy' }}</p>
 
