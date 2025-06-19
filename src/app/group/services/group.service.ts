@@ -45,7 +45,7 @@ export class GroupService extends BaseService<GroupEntity> {
 
 
   getAllGroupsByUserId(userId: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.resourceEndpoint}/user/${userId}`, this.httpOptions);
+    return this.http.get<any[]>(`${this.resourcePath()}/user/${userId}`, this.httpOptions);
   }
 
   createGroup(groupName: string, groupPhoto: string, description: string, adminId: number) {
