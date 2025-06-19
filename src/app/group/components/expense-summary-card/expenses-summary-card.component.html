@@ -1,0 +1,26 @@
+<div class="card-payment">
+  <mat-card class="custom-card">
+    <mat-card-title>
+      {{ expense.name }} - {{ expense.amount | currency }}
+    </mat-card-title>
+    <mat-card-subtitle>
+      {{ 'expense.dueDate' | translate }}: {{ expense.dueDate | date: 'dd/MM/yyyy' }}
+    </mat-card-subtitle>
+    <mat-card-content>
+      <mat-list>
+        <span matListItemLine>{{ 'expense.title' | translate }}: {{ expense.name }}</span>
+        <span matListItemLine>{{ 'summary.group' | translate }}: {{ group.name }}</span>
+        <span matListItemLine>{{ 'expense.uploadedBy' | translate }}: {{ expense.userId }}</span>
+        <span matListItemLine>{{ 'expense.uploadedBy' | translate }}: {{ getCreatorName() }}</span>
+      </mat-list>
+      <button
+        *ngIf="showDetailsButton"
+        mat-raised-button
+        color="primary"
+        [routerLink]="['/page-group-expenses-details', expense.id]"
+      >
+        {{ 'expense.see_details' | translate }}
+      </button>
+    </mat-card-content>
+  </mat-card>
+</div>

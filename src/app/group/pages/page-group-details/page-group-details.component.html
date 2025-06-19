@@ -18,13 +18,13 @@
         </mat-card-title-group>
       </mat-card-header>
       <mat-card-content>
-        <p>{{ 'group.description' | translate }}: {{ group.description }}</p>
+        <p>{{ 'createGroup.groupDescription' | translate }}: {{ group.description }}</p>
         <p>{{ 'group.creationDate' | translate }}: {{ group.createdAt | date: 'dd/MM/yyyy' }}</p>
         <p>{{ 'group.members' | translate }}: {{ totalOfMembers }}</p>
 
         @if (group.adminId === currentUserId) {
           <a routerLink="/group-config/{{ group.id }}" mat-raised-button color="primary">
-           Editar Grupo
+            {{ 'group.editGroup' | translate }}
           </a>
          }
 
@@ -33,40 +33,19 @@
 
     <mat-card>
       <mat-card-title (click)="toggleExpenses()" style="cursor: pointer;">
-        {{ 'Expenses' | translate }}
+        {{ 'expense.title' | translate }}
         <mat-icon>{{ showExpenses ? 'expand_less' : 'expand_more' }}</mat-icon>
       </mat-card-title>
       <mat-card-content *ngIf="showExpenses">
         <ng-container *ngIf="groupExpenses.length > 0; else noExpenses">
-          <mat-card *ngFor="let expense of groupExpenses" style="margin-bottom: 10px;">
-            <mat-card-title>
-              {{ expense.name }} - {{ expense.amount | currency }}
-            </mat-card-title>
-            <mat-card-content>
-              <div>
-                <strong>{{ 'Done by' | translate }}:</strong> {{ getUserNameById(expense.userId) }}
-              </div>
-              <button mat-button (click)="togglePayments(expense)">
-                {{ expense.showPayments ? ('Hide payments' | translate) : ('Show payments' | translate) }}
-              </button>
-              <div *ngIf="expense.showPayments">
-                <div *ngIf="expense.payments?.length > 0; else noPayments">
-                  <div *ngFor="let payment of expense.payments">
-                    <div><strong>{{ 'Done by: ' }}</strong><span>{{ getUserNameById(payment.userId) }}</span></div>
-                    <span>{{ payment.description }}</span>:
-                    <span>{{ payment.amount | currency }}</span>
-                    <span>({{ payment.status }})</span>
-                  </div>
-                </div>
-                <ng-template #noPayments>
-                  <span>{{ 'Not payments' | translate }}</span>
-                </ng-template>
-              </div>
-            </mat-card-content>
-          </mat-card>
+          <app-expense-summary-card
+            *ngFor="let expense of groupExpenses"
+            [expense]="expense"
+            [groupMembers]="groupMembers">
+          </app-expense-summary-card>
         </ng-container>
         <ng-template #noExpenses>
-          <span>{{ 'Not Expenses' | translate }}</span>
+          <span>{{ 'expense.not_expense' | translate }}</span>
         </ng-template>
       </mat-card-content>
     </mat-card>

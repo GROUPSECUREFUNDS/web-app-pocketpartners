@@ -2,10 +2,10 @@
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>
-        ¿Qué grupo?
+        {{ 'expense.group' | translate }}
       </ng-template>
       <mat-form-field>
-        <mat-label>Selecciona un grupo</mat-label>
+        <mat-label>{{ 'expense.pick_group' | translate }}</mat-label>
         <mat-select formControlName="firstCtrl" required (selectionChange)="onGroupSelectionChange($event)">
           <mat-option *ngFor="let group of joinedGroups" [value]="group.id">
             {{ group.name }}
@@ -13,17 +13,17 @@
         </mat-select>
       </mat-form-field>
       <div>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-button matStepperNext>{{ 'common.next' | translate }}</button>
       </div>
     </form>
   </mat-step>
   <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup">
       <ng-template matStepLabel>
-        ¿Qué gasto?
+        {{ 'expense.which' | translate }}
       </ng-template>
       <mat-form-field>
-        <mat-label>Selecciona un gasto</mat-label>
+        <mat-label>{{ 'expense.pick' | translate }}</mat-label>
         <mat-select formControlName="firstCtrl" required (selectionChange)="onExpenseSelectionChange($event)">
           <mat-option *ngFor="let expense of expenses" [value]="expense.id">
             {{ expense.name }}
@@ -31,52 +31,71 @@
         </mat-select>
       </mat-form-field>
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext [disabled]="!secondFormGroup.valid">Next</button>
+        <button mat-button matStepperPrevious>{{ 'common.back' | translate }}</button>
+        <button mat-button matStepperNext [disabled]="!secondFormGroup.valid">{{ 'common.next' | translate }}</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="memberFormGroup">
+    <form [formGroup]="memberFormGroup">
+      <ng-template matStepLabel>
+        {{ 'expense.pick_member' | translate }}
+      </ng-template>
+      <mat-form-field>
+        <mat-label>{{ 'expense.pick_member' | translate }}</mat-label>
+        <mat-select formControlName="memberCtrl" required>
+          <mat-option *ngFor="let member of groupMembers" [value]="member.userId">
+            {{ member.fullName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>{{ 'common.back' | translate }}</button>
+        <button mat-button matStepperNext [disabled]="!memberFormGroup.valid">{{ 'common.next' | translate }}</button>
       </div>
     </form>
   </mat-step>
   <mat-step [stepControl]="thirdFormGroup">
     <form [formGroup]="thirdFormGroup">
       <ng-template matStepLabel>
-        Detalles del pago
+        {{ 'payments.paymentDetails' | translate }}
       </ng-template>
       <mat-form-field>
-        <mat-label>Descripción</mat-label>
+        <mat-label>{{ 'payments.description' | translate }}</mat-label>
         <input matInput formControlName="description" required>
       </mat-form-field>
       <mat-form-field>
-        <mat-label>Monto a pagar</mat-label>
+        <mat-label>{{ 'payments.amount_pay' | translate }}</mat-label>
         <input matInput type="number" formControlName="amount" required [max]="maxAmount" min="0.01">
-        <mat-hint>Monto máximo: {{ maxAmount }}</mat-hint>
+        <mat-hint>{{ 'payments.amount_max' | translate }}: {{ maxAmount }}</mat-hint>
       </mat-form-field>
       <div *ngIf="thirdFormGroup.value.amount && +thirdFormGroup.value.amount > maxAmount" style="color:red;">
-        El monto no puede exceder el monto del gasto.
+        {{ 'payments.amount_message' | translate }}
       </div>
       <div>
-        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperPrevious>{{ 'common.back' | translate }}</button>
         <button mat-button matStepperNext
                 [disabled]="!thirdFormGroup.valid || (thirdFormGroup.value.amount && +thirdFormGroup.value.amount > maxAmount)">
-          Next
+          {{ 'common.next' | translate }}
         </button>
       </div>
     </form>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>
-      Resumen
+      {{ 'summary.title' | translate }}
     </ng-template>
     <div>
-      <h1>Resumen</h1>
-      <p>Grupo: {{ firstFormGroup.value.firstCtrl }}</p>
-      <p>Gasto: {{ selectedExpense?.name }}</p>
-      <p>Descripción: {{ thirdFormGroup.value.description }}</p>
-      <p>Monto: {{ thirdFormGroup.value.amount }}</p>
+      <h1>{{ 'summary.title' | translate }}</h1>
+      <p>{{ 'summary.group' | translate }}: {{ firstFormGroup.value.firstCtrl }}</p>
+      <p>{{ 'summary.expense' | translate }}: {{ selectedExpense?.name }}</p>
+      <p>{{ 'payments.description' | translate }}: {{ thirdFormGroup.value.description }}</p>
+      <p>{{ 'payments.amount' | translate }}: {{ thirdFormGroup.value.amount }}</p>
     </div>
     <div>
-      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperPrevious>{{ 'common.back' | translate }}</button>
       <button mat-button [disabled]="!canSubmit" (click)="onSubmit()">
-        Guardar pago
+        {{ 'common.done' | translate }}
       </button>
     </div>
   </mat-step>

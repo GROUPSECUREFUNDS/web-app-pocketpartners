@@ -53,10 +53,11 @@
     "thisAreTheTotalExpenses": "Estos son los gastos totales",
     "paymentDistribution": "Distribución de pagos",
     "ExpensesDetailsGroup": "Detalle de Gastos del Grupo",
-    "viewDetailedDistribution": "Vista detallada de la distribución de gastos"
+    "viewDetailedDistribution": "Vista detallada de la distribución de gastos",
+    "editGroup": "Editar Grupo"
   },
   "expense": {
-    "title": "Gasto",
+    "title": "Gastos",
     "created": "Creado",
     "totalAmount": "Monto Total",
     "uploadedBy": "Subido Por",
@@ -67,13 +68,17 @@
     "amount": "¿Cuánto?",
     "setAmount": "Establece el monto",
     "group": "¿Qué grupo?",
-    "pickGroup": "Selecciona un grupo",
+    "pick_group": "Selecciona un grupo",
     "summary": "Resumen",
     "search": "Buscar gastos...",
     "addNew": "Agregar Nuevo Gasto",
     "which": "¿Qué Gasto?",
     "pick": "Selecciona un gasto",
-    "uploadedByYou": "Gastos Subidos por TI"
+    "uploadedByYou": "Gastos Subidos por TI",
+    "dueDate": "Fecha de Vencimiento",
+    "see_details": "Ver Detalles",
+    "not_expense": "No hay gastos aún.",
+    "expenseDetails": "Detalles del Gasto"
   },
   "common": {
     "next": "Siguiente",
@@ -95,6 +100,9 @@
     "members": "Miembros",
     "description": "Descripción",
     "amount": "Monto",
+    "amount_pay": "Monto a Pagar",
+    "amount_max": "Monto Máximo",
+    "amount_message": "El monto no puede exceder el monto del gasto.",
     "noMovements": "No hay movimientos aún...",
     "outgoing": "Pagos Salientes",
     "made": "Pagos Realizados",
@@ -102,7 +110,14 @@
     "makePayment": "Hacer Pago",
     "groups": "Grupos",
     "noPayments": "No hay pagos aún. ¡Haz uno!",
-    "paymentDetails": "Detalles del Pago"
+    "paymentDetails": "Detalles del Pago",
+    "noPaymentsYet": "No hay pagos asociados.",
+    "paymentTableInfo": "Los pagos asociados a este gasto aparecerán aquí.",
+    "available": "Pagos Asociados",
+    "status": "Estado",
+    "assignedTo": "Asignado a",
+    "COMPLETED": "Completado",
+    "PENDING": "Pendiente"
   },
   "transaction": {
     "timeline": "Línea de Tiempo de Transacciones",

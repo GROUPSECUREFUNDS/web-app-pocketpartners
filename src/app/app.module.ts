@@ -91,6 +91,7 @@ import { OcrReceiptComponent } from './payments/components/ocr-receipt/ocr-recei
 import {MatProgressBar} from "@angular/material/progress-bar";
 import {MatTooltip} from "@angular/material/tooltip";
 import { PageMyGroupsComponent } from './group/pages/page-my-groups/page-my-groups.component';
+import { ExpensesSummaryCardComponent } from './group/components/expense-summary-card/expenses-summary-card.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -130,7 +131,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AddReceiptsComponent,
     ReceiptPageComponent,
     OcrReceiptComponent,
-    PageMyGroupsComponent
+    PageMyGroupsComponent,
+    ExpensesSummaryCardComponent
   ],
   exports: [],
   bootstrap: [AppComponent],
