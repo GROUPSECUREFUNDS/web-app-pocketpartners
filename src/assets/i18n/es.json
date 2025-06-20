@@ -66,6 +66,7 @@
     "new": "Nuevo Gasto",
     "name": "Dale un nombre",
     "amount": "¿Cuánto?",
+    "amount2": "Monto",
     "setAmount": "Establece el monto",
     "group": "¿Qué grupo?",
     "pick_group": "Selecciona un grupo",
@@ -78,7 +79,18 @@
     "dueDate": "Fecha de Vencimiento",
     "see_details": "Ver Detalles",
     "not_expense": "No hay gastos aún.",
-    "expenseDetails": "Detalles del Gasto"
+    "expenseDetails": "Detalles del Gasto",
+    "expenseVoucher": "Comprobante de Gasto"
+  },
+  "receipts": {
+    "title": "Comprobantes",
+    "not": "No hay comprobantes.",
+    "infoTable": "Los comprobantes de este gasto aparecerán aquí",
+    "amount": "Monto del Comprobante",
+    "name": "Nombre del Comprobante",
+    "number": "Número de Comprobante",
+    "date": "Fecha de emisión",
+    "addNew": "Agregar Comprobante"
   },
   "common": {
     "next": "Siguiente",

@@ -68,6 +68,7 @@
     "new": "New Expense",
     "name": "Give it a name",
     "amount": "How much?",
+    "amount2": "Amount",
     "set_amount": "Set the amount",
     "group": "Which group?",
     "pick_group": "Pick a group",
@@ -81,7 +82,18 @@
     "add_new": "Add New Expense",
     "see_details": "See Details",
     "not_expense": "No expenses yet.",
-    "expenseDetails": "Expense Details"
+    "expenseDetails": "Expense Details",
+    "expenseVoucher": "Expense Voucher"
+  },
+  "receipts": {
+    "title": "Receipts",
+    "not": "No receipts yet.",
+    "infoTable": "Receipts for this expense will appear here",
+    "amount": "Receipt Amount",
+    "name": "Receipt Name",
+    "number": "Receipt Number",
+    "date": "Issue Date",
+    "addNew": "Add Receipt"
   },
   "common": {
     "next": "Next",
