@@ -70,6 +70,7 @@
     "setAmount": "Establece el monto",
     "group": "¿Qué grupo?",
     "pick_group": "Selecciona un grupo",
+    "pick_member": "Selecciona un miembro",
     "summary": "Resumen",
     "search": "Buscar gastos...",
     "addNew": "Agregar Nuevo Gasto",
@@ -179,6 +180,20 @@
       "seeReceipts": "Ver Recibos",
       "pending": "Pendiente de pago",
       "makePayment": "Pagar"
+    }
+  },
+  "incomingPayments": {
+    "noPaymentsTitle": "No hay pagos entrantes",
+    "noPaymentsInfo": "Los pagos que otros miembros deben hacerte sobre los gastos creados por ti aparecerán aquí."
+  },
+  "outgoingPayments": {
+    "made": {
+      "noPaymentsTitle": "No hay pagos realizados",
+      "noPaymentsInfo": "Los pagos que has realizado aparecerán aquí."
+    },
+    "toDo": {
+      "noPaymentsTitle": "No hay pagos pendientes",
+      "noPaymentsInfo": "Los pagos que debes hacer  aparecerán aquí."
     }
   }
 }

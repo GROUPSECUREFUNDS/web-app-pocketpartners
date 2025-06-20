@@ -72,6 +72,7 @@
     "set_amount": "Set the amount",
     "group": "Which group?",
     "pick_group": "Pick a group",
+    "pick_member": "Pick a member",
     "summary": "Summary",
     "search": "Search expenses...",
     "addNew": "Add New Expense",
@@ -186,6 +187,20 @@
       "seeReceipts": "See Receipts",
       "pending": "Pending",
       "makePayment": "Make Payment"
+    }
+  },
+  "incomingPayments": {
+    "noPaymentsTitle": "No incoming payments yet.",
+    "noPaymentsInfo": "Incoming payments will appear here."
+  },
+  "outgoingPayments": {
+    "made": {
+      "noPaymentsTitle":"No payments made yet.",
+      "noPaymentsInfo": "Payments made will appear here."
+    },
+    "toDo": {
+      "noPaymentsTitle": "No payments to do yet.",
+      "noPaymentsInfo": "Payments to do will appear here."
     }
   }
 }
