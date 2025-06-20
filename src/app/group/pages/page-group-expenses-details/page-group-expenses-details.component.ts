@@ -11,6 +11,9 @@ import {ReceiptService} from "../../../payments/services/receipt.service";
 import {ImageService} from "../../../shared/services/image.service";
 import {MatDialog} from "@angular/material/dialog";
 import {AddReceiptsComponent} from "../../../payments/components/add-receipts/add-receipts.component";
+import {AuthenticationService} from "../../../iam/services/authentication.service";
+import {firstValueFrom} from "rxjs";
+import {PaymentDetailsMode} from "../../../payments/model/payment-details-mode";
 
 
 @Component({
@@ -33,6 +36,7 @@ export class PageGroupExpensesDetailsComponent implements OnInit {
     private receiptService: ReceiptService,
     private imageService: ImageService,
     private dialog: MatDialog,
+    private authService: AuthenticationService,
     private router: Router
   ) {}
 
@@ -96,8 +100,15 @@ export class PageGroupExpensesDetailsComponent implements OnInit {
     return this.getStatusKey(status) === PaymentStatus.COMPLETED ? 'Completado' : 'Pendiente';
   }
 
-  navigateToReceipts(payment: PaymentEntity) {
-    this.router.navigate([`/payments/${payment.id}/receipts`]);
+  async navigateToReceipts(payment: PaymentEntity) {
+    let userId = await firstValueFrom(this.authService.currentUserId);
+    this.router.navigate([`/payments/${payment.id}/receipts`], {
+      queryParams: {
+        mode: payment.userId === userId?
+          PaymentDetailsMode.PRIVATE:
+          PaymentDetailsMode.PUBLIC
+      }
+    }).then();
   }
 }
 
