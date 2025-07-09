@@ -108,3 +108,31 @@
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
+@media (max-width: 600px) {
+  .mat-mdc-form-field {
+    width: 100%;
+    margin: 0 0 16px 0;
+  }
+  form {
+    width: 100%;
+  }
+  .next-button {
+    width: 100%;
+    margin-top: 16px;
+    padding: 12px 0;
+  }
+  .upload-label {
+    width: 100%;
+    justify-content: center;
+  }
+  .image-preview-container,
+  .image-preview {
+    justify-content: center !important;
+    margin-left: 0 !important;
+    max-width: 100% !important;
+    max-height: 200px !important;
+  }
+  h1, .mat-stepper-label {
+    font-size: 1.1em;
+  }
+}

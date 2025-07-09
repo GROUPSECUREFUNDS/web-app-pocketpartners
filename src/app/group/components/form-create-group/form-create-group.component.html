@@ -1,4 +1,4 @@
-<mat-stepper [linear]="!isLinear" #stepper>
+<mat-stepper [linear]="!isLinear" #stepper [orientation]="stepperOrientation">
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>{{ 'createGroup.groupInfo' | translate }}</ng-template>
@@ -21,20 +21,16 @@
         <span *ngIf="selectedFileName" class="file-name">{{ selectedFileName }}</span>
       </div>
 
-
       <input type="hidden" formControlName="secondCtrl" />
 
-
-      <button mat-button matStepperNext  class="next-button">{{ 'createGroup.next' | translate }}</button>
+      <button mat-button matStepperNext class="next-button">{{ 'createGroup.next' | translate }}</button>
 
       <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 20px;">
-      <div *ngIf="previewImageUrl" style="margin-left: 20px;">
-        <img [src]="previewImageUrl" alt="Vista previa"
-             style="max-width: 300px; max-height: 300px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);" />
+        <div *ngIf="previewImageUrl" style="margin-left: 20px;">
+          <img [src]="previewImageUrl" alt="Vista previa"
+               style="max-width: 300px; max-height: 300px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);" />
+        </div>
       </div>
-      </div>
-
-
     </form>
   </mat-step>
 
@@ -52,6 +48,6 @@
   <mat-step>
     <ng-template matStepLabel>{{ 'createGroup.confirmation' | translate }}</ng-template>
     <p>{{ 'createGroup.newGroupCreated' | translate }}</p>
-    <button mat-button class="next-button" (click)="createNewGroup() ">{{ 'createGroup.done' | translate }}</button>
+    <button mat-button class="next-button" (click)="createNewGroup()">{{ 'createGroup.done' | translate }}</button>
   </mat-step>
 </mat-stepper>
