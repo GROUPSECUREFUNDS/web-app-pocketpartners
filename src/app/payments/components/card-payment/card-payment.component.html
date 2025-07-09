@@ -1,4 +1,9 @@
 <div class="card-payment">
+  @if (isLoading) {
+    <div class ="loading-spinner">
+      <mat-spinner [diameter]="50"></mat-spinner>
+    </div>
+  } @else {
     <mat-card class="custom-card">
       <mat-card-title>{{expense.name}} - {{payment.amount | currency}}</mat-card-title>
       <mat-card-subtitle>
@@ -6,29 +11,31 @@
       </mat-card-subtitle>
       <mat-card-content>
         <mat-list>
-            <span matListItemLine>{{'cardPayment.description' | translate}}: {{payment.description}}</span>
-            <span matListItemLine>{{'cardPayment.expense' | translate}}: {{expense.name}}</span>
-            <span matListItemLine>{{'cardPayment.group' | translate}}: {{group.name}}</span>
-            <span matListItemLine>{{'cardPayment.member' | translate}}: {{member.fullName}}</span>
+          <span matListItemLine>{{'cardPayment.description' | translate}}: {{payment.description}}</span>
+          <span matListItemLine>{{'cardPayment.expense' | translate}}: {{expense.name}}</span>
+          <span matListItemLine>{{'cardPayment.group' | translate}}: {{group.name}}</span>
+          <span matListItemLine>{{'cardPayment.member' | translate}}: {{member.fullName}}</span>
         </mat-list>
       </mat-card-content>
-        @if(mode==PaymentCardMode.TO_DO){
-          <mat-card-actions>
+      @if(mode==PaymentCardMode.TO_DO){
+        <mat-card-actions>
           <button  mat-raised-button (click)="showAddReceipts()" color="accent"><mat-icon matPrefix>check</mat-icon> {{'cardPayment.btn.makePayment' | translate}}</button>
-          </mat-card-actions>
-        } @else if (mode== PaymentCardMode.MADE) {
-          <mat-card-actions>
+        </mat-card-actions>
+      } @else if (mode== PaymentCardMode.MADE) {
+        <mat-card-actions>
           <button  mat-raised-button (click)="navigateToReceipts()" color="warn"><mat-icon matPrefix>receipt</mat-icon>{{'cardPayment.btn.seeReceipts' | translate}}</button>
-          </mat-card-actions>
-        } @else if (mode==PaymentCardMode.INCOMING && payment.status== PaymentStatus.COMPLETED.toLowerCase()) {
-          <mat-card-actions>
+        </mat-card-actions>
+      } @else if (mode==PaymentCardMode.INCOMING && payment.status== PaymentStatus.COMPLETED.toLowerCase()) {
+        <mat-card-actions>
           <button  mat-raised-button color="accent"><mat-icon matPrefix>check</mat-icon>{{'cardPayment.btn.payed' | translate}}</button>
           <button  mat-raised-button (click)="navigateToReceipts()" color="warn"><mat-icon matPrefix>receipt</mat-icon>{{'cardPayment.btn.seeReceipts' | translate}}</button>
-          </mat-card-actions>
-        } @else if (mode==PaymentCardMode.INCOMING && payment.status== PaymentStatus.PENDING.toLowerCase()) {
-          <mat-card-actions>
+        </mat-card-actions>
+      } @else if (mode==PaymentCardMode.INCOMING && payment.status== PaymentStatus.PENDING.toLowerCase()) {
+        <mat-card-actions>
           <button  mat-raised-button color="warn"><mat-icon matPrefix>schedule</mat-icon>{{'cardPayment.btn.pending' | translate}}</button>
-          </mat-card-actions>
-        }
+        </mat-card-actions>
+      }
     </mat-card>
+  }
+
 </div>

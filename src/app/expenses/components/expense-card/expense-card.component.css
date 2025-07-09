@@ -7,6 +7,10 @@
 }
 
 .expense-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100px;
   background-color: #c682ff;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
