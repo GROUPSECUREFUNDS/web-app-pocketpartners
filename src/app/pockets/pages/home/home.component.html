@@ -1,15 +1,16 @@
 <div class="container">
   <div class="left-container">
     <mat-card class="welcome-card">
-      <mat-card-header>
-        <div mat-card class="welcome-image">
-          <img [src]="partner.photo" alt="{{ 'userProfile.photoAlt' | translate }}" >
-        </div>
-        <mat-card-title class="else">{{ 'welcome.greeting' | translate }} {{ currentUername }}</mat-card-title>
-        <mat-card-subtitle style="margin-left: 30px;">{{ partner.email }}</mat-card-subtitle>
+      <mat-card-header >
+        <img mat-card-avatar
+             class="welcome-image"
+             [src]="partner.photo || 'assets/images/default-avatar.png'"
+             alt="Avatar">
+        <mat-card-title>{{ 'welcome.greeting' | translate }} {{ currentUername }}</mat-card-title>
+        <mat-card-subtitle>{{ partner.email }}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <p style="margin-left: 85px;">{{ 'welcome.hiMessage' | translate }}</p>
+        <p style="text-align: center;">{{ 'welcome.hiMessage' | translate }}</p>
       </mat-card-content>
     </mat-card>
 

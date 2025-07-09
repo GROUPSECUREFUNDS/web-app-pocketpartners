@@ -1,17 +1,18 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PaymentEntity } from "../../model/payment-entity";
 import { PartnerEntity } from "../../../pockets/model/partnerEntity";
 import { PaymentStatus } from "../../model/payment-status";
-import {GroupMembersService} from "../../../group/services/group-members.service";
+import { GroupMembersService } from "../../../group/services/group-members.service";
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-form-payment',
   templateUrl: './form-payment.component.html',
   styleUrls: ['./form-payment.component.css']
 })
-export class FormPaymentComponent {
+export class FormPaymentComponent implements OnInit {
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required],
   });
@@ -37,7 +38,21 @@ export class FormPaymentComponent {
 
   groupMembers: any[] = [];
 
-  constructor(private _formBuilder: FormBuilder, private router: Router, private groupMembersService:GroupMembersService) { }
+  stepperOrientation: 'horizontal' | 'vertical' = 'vertical';
+
+  constructor(
+    private _formBuilder: FormBuilder,
+    private router: Router,
+    private groupMembersService: GroupMembersService,
+    private breakpointObserver: BreakpointObserver
+  ) { }
+
+  ngOnInit() {
+    this.breakpointObserver.observe([Breakpoints.Handset])
+      .subscribe(result => {
+        this.stepperOrientation = result.matches ? 'vertical' : 'horizontal';
+      });
+  }
 
   onGroupSelectionChange(event: any) {
     this.groupChange.emit(event.value);

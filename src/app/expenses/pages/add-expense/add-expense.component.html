@@ -1,6 +1,10 @@
 <div class="new-expense">
   <h1 class="title">
-    {{ 'expense.add_new' | translate }} 
+    {{ 'expense.add_new' | translate }}
   </h1>
-  <app-form-expense (onAddExpense)="onSubmit($event)" [user]="user" [joinedGroups]="joinedGroups"></app-form-expense>
+  <app-form-expense *ngIf="!isLoading" (onAddExpense)="onSubmit($event)" [user]="user" [joinedGroups]="joinedGroups"></app-form-expense>
+  <div class="spinner-add-expense" *ngIf="isLoading">
+    <mat-spinner [diameter]="30" ></mat-spinner>
+    <p>{{"spinner.new_expense" | translate}}</p>
+  </div>
 </div>

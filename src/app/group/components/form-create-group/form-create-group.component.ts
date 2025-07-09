@@ -1,12 +1,11 @@
-import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { GroupEntity } from '../../model/group.entity';
-import { PartnerEntity } from '../../../pockets/model/partnerEntity';
-import { PartnerService } from '../../../pockets/services/Partner.service';
 import { GroupMembersService } from '../../services/group-members.service';
 import { AuthenticationService } from '../../../iam/services/authentication.service';
 import { GroupService } from '../../services/group.service';
-import {StorageService} from "../../../shared/services/storage.service";
+import { StorageService } from "../../../shared/services/storage.service";
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-form-create-group',
@@ -42,15 +41,23 @@ export class FormCreateGroupComponent implements OnInit {
   private group: GroupEntity = new GroupEntity();
   currentUserId: number = 0;
 
+  stepperOrientation: 'horizontal' | 'vertical' = 'horizontal';
+
   constructor(
     private _formBuilder: FormBuilder,
     private groupMember: GroupMembersService,
     private storageService: StorageService,
     private groupService: GroupService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private breakpointObserver: BreakpointObserver
   ) {}
 
   ngOnInit() {
+    this.breakpointObserver.observe([Breakpoints.Handset])
+      .subscribe(result => {
+        this.stepperOrientation = result.matches ? 'vertical' : 'horizontal';
+      });
+
     this.authenticationService.currentUserId.subscribe((userId: any) => {
       this.currentUserId = userId;
     });
@@ -64,11 +71,8 @@ export class FormCreateGroupComponent implements OnInit {
   }
 
   onChanges(): void {
-    this.firstFormGroup.valueChanges.subscribe(val => {
-
-    });
+    this.firstFormGroup.valueChanges.subscribe(val => {});
   }
-
 
   uploadImagegroup(event: any) {
     if (event.target.files && event.target.files.length > 0) {
@@ -91,14 +95,10 @@ export class FormCreateGroupComponent implements OnInit {
   }
 
   createNewGroup() {
-
     this.group.name = this.firstFormGroup.get('firstCtrl')?.value as string;
     this.group.groupPhoto = this.firstFormGroup.get('secondCtrl')?.value as string;
-    console.log(this.currentUserId);
     this.group.adminId = this.currentUserId;
     this.group.description = this.thirdFormGroup.get('description')?.value as string;
-
-
     this.createGroup.emit(this.group);
   }
 }

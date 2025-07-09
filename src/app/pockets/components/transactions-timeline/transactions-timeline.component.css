@@ -2,7 +2,6 @@
 
 
 .transactions-card {
-  margin: 40px auto;
   padding: 20px;
   width: 100%;
   max-width: 1100px;
@@ -20,8 +19,13 @@
 }
 
 
+
 .timeline-section {
   margin: 25px 0;
+  max-height:350px;
+  width:100%;
+  overflow-y: auto;
+  padding-right: 15px;
 }
 
 .timeline-section h2 {
@@ -65,11 +69,8 @@
 
 
 @media (max-width: 768px) {
-  .transactions-card {
-    width: 95%;
-  }
-
-  .transaction-card {
-    width: 100%;
+  .transaction-card{
+    flex-direction: column;
+    justify-content: center;
   }
 }
