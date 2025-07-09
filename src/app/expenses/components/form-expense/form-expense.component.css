@@ -1,0 +1,21 @@
+@media (max-width: 600px) {
+  mat-form-field {
+    width: 100%;
+  }
+  form {
+    width: 100%;
+  }
+  .mat-stepper-horizontal {
+    margin: 0;
+  }
+  button[mat-button] {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+  .mat-stepper-label {
+    font-size: 14px;
+  }
+  h1 {
+    font-size: 1.2em;
+  }
+}

@@ -30,7 +30,8 @@
     "currency": "Currency",
     "confirmation": "Confirmation",
     "newGroupCreated": "New Group Created",
-    "done": "Done"
+    "done": "Done",
+    "image": "UPLOAD IMAGE"
   },
   "groups": {
     "allGroups": "All Groups",
