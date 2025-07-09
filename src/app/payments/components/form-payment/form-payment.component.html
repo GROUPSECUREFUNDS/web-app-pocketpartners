@@ -1,4 +1,4 @@
-<mat-stepper #stepper>
+<mat-stepper #stepper [orientation]="stepperOrientation">
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>
