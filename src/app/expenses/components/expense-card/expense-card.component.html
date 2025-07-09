@@ -1,3 +1,4 @@
+
 <div *ngIf="isFirst" style="margin-bottom: 10px;">
   <button mat-raised-button color="primary" (click)="requestShowAll()">
     {{ 'expense.showHidden' | translate }}
@@ -6,7 +7,7 @@
 
 <mat-card class="expense-card">
   <mat-card-header class="expense-header">
-    <mat-card-title>{{ 'expense.title' | translate }}: {{ expense.name }}</mat-card-title>
+    <mat-card-title>{{ expense.name }}</mat-card-title>
     <mat-card-subtitle>{{ 'expense.created' | translate }}: {{ expense.createdAt | date: 'medium' }}</mat-card-subtitle>
   </mat-card-header>
 
@@ -25,13 +26,5 @@
       <mat-icon>payment</mat-icon>
     </button>
 
-    <button
-      mat-icon-button
-      color="warn"
-      [attr.aria-label]="'expense.hide' | translate"
-      (click)="hideCard()"
-    >
-      <mat-icon>visibility_off</mat-icon>
-    </button>
   </mat-card-actions>
 </mat-card>

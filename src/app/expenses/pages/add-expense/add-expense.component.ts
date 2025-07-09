@@ -16,13 +16,14 @@ import { Router } from '@angular/router';
 export class AddExpenseComponent implements OnInit {
   userId: number = 0;
   joinedGroups: any = [];
+  isLoading: boolean = false;
 
   constructor(
     private partnerService: PartnerService,
     private expenseService: ExpensesService,
     private authenticationService: AuthenticationService,
     private groupService: GroupService,
-    private router: Router 
+    private router: Router
   ) { }
 
   user: PartnerEntity = new PartnerEntity();
@@ -43,16 +44,28 @@ export class AddExpenseComponent implements OnInit {
   }
 
   onSubmit(expense: ExpensesEntity) {
+    this.isLoading = true;
     let expenseClean: any = { ...expense };
     expenseClean.userId = this.userId;
     delete expenseClean.createdAt;
     delete expenseClean.updatedAt;
-    this.expenseService.create(expenseClean).subscribe(() => {
-      this.redirectToExpensesList(); 
+    this.expenseService.create(expenseClean).subscribe({
+      next: (createdExpense: ExpensesEntity) => {
+        this.isLoading = false;
+        alert("Expense created successfully!");
+        this.redirectToExpensesList();
+      },
+      error: (error: any) => {
+        alert(error.message);
+        this.isLoading = false;
+      },
+      complete: () => {
+        console.log('Expense creation completed');
+      }
     });
   }
 
   redirectToExpensesList() {
-    this.router.navigate(['/expenses']); 
+    this.router.navigate(['/expenses']);
   }
 }

@@ -1,3 +1,7 @@
+<div class="title-container">
+  <h1>{{ 'header.expenses' | translate }}</h1>
+</div>
+
 <div class="search-bar">
   <input type="text" [(ngModel)]="searchText" [placeholder]="'expense.search' | translate" />
 </div>
@@ -25,7 +29,7 @@
 
 <ng-template #loading>
   <div class="loading-spinner">
-    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    <mat-spinner [diameter]="100"></mat-spinner>
   </div>
 </ng-template>
 

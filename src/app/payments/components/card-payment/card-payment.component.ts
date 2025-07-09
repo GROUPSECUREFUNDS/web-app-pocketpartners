@@ -14,7 +14,8 @@ import {Router} from "@angular/router";
 import {PaymentCardMode} from "../../model/payment-card-mode";
 import {PaymentDetailsMode} from "../../model/payment-details-mode";
 import {AuthenticationService} from "../../../iam/services/authentication.service";
-import {firstValueFrom} from "rxjs";
+import {firstValueFrom, forkJoin} from "rxjs";
+import {switchMap} from "rxjs/operators";
 
 @Component({
   selector: 'app-card-payment',
@@ -30,6 +31,7 @@ export class CardPaymentComponent{
   group:GroupEntity;
   admin: ContactEntity;
   member:ContactEntity;
+  isLoading: boolean = false;
 
   constructor(
     private expenseService:ExpensesService,
@@ -52,19 +54,33 @@ export class CardPaymentComponent{
   }
 
   fetchData(){
-    this.expenseService.getExpenseById(this.payment.expenseId).subscribe((expenseData)=>{
-      this.expense = expenseData;
-      this.groupService.getById(this.expense.groupId).subscribe((groupData)=>{
-        this.group = groupData;
-        this.contactService.getUserById(this.group.adminId).subscribe((contactData)=>{
-          this.admin = contactData;
-        })
-      })
-    })
+    this.isLoading = true;
 
-      this.contactService.getUserById(this.payment.userId).subscribe((contactData)=>{
-        this.member = contactData;
-      });
+    this.expenseService.getExpenseById(this.payment.expenseId).pipe(
+      switchMap(expenseData => {
+        this.expense = expenseData;
+        return this.groupService.getById(expenseData.groupId);
+      }),
+      switchMap(groupData => {
+        this.group = groupData;
+        return forkJoin({
+          admin: this.contactService.getUserById(groupData.adminId),
+          member: this.contactService.getUserById(this.payment.userId)
+        });
+      })
+    ).subscribe({
+      next: ({admin, member}) => {
+        this.admin = admin;
+        this.member = member;
+      },
+      error: (err) => {
+        console.error('Error al cargar datos:', err);
+        this.isLoading = false;
+      },
+      complete: () => {
+        this.isLoading = false;
+      }
+    });
   }
 
   showAddReceipts(){

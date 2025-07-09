@@ -38,7 +38,9 @@
     "youAreInGroup": "You are in the group",
     "viewDetails": "View details",
     "joinGroup": "Join the group",
-    "createGroup": "Create group"
+    "createGroup": "Create group",
+    "myGroups": "My Groups",
+    "noGroupsYet": "You have not created or joined any groups yet."
   },
   "group": {
     "debtInfo": "The group {{groupName}}",
@@ -202,5 +204,8 @@
       "noPaymentsTitle": "No payments to do yet.",
       "noPaymentsInfo": "Payments to do will appear here."
     }
+  },
+  "spinner": {
+    "new_expense": "Creating new expense..."
   }
 }
