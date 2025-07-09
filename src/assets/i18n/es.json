@@ -29,7 +29,8 @@
     "currency": "Moneda",
     "confirmation": "Confirmación",
     "newGroupCreated": "Nuevo Grupo Creado",
-    "done": "Hecho"
+    "done": "Hecho",
+    "image": "CARGAR IMAGEN"
   },
   "groups": {
     "allGroups": "Todos los Grupos",

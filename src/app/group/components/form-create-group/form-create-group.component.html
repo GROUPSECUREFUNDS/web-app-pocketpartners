@@ -16,7 +16,7 @@
           (change)="uploadImagegroup($event)"
         />
         <label for="uploadImage" class="upload-label">
-          <mat-icon>image</mat-icon> CARGAR IMAGEN
+          <mat-icon>image</mat-icon> {{ 'createGroup.image' | translate }}
         </label>
         <span *ngIf="selectedFileName" class="file-name">{{ selectedFileName }}</span>
       </div>
