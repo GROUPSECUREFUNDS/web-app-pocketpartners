@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { ExpensesEntity } from '../../model/expenses.entity';
 import { forkJoin, of } from 'rxjs';
 import { catchError, retry, switchMap } from 'rxjs/operators';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PartnerEntity } from "../../../pockets/model/partnerEntity";
 import { OperationEntity } from "../../../group/model/operation-entity";
@@ -13,15 +13,16 @@ import { ExpensesService } from "../../services/expenses.service";
 import { GroupOperationsService } from "../../../group/services/group-operations.service";
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
-
-
 import { GroupService } from "../../../group/services/group.service";
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+
 @Component({
   selector: 'app-form-expense',
   templateUrl: './form-expense.component.html',
   styleUrls: ['./form-expense.component.css']
 })
-export class FormExpenseComponent {
+
+export class FormExpenseComponent implements OnInit {
   isLoading: boolean = false;
   errorMessage: string = '';
   firstFormGroup = this._formBuilder.group({
@@ -39,19 +40,36 @@ export class FormExpenseComponent {
   fifthFormGroup = this._formBuilder.group({
     dueDateCtrl: ['', Validators.required],
   });
-
+  isLoading: boolean = false;
   @Input() user: PartnerEntity = new PartnerEntity();
   @Input() joinedGroups: any;
   private Expense = new ExpensesEntity();
   @Output() onAddExpense: EventEmitter<ExpensesEntity> = new EventEmitter<ExpensesEntity>();
 
-  constructor(private _formBuilder: FormBuilder, private router: Router, private paymentService: PaymentService, private groupMembersService: GroupMembersService, private expenseService: ExpensesService, private groupOperationService: GroupOperationsService,
-    private groupService: GroupService
+  stepperOrientation: 'horizontal' | 'vertical' = 'horizontal';
+
+  constructor(
+    private _formBuilder: FormBuilder,
+    private router: Router,
+    private paymentService: PaymentService,
+    private groupMembersService: GroupMembersService,
+    private expenseService: ExpensesService,
+    private groupOperationService: GroupOperationsService,
+    private groupService: GroupService,
+    private breakpointObserver: BreakpointObserver
   ) { }
+
+  ngOnInit() {
+    this.breakpointObserver.observe([Breakpoints.Handset])
+      .subscribe(result => {
+        this.stepperOrientation = result.matches ? 'vertical' : 'horizontal';
+      });
+  }
 
   onSubmit() {
     this.isLoading = true;
     this.errorMessage = '';
+
     // Configurar los datos de Expense
     this.Expense.name = this.firstFormGroup.value.firstCtrl as string;
     this.Expense.amount = parseFloat(<string>this.thirdFormGroup.value.firstCtrl);
@@ -133,7 +151,6 @@ export class FormExpenseComponent {
         console.error('Una o más operaciones fallaron');
       }
     });
+
   }
-
-
 }

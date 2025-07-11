@@ -36,19 +36,13 @@
   }
 }
 
-
-
-
-
-
-
 .content {
+  margin: 5px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  justify-content: center;
-  margin-top: 40px;
-  margin-left: 40px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  justify-items: center;
+  align-items: start;
+  gap: 20px;
 }
 
 .expense-card {
@@ -84,4 +78,37 @@
 .purple-button {
   background-color: #9C27B0 !important;
   color: white !important;
+}
+
+.spinner-add-expense{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.loading-spinner{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+.title-container {
+
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 20px 0;
+}
+
+.title-container h1 {
+  padding: 10px 20px;
+  background-color: #ff9900;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 24px;
 }

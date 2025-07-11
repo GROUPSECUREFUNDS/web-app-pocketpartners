@@ -15,7 +15,7 @@ export class PageMyGroupsComponent implements OnInit {
   public groups: GroupEntity[] = [];
   public searchTerm: string = '';
   currentUserId: number = 0;
-  isDataLoaded: Promise<boolean> = new Promise((resolve) => resolve(false));
+  isDataLoading: boolean = false;
   constructor(
     private groupService: GroupService,
     private router: Router,
@@ -24,19 +24,19 @@ export class PageMyGroupsComponent implements OnInit {
   ) { }
 
   getUserGroups() {
-    this.isDataLoaded.finally(() => {
-      this.isDataLoaded = new Promise((resolve) => resolve(false));
-    });
 
-    this.groupService.getAllGroupsByUserId(this.currentUserId).subscribe((groups: any[]) => {
-      this.groups = groups.map(group => ({
-        ...group,
-        isMember: true
-      }));
-
-      this.isDataLoaded.finally(() => {
-        this.isDataLoaded = new Promise((resolve) => resolve(true));
-      });
+    this.groupService.getAllGroupsByUserId(this.currentUserId).subscribe({
+      next: (groups: GroupEntity[]) => {
+        this.groups = groups.map((group)=>{
+          return {...group, isMember:true};
+        });
+        this.isDataLoading = false;
+      },
+      error: (error) => {
+        console.error('Error fetching user groups:', error);
+        this.groups = [];
+        this.isDataLoading = false;
+      }
     });
   }
 

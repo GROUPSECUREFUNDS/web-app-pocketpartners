@@ -1,8 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
-.example-card {
-  max-width: 97%; 
+/*.example-card {
+  max-width: 95%;
   margin-right: 10px;
   padding-left: 20px;
   padding-bottom: 20px;
+}*/
+
+mat-card-content {
+  position: relative;
+  height: 400px;
+}
+
+canvas {
+  width: 100% !important;
+  height: 100% !important;
 }

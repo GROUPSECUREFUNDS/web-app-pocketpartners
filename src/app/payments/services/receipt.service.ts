@@ -20,6 +20,9 @@ export class ReceiptService extends  BaseService<ReceiptEntity>{
   getReceiptsByPaymentId(paymentId:number):Observable<ReceiptEntity[]> {
     return this.http.get<any>(`${this.resourcePath()}/payment/${paymentId}`, this.httpOptions);
   }
+  getReceiptsByExpenseId(expenseId: number): Observable<ReceiptEntity[]> {
+    return this.http.get<ReceiptEntity[]>(`${this.resourcePath()}/expense/${expenseId}`, this.httpOptions);
+  }
 
   createReceiptByExpense(requestReceipt: any, expenseId:number) {
 

@@ -80,6 +80,8 @@ export class ChartComponent implements OnInit, OnDestroy {
         }]
       },
       options: {
+        responsive:true,
+        maintainAspectRatio: false,
         scales: {
           y: {
             beginAtZero: true
@@ -90,7 +92,7 @@ export class ChartComponent implements OnInit, OnDestroy {
   }
 
   formatDate(date: Date): string {
-    return new Date(date).toLocaleDateString('en-GB'); 
+    return new Date(date).toLocaleDateString('en-GB');
   }
 
   getRandomColor(): string {

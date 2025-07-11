@@ -16,3 +16,7 @@
   background-color: #1976d2 !important; /* Azul Material */
   color: #fff !important;
 }
+.no-payments{
+  text-align:center;
+  margin-top: 2em;
+}

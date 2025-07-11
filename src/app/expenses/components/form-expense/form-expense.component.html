@@ -1,4 +1,4 @@
-<mat-stepper #stepper>
+<mat-stepper #stepper [orientation]="stepperOrientation">
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>
@@ -90,7 +90,10 @@
     </div>
     <div>
       <button mat-button matStepperPrevious>{{ 'common.back' | translate }}</button>
-      <button mat-button (click)="onSubmit()" [disabled]="isLoading">{{ 'common.submit' | translate }}</button>
+      <button mat-button (click)="onSubmit()" [disabled]="isLoading">{{ 'common.submit' | translate }}
+      {{ 'common.submit' | translate }}
+      </button>
+
     </div>
   </mat-step>
 

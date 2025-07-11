@@ -11,8 +11,8 @@
   @if(payments.length==0){
     <div class="no-payments">
       <mat-icon>payments</mat-icon>
-      <h2>No hay pagos entrantes</h2>
-      <p>Tus pagos entrantes sobre algún gasto, aparecerán aquí.</p>
+      <h2>{{'incomingPayments.noPaymentsTitle' | translate}}</h2>
+      <p>{{'incomingPayments.noPaymentsInfo' | translate}}</p>
     </div>
   }
 } @else {

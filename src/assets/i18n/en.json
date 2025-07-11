@@ -30,7 +30,8 @@
     "currency": "Currency",
     "confirmation": "Confirmation",
     "newGroupCreated": "New Group Created",
-    "done": "Done"
+    "done": "Done",
+    "image": "UPLOAD IMAGE"
   },
   "groups": {
     "allGroups": "All Groups",
@@ -38,7 +39,9 @@
     "youAreInGroup": "You are in the group",
     "viewDetails": "View details",
     "joinGroup": "Join the group",
-    "createGroup": "Create group"
+    "createGroup": "Create group",
+    "myGroups": "My Groups",
+    "noGroupsYet": "You have not created or joined any groups yet."
   },
   "group": {
     "debtInfo": "The group {{groupName}}",
@@ -68,9 +71,11 @@
     "new": "New Expense",
     "name": "Give it a name",
     "amount": "How much?",
+    "amount2": "Amount",
     "set_amount": "Set the amount",
     "group": "Which group?",
     "pick_group": "Pick a group",
+    "pick_member": "Pick a member",
     "summary": "Summary",
     "search": "Search expenses...",
     "addNew": "Add New Expense",
@@ -81,7 +86,18 @@
     "add_new": "Add New Expense",
     "see_details": "See Details",
     "not_expense": "No expenses yet.",
-    "expenseDetails": "Expense Details"
+    "expenseDetails": "Expense Details",
+    "expenseVoucher": "Expense Voucher"
+  },
+  "receipts": {
+    "title": "Receipts",
+    "not": "No receipts yet.",
+    "infoTable": "Receipts for this expense will appear here",
+    "amount": "Receipt Amount",
+    "name": "Receipt Name",
+    "number": "Receipt Number",
+    "date": "Issue Date",
+    "addNew": "Add Receipt"
   },
   "common": {
     "next": "Next",
@@ -175,5 +191,22 @@
       "pending": "Pending",
       "makePayment": "Make Payment"
     }
+  },
+  "incomingPayments": {
+    "noPaymentsTitle": "No incoming payments yet.",
+    "noPaymentsInfo": "Incoming payments will appear here."
+  },
+  "outgoingPayments": {
+    "made": {
+      "noPaymentsTitle":"No payments made yet.",
+      "noPaymentsInfo": "Payments made will appear here."
+    },
+    "toDo": {
+      "noPaymentsTitle": "No payments to do yet.",
+      "noPaymentsInfo": "Payments to do will appear here."
+    }
+  },
+  "spinner": {
+    "new_expense": "Creating new expense..."
   }
 }

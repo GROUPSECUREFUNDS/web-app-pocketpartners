@@ -66,5 +66,57 @@
         </mat-card>
       </mat-expansion-panel>
     </mat-accordion>
+    <h2 style="margin-top: 32px;">{{ 'expense.expenseVoucher' | translate}}</h2>
+    <mat-accordion>
+      <ng-container *ngIf="receipts.length === 0; else receiptsList">
+        <div class="no-payments">
+          <mat-icon>receipt</mat-icon>
+          <h2>{{ 'receipts.not' | translate}}</h2>
+          <p>{{ 'receipts.infoTable' | translate}}</p>
+        </div>
+      </ng-container>
+      <ng-template #receiptsList>
+        <mat-expansion-panel *ngFor="let receipt of receipts">
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{ receipt.name }}</mat-panel-title>
+            <mat-panel-description>{{ 'expense.amount2' | translate}}:
+              {{ receipt.amount | currency }}</mat-panel-description>
+          </mat-expansion-panel-header>
+          <mat-card class="panel-content">
+            <div class="fields-container">
+              <mat-form-field appearance="fill">
+                <mat-label>{{ 'receipts.name' | translate}}</mat-label>
+                <input matInput [ngModel]="receipt.name" placeholder="Descripción del comprobante" [disabled]="true">
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>{{ 'receipts.number' | translate}}</mat-label>
+                <input matInput [ngModel]="receipt.receiptNumber" placeholder="Número del comprobante" [disabled]="true">
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>{{ 'receipts.ammount' | translate}}</mat-label>
+                <input matInput type="number" [ngModel]="receipt.amount" placeholder="Monto del comprobante" [disabled]="true">
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>{{ 'receipts.date' | translate}}</mat-label>
+                <input matInput [matDatepicker]="picker" [ngModel]="receipt.issueDate" [disabled]="true">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <mat-divider [vertical]="true"></mat-divider>
+            <div class="img-container" *ngIf="receipt.imagePath">
+              <img [src]="receipt.imagePath" alt="Vista previa del comprobante">
+            </div>
+          </mat-card>
+        </mat-expansion-panel>
+      </ng-template>
+    </mat-accordion>
+
+    <div class="add-button" style="margin-top: 16px;">
+      <button mat-fab extended color="primary" (click)="showAddReceiptDialog()">
+        <mat-icon>add</mat-icon>
+        {{ 'receipts.addNew' | translate}}
+      </button>
+    </div>
   </ng-template>
 </div>
