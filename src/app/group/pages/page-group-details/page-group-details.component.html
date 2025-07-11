@@ -18,13 +18,13 @@
         </mat-card-title-group>
       </mat-card-header>
       <mat-card-content>
-        <p>{{ 'createGroup.groupDescription' | translate }}: {{ group.description }}</p>
+        <p>{{ 'group.description' | translate }}: {{ group.description }}</p>
         <p>{{ 'group.creationDate' | translate }}: {{ group.createdAt | date: 'dd/MM/yyyy' }}</p>
         <p>{{ 'group.members' | translate }}: {{ totalOfMembers }}</p>
 
         @if (group.adminId === currentUserId) {
           <a routerLink="/group-config/{{ group.id }}" mat-raised-button color="primary">
-            {{ 'group.editGroup' | translate }}
+           Editar Grupo
           </a>
          }
 
@@ -37,18 +37,37 @@
         <mat-icon>{{ showExpenses ? 'expand_less' : 'expand_more' }}</mat-icon>
       </mat-card-title>
       <mat-card-content *ngIf="showExpenses">
-        <ng-container *ngIf="groupExpenses.length > 0; else noExpenses">
-          <app-expense-summary-card
-            *ngFor="let expense of groupExpenses"
-            [expense]="expense"
-            [groupMembers]="groupMembers">
-          </app-expense-summary-card>
+
+        <div *ngIf="isExpensesLoading" style="display: flex; justify-content: center; margin: 24px 0;">
+          <mat-progress-spinner mode="indeterminate" diameter="40"></mat-progress-spinner>
+        </div>
+        <ng-container *ngIf="!isExpensesLoading">
+          <mat-slide-toggle
+            color="primary"
+            [(ngModel)]="filterPending"
+            style="margin-bottom: 16px; margin-left: 8px;">
+            {{ filterPending ? 'Pendientes' : 'Todos' }}
+          </mat-slide-toggle>
+
+          <ng-container *ngIf="filteredExpenses.length > 0; else noPending">
+            <app-expense-summary-card
+              *ngFor="let expense of filteredExpenses"
+              [expense]="expense"
+              [groupMembers]="groupMembers">
+            </app-expense-summary-card>
+          </ng-container>
+
+          <ng-template #noPending>
+            <div style="color: #888; text-align:center;">
+              {{ filterPending ? 'No hay gastos pendientes.' : ('expense.not_expense' | translate) }}
+            </div>
+          </ng-template>
         </ng-container>
-        <ng-template #noExpenses>
-          <span>{{ 'expense.not_expense' | translate }}</span>
-        </ng-template>
+
+
       </mat-card-content>
     </mat-card>
+
 
     <mat-card>
       <mat-card-title>{{ 'group.eachMemberMustPay' | translate }}</mat-card-title>

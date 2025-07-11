@@ -82,11 +82,19 @@
       <p>{{ 'expense.group' | translate }}: {{ fourthFormGroup.value.firstCtrl }}</p>
       <p>{{ 'expense.dueDate' | translate }}: {{ fifthFormGroup.value.dueDateCtrl | date }}</p>
     </div>
+    <div *ngIf="errorMessage" style="color: red; margin: 12px 0;">
+      {{ errorMessage }}
+    </div>
+    <div *ngIf="isLoading" style="display: flex; justify-content: center; margin: 18px 0;">
+      <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    </div>
     <div>
       <button mat-button matStepperPrevious>{{ 'common.back' | translate }}</button>
-      <button mat-button (click)="onSubmit()" [disabled]="isLoading">
-        {{ 'common.submit' | translate }}
+      <button mat-button (click)="onSubmit()" [disabled]="isLoading">{{ 'common.submit' | translate }}
+      {{ 'common.submit' | translate }}
       </button>
+
     </div>
   </mat-step>
+
 </mat-stepper>
