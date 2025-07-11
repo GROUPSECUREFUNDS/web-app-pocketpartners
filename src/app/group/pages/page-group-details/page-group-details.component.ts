@@ -8,6 +8,8 @@ import { PaymentService } from '../../../payments/services/payment.service';
 import { AuthenticationService } from '../../../iam/services/authentication.service';
 import { PartnerService } from '../../../pockets/services/Partner.service';
 import { GroupMembersService } from '../../services/group-members.service';
+import { FormsModule } from '@angular/forms';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-page-group-details',
@@ -27,6 +29,16 @@ export class PageGroupDetailsComponent implements OnInit {
   pieChart!: Chart<"pie", number[], string>;
   invitationToken: string = '';
   currentUserId!: number;
+  pendingExpenses: any[] = [];
+  filterPending: boolean = false;
+  isExpensesLoading: boolean = false;
+
+
+  get filteredExpenses() {
+    return this.filterPending
+      ? this.groupExpenses.filter(e => e.status === 'pending')
+      : this.groupExpenses;
+  }
 
   // --- NUEVO PARA EXPENSES ---
   showExpenses = false;
@@ -85,8 +97,12 @@ export class PageGroupDetailsComponent implements OnInit {
   }
 
   getGroupExpenses() {
+    this.isExpensesLoading = true;
     this.expensesService.getExpensesByGroupId(this.id).subscribe((expenses: any[]) => {
       this.groupExpenses = expenses;
+      this.pendingExpenses = expenses.filter(e => e.status === 'pending');
+      this.isExpensesLoading = false;
+      this.calculateAmountEachMemberShouldPay();
     });
   }
   // ---------------------------
@@ -121,16 +137,22 @@ export class PageGroupDetailsComponent implements OnInit {
   }
 
   calculateAmountEachMemberShouldPay() {
+    // Suma solo los gastos pendientes
+    const totalPendingExpenses = this.groupExpenses
+      .filter(exp => exp.status === 'pending')
+      .reduce((sum, exp) => sum + (exp.amount || 0), 0);
+
     this.groupService.getAllMembersByIdGroup(this.group.id).subscribe((group: any) => {
       const numberOfMembers = group.length;
       if (numberOfMembers > 0) {
         this.totalOfMembers = numberOfMembers;
-        this.amountEachMemberShouldPay = this.totalExpenses / numberOfMembers;
+        this.amountEachMemberShouldPay = totalPendingExpenses / numberOfMembers;
       }
       this.getAllGroupMembers();
       this.updatePieChart();
     });
   }
+
 
   togglePaidMember(memberId: number) {
     if (this.paidMembers.has(memberId)) {

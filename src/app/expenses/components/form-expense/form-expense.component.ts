@@ -11,6 +11,7 @@ import { PaymentService } from "../../../payments/services/payment.service";
 import { GroupMembersService } from "../../../group/services/group-members.service";
 import { ExpensesService } from "../../services/expenses.service";
 import { GroupOperationsService } from "../../../group/services/group-operations.service";
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
@@ -21,6 +22,8 @@ import { GroupService } from "../../../group/services/group.service";
   styleUrls: ['./form-expense.component.css']
 })
 export class FormExpenseComponent {
+  isLoading: boolean = false;
+  errorMessage: string = '';
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required],
   });
@@ -47,6 +50,8 @@ export class FormExpenseComponent {
   ) { }
 
   onSubmit() {
+    this.isLoading = true;
+    this.errorMessage = '';
     // Configurar los datos de Expense
     this.Expense.name = this.firstFormGroup.value.firstCtrl as string;
     this.Expense.amount = parseFloat(<string>this.thirdFormGroup.value.firstCtrl);
@@ -110,15 +115,18 @@ export class FormExpenseComponent {
           }),
           catchError(err => {
             console.error('Error al obtener los gastos del grupo:', err);
+            this.isLoading = false;
             return of(null); // Manejar error en la obtención de gastos
           })
         );
       }),
       catchError(err => {
         console.error('Error al obtener los miembros del grupo:', err);
+        this.isLoading = false;
         return of(null); // Manejar error en la obtención de miembros
       })
     ).subscribe(results => {
+      this.isLoading = false;
       if (results && results.every(result => result !== null)) {
         console.log('Todos los pagos y operaciones se crearon exitosamente:', results);
       } else {

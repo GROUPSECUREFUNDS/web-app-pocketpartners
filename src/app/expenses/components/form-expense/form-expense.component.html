@@ -2,14 +2,14 @@
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>
-        {{ 'expense.new' | translate }} 
+        {{ 'expense.new' | translate }}
       </ng-template>
       <mat-form-field>
-        <mat-label>{{ 'expense.name' | translate }}</mat-label> 
+        <mat-label>{{ 'expense.name' | translate }}</mat-label>
         <input matInput formControlName="firstCtrl" required>
       </mat-form-field>
       <div>
-        <button mat-button matStepperNext>{{ 'common.next' | translate }}</button> 
+        <button mat-button matStepperNext>{{ 'common.next' | translate }}</button>
       </div>
     </form>
   </mat-step>
@@ -17,14 +17,14 @@
   <mat-step [stepControl]="thirdFormGroup">
     <form [formGroup]="thirdFormGroup">
       <ng-template matStepLabel>
-        {{ 'expense.amount' | translate }} 
+        {{ 'expense.amount' | translate }}
       </ng-template>
       <mat-form-field>
-        <mat-label>{{ 'expense.set_amount' | translate }}</mat-label> 
+        <mat-label>{{ 'expense.set_amount' | translate }}</mat-label>
         <input type="number" matInput formControlName="firstCtrl" required>
       </mat-form-field>
       <div>
-        <button mat-button matStepperPrevious>{{ 'common.back' | translate }}</button> 
+        <button mat-button matStepperPrevious>{{ 'common.back' | translate }}</button>
         <button mat-button matStepperNext>{{ 'common.next' | translate }}</button>
       </div>
     </form>
@@ -33,10 +33,10 @@
   <mat-step [stepControl]="fourthFormGroup">
     <form [formGroup]="fourthFormGroup">
       <ng-template matStepLabel>
-        {{ 'expense.group' | translate }} 
+        {{ 'expense.group' | translate }}
       </ng-template>
       <mat-form-field>
-        <mat-label>{{ 'expense.pick_group' | translate }}</mat-label> 
+        <mat-label>{{ 'expense.pick_group' | translate }}</mat-label>
         <mat-select formControlName="firstCtrl" required>
           <mat-option *ngFor="let group of joinedGroups" [value]="group.id">
             {{ group.name }}
@@ -73,7 +73,7 @@
 
   <mat-step>
     <ng-template matStepLabel>
-      {{ 'expense.summary' | translate }} 
+      {{ 'expense.summary' | translate }}
     </ng-template>
     <div>
       <h1>{{ 'expense.summary' | translate }}</h1>
@@ -82,9 +82,16 @@
       <p>{{ 'expense.group' | translate }}: {{ fourthFormGroup.value.firstCtrl }}</p>
       <p>{{ 'expense.dueDate' | translate }}: {{ fifthFormGroup.value.dueDateCtrl | date }}</p>
     </div>
+    <div *ngIf="errorMessage" style="color: red; margin: 12px 0;">
+      {{ errorMessage }}
+    </div>
+    <div *ngIf="isLoading" style="display: flex; justify-content: center; margin: 18px 0;">
+      <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    </div>
     <div>
       <button mat-button matStepperPrevious>{{ 'common.back' | translate }}</button>
-      <button mat-button (click)="onSubmit()">{{ 'common.submit' | translate }}</button> 
+      <button mat-button (click)="onSubmit()" [disabled]="isLoading">{{ 'common.submit' | translate }}</button>
     </div>
   </mat-step>
+
 </mat-stepper>
